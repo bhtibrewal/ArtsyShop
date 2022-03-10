@@ -1,5 +1,6 @@
 import "./App.css";
-import { LeftNav, Navbar, RightNav, Search } from "./components/navbar/Navbar";
+import { LeftNav, RightNav, Search } from "./components/navbar/components";
+import { Navbar } from "./components/navbar/Navbar";
 import { HomePage } from "./pages/home_page/HomePage";
 
 function App() {
