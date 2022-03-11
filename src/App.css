@@ -93,3 +93,28 @@ img {
 .header {
   grid-area: header;
 }
+
+
+.page-header-section {
+  display: grid;
+}
+.page-header-section i {
+  color: var(--primary-color);
+}
+.section-bg {
+  height: 100%;
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+.section-bg img {
+  height: 100%;
+}
+.section-content {
+  grid-column: 1/2;
+  grid-row: 1/2;
+  min-height: 16rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--light-text);
+}
