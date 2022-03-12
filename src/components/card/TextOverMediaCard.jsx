@@ -1,9 +1,11 @@
+
+
 export const TextOverMediaCard = ({ item }) => {
   const {
     item_name,
     item_by,
     item_desc,
-    item_original_price = 22,
+    item_original_price,
     item_price,
     item_rating,
   } = item;
@@ -26,13 +28,7 @@ export const TextOverMediaCard = ({ item }) => {
             <h3>${item_price}</h3>
             <span className="strike-price">${item_original_price}</span>
           </div>
-          <div>
-            {Array(item_rating)
-              .fill()
-              .map(() => {
-                return <i className="fas fa-star filled"></i>;
-              })}
-          </div>
+          
         </div>
       </div>
     </div>

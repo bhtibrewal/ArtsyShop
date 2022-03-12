@@ -1,0 +1,11 @@
+.wishlist-sec {
+  padding: 2rem 5%;
+  margin: 2rem 0;
+  background: var(--light-bg);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.wishlist-sec .favourite-icon {
+  color: var(--light-bg);
+  background: var(--primary-color);
+}

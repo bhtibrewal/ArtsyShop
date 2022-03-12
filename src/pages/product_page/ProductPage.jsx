@@ -79,6 +79,7 @@ export const ProductPage = () => {
                     item_by: "Guido Borelli",
                     item_desc: "",
                     item_price: 18,
+                    item_original_price : 22,
                     item_rating: 4,
                   }}
                 />
