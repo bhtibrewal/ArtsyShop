@@ -1,6 +1,4 @@
-import { ButtonPrimary } from "./ButtonPrimary";
-import { ButtonSecondary } from "./ButtonSecondary";
-import { OutlineButtonPrimary } from "./OutlineButtonPrimary";
-import { OutlineButtonSecondary } from "./OutlineButtonSecondary";
-
-export {ButtonPrimary, ButtonSecondary,OutlineButtonPrimary, OutlineButtonSecondary};
+export { ButtonPrimary } from "./ButtonPrimary";
+export { ButtonSecondary } from "./ButtonSecondary";
+export { OutlineButtonPrimary } from "./OutlineButtonPrimary";
+export { OutlineButtonSecondary } from "./OutlineButtonSecondary";

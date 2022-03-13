@@ -1,35 +1,40 @@
-export const BasicCard = () => {
+import { RatingPalleteIcon } from "../index";
+
+export const BasicCard = ({ item , children}) => {
+  const {
+    item_name,
+    item_by,
+    item_desc,
+    item_original_price,
+    item_price,
+    item_rating,
+  } = item;
   return (
-    <div class="card w-30 basic">
-      <button class="icon favourite-icon">
-        <i class="fa-regular fa-heart fa-2x"></i>
+    <div className="card w-30 basic">
+      <button className="icon favourite-icon">
+        <i className="fa-regular fa-heart fa-2x"></i>
       </button>
-      <div class="content">
+      <div className="content">
         <img
-          class="card-img"
+          className="card-img"
           src="https://render.fineartamerica.com/images/images-new-artwork/images-medium-5/la-porta-rossa-sulla-salita-guido-borelli.jpg?v=2"
           alt=""
         />
 
-        <div class="card-header">
-          <h1>La Porta Rossa Sulla Salita Art Print</h1>
-          <h2>by Guido Borelli</h2>
-          <div class="card-body">
-            Visit ten places on our planet that are undergoing the biggest
-            changes today.
-          </div>
-          <div class="price-sec">
-            <h3>$18</h3>
-            <span class="strike-price">$22</span>
+        <div className="card-header">
+          <h1>{item_name}</h1>
+          <h2>by {item_by}</h2>
+          <div className="card-body">{item_desc}</div>
+          <RatingPalleteIcon rating={item_rating} />
+          <div className="price-sec">
+            <h3>${item_price}</h3>
+            <span className="strike-price">${item_original_price}</span>
           </div>
         </div>
       </div>
 
-      <div class="card-actions">
-        <button class="btn btn-primary">
-          <i class="fa-solid fa-cart-shopping"></i>
-          add to cart
-        </button>
+      <div className="card-actions">
+        {children}
       </div>
     </div>
   );

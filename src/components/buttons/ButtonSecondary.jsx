@@ -1,8 +1,11 @@
 export const ButtonSecondary = ({ children, className, onClick }) => {
-    return (
-      <button class={`btn btn-secondary
-       ${className}`} onClick={onClick}>
-        {children}
-      </button>
-    );
-  };
+  return (
+    <button
+      className={`btn btn-secondary
+       ${className}`}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+};
