@@ -12,9 +12,9 @@ export const CollectionContent = ({ tag, heading, subtitle, img }) => {
         </div>
       </div>
       <div className="collection-artworks flex-col">
-        {item.map(() => {
+        {item.map((i) => {
           return (
-            <div className="collection-artwork-item" key=''>
+            <div className="collection-artwork-item" key={i}>
               <img src={img} alt='' />
             </div>
           );

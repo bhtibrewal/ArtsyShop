@@ -1,6 +1,21 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Categories } from "./Categories";
 
-export const CategoriesSection=() => {
+export const CategoriesSection = () => {
+  const [categoryList, setList] = useState([]);
+  useEffect(() => {
+    fetchCategory();
+    return ()=>{};
+  },[]);
+  const fetchCategory = async () => {
+    const res = await axios.get("/api/categories");
+    try {
+      setList(res.data.categories.map((i) => i.categoryName));
+    } catch {
+      throw new Error("error");
+    }
+  };
   const category_list = [
     "Abstraction",
     "Nature",
@@ -15,9 +30,10 @@ export const CategoriesSection=() => {
     <section className="category-section">
       <h1>Categories</h1>
       <div className="grid-4 category-grid">
-        {category_list.map((i) => {
+        {categoryList.map((i) => {
           return (
             <Categories
+              key={i}
               link={"/pages/product/product.html"}
               category={i}
               img_url={
@@ -29,5 +45,4 @@ export const CategoriesSection=() => {
       </div>
     </section>
   );
-}
-
+};
