@@ -1,6 +1,7 @@
 import React from "react";
 
-export const PriceSec = () => {
+export const TotalBill = () => {
+  const cart = useCart();
   return (
     <section className="cart-price-sec">
       <p>
@@ -8,7 +9,7 @@ export const PriceSec = () => {
       </p>
       <hr />
       <div className="calc-part">
-        <span>Price (2 Items)</span>
+        <span>Price ({cart.length} Items)</span>
         <span>₹853,200</span> <span>Discount</span>
         <span>-₹85,000</span> <span>Shipping Charges</span>
         <span>₹50,000</span>

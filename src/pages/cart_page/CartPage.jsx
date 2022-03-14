@@ -1,6 +1,6 @@
-import { HorizontalCard } from "../../components";
 import "./cart_page.css";
-import { PriceSec } from "./component/PriceSec";
+import { HorizontalCard } from "../../components";
+import { TotalBill } from "./component/TotalBill";
 
 export const CartPage = () => {
   return (
@@ -10,7 +10,7 @@ export const CartPage = () => {
         <HorizontalCard />
       </section>
 
-      <PriceSec />
+      <TotalBill />
     </main>
   );
 };
