@@ -4,6 +4,9 @@
   width: 90vw;
   margin: auto;
 }
+.hero-section img{
+  aspect-ratio: 16/9;
+}
 .hero-overlay {
   padding: 2rem;
   text-align: center;
