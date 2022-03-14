@@ -1,7 +1,21 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { TextOverMediaCard } from "../../components";
 import "./product_page.css";
 
 export const ProductPage = () => {
+  const [prodList, setProductList] = useState([]);
+  useEffect(() => {
+    fetchProduct();
+  },[]);
+  const fetchProduct = async () => {
+    const res = await axios.get("api/products?categoryname");
+    try {
+      setProductList(res.data.products);
+    } catch {
+      throw new Error("error");
+    }
+  };
   return (
     <main className="main">
       {/*  header section  */}
@@ -9,7 +23,7 @@ export const ProductPage = () => {
         <div className="section-bg">
           <img
             src="https://d17h7hjnfv5s46.cloudfront.net/assets/build/images/banners/search/desktop/categorie/nature.90ad9bf4.jpg"
-            srcset="
+            srcSet="
               https://d17h7hjnfv5s46.cloudfront.net/assets/build/images/banners/search/mobile/categorie/nature.4613eed6.jpg       800w,
               https://d17h7hjnfv5s46.cloudfront.net/assets/build/images/banners/search/desktop/categorie/nature1152.73034e4d.jpg 1152w,
               https://d17h7hjnfv5s46.cloudfront.net/assets/build/images/banners/search/desktop/categorie/nature1920.4a74dce3.jpg 1920w,
@@ -28,7 +42,7 @@ export const ProductPage = () => {
       <section className="menu-sec">
         <div className="main-drop category-dropdown">
           <h4>Painting Category</h4>
-          <button className="btn dropdown-box" onClick="">
+          <button className="btn dropdown-box" >
             Nature
             <i className="fa-solid fa-angle-down"></i>
           </button>
@@ -44,14 +58,14 @@ export const ProductPage = () => {
         <div className="price-sec">
           <h3>Price</h3>
           <div>
-            <input value="" type="range" min="0" max="1000" step="50" />
+            <input type="range" min="0" max="1000" step="50" />
             <span>{}</span>
           </div>
         </div>
 
         {/*  sort by dropdown  */}
         <div className="dropdown-container sortBy-con">
-          <button className="btn dropdown-btn" onClick="">
+          <button className="btn dropdown-btn" >
             Sort By
             <i className="fa-solid fa-angle-down"></i>
           </button>
@@ -69,19 +83,12 @@ export const ProductPage = () => {
       {/* products section */}
       <section className="products-sec">
         <div className="grid-3 products-grid">
-          {Array(12)
-            .fill("")
-            .map(() => {
+          {prodList
+            .map((i) => {
               return (
                 <TextOverMediaCard
-                  item={{
-                    item_name: "La Porta Rossa Sulla Salita Art Print",
-                    item_by: "Guido Borelli",
-                    item_desc: "",
-                    item_price: 18,
-                    item_original_price : 22,
-                    item_rating: 4,
-                  }}
+                key={i._id}
+                  item={i}
                 />
               );
             })}
