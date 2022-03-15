@@ -1,21 +1,21 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { TextOverMediaCard } from "../../components";
+import { useProductContext } from "../../context";
+import { useFetch } from "../../custom_hooks/useFetch";
 import "./product_page.css";
 
 export const ProductPage = () => {
-  const [prodList, setProductList] = useState([]);
+  const products = useFetch("api/products");
+
+  const { productState, productDispatch } = useProductContext();
+
   useEffect(() => {
-    fetchProduct();
-  },[]);
-  const fetchProduct = async () => {
-    const res = await axios.get("api/products?categoryname");
-    try {
-      setProductList(res.data.products);
-    } catch {
-      throw new Error("error");
-    }
-  };
+    productDispatch({ type: "ADD_PRODUCT", payload: products });
+  }, [products]);
+  
+  const { productList } = productState;
+ 
   return (
     <main className="main">
       {/*  header section  */}
@@ -23,13 +23,6 @@ export const ProductPage = () => {
         <div className="section-bg">
           <img
             src="https://d17h7hjnfv5s46.cloudfront.net/assets/build/images/banners/search/desktop/categorie/nature.90ad9bf4.jpg"
-            srcSet="
-              https://d17h7hjnfv5s46.cloudfront.net/assets/build/images/banners/search/mobile/categorie/nature.4613eed6.jpg       800w,
-              https://d17h7hjnfv5s46.cloudfront.net/assets/build/images/banners/search/desktop/categorie/nature1152.73034e4d.jpg 1152w,
-              https://d17h7hjnfv5s46.cloudfront.net/assets/build/images/banners/search/desktop/categorie/nature1920.4a74dce3.jpg 1920w,
-              https://d17h7hjnfv5s46.cloudfront.net/assets/build/images/banners/search/desktop/categorie/nature3440.90ad9bf4.jpg 3440w
-            "
-            sizes="(min-width:768px) 100vw, 260px"
             alt=""
           />
         </div>
@@ -42,7 +35,7 @@ export const ProductPage = () => {
       <section className="menu-sec">
         <div className="main-drop category-dropdown">
           <h4>Painting Category</h4>
-          <button className="btn dropdown-box" >
+          <button className="btn dropdown-box">
             Nature
             <i className="fa-solid fa-angle-down"></i>
           </button>
@@ -65,7 +58,7 @@ export const ProductPage = () => {
 
         {/*  sort by dropdown  */}
         <div className="dropdown-container sortBy-con">
-          <button className="btn dropdown-btn" >
+          <button className="btn dropdown-btn">
             Sort By
             <i className="fa-solid fa-angle-down"></i>
           </button>
@@ -83,15 +76,9 @@ export const ProductPage = () => {
       {/* products section */}
       <section className="products-sec">
         <div className="grid-3 products-grid">
-          {prodList
-            .map((i) => {
-              return (
-                <TextOverMediaCard
-                key={i._id}
-                  item={i}
-                />
-              );
-            })}
+          {productList.map((i) => {
+            return <TextOverMediaCard key={i._id} item={i} />;
+          })}
         </div>
       </section>
     </main>

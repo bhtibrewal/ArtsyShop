@@ -6,8 +6,8 @@ export const CategoriesSection = () => {
   const [categoryList, setList] = useState([]);
   useEffect(() => {
     fetchCategory();
-    return ()=>{};
-  },[]);
+    return () => {};
+  }, []);
   const fetchCategory = async () => {
     const res = await axios.get("/api/categories");
     try {
@@ -16,16 +16,16 @@ export const CategoriesSection = () => {
       throw new Error("error");
     }
   };
-  const category_list = [
-    "Abstraction",
-    "Nature",
-    "Landscape",
-    "urban",
-    "Street",
-    "Medival",
-    "Pop Culture",
-    "Portrait",
-  ];
+  // const category_list = [
+  //   "Abstraction",
+  //   "Nature",
+  //   "Landscape",
+  //   "urban",
+  //   "Street",
+  //   "Medival",
+  //   "Pop Culture",
+  //   "Portrait",
+  // ];
   return (
     <section className="category-section">
       <h1>Categories</h1>

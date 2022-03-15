@@ -15,7 +15,13 @@
   text-shadow: 2px 2px 5px var(--secondary-color);
   backdrop-filter: blur(2px);
   color: var(--light-text);
+
 }
+.hero-overlay>*{
+  background: rgba(0, 0, 0, 0.356);
+  font-size: 2em;
+}
+
 /* category section */
 .category-section {
   padding: 2rem;

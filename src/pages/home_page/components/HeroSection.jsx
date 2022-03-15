@@ -15,11 +15,11 @@ export const HeroSection = () => {
   return (
     <section className="hero-section grid-overlay">
       <div className="hero-img">
-        <img alt="hero image" src={corouselImages[sliderIndex]} />
+        <img alt="hero" src={corouselImages[sliderIndex]} />
       </div>
       <div className="hero-overlay flex-col">
         <h2>Discover the creative universe of our artists.</h2>
-        <ButtonPrimary onClick={sliderControler}>Discover</ButtonPrimary>
+        <ButtonPrimary className="hero-sec-button" onClick={sliderControler}>Discover</ButtonPrimary>
       </div>
     </section>
   );
