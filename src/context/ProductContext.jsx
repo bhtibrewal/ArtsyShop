@@ -9,7 +9,7 @@ import { useFetch } from "../custom_hooks/useFetch";
 const ProductContext = createContext();
 
 const ProductContextProvider = ({ children }) => {
-  
+
   // const fetchProduct = async () => {
   //   try {
   //     const res = await axios.get("api/products");
@@ -37,9 +37,9 @@ const ProductContextProvider = ({ children }) => {
   };
 
   const initialProductState = {
-    productList: useFetch("api/products"),
+    productList: [],
     wishList: [],
-    cart: fetchCart(),
+    cart: [],
   };
   const product_reducer_fn = (_state, { type, payload }) => {
     switch (type) {
