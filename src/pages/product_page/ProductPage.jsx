@@ -1,21 +1,19 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { TextOverMediaCard } from "../../components";
 import { useProductContext } from "../../context";
-import { useFetch } from "../../custom_hooks/useFetch";
+import { useAxios } from "../../custom_hooks/useAxios";
 import "./product_page.css";
 
 export const ProductPage = () => {
-  const products = useFetch("api/products");
-
   const { productState, productDispatch } = useProductContext();
 
+  const products = useAxios("api/products");
   useEffect(() => {
     productDispatch({ type: "ADD_PRODUCT", payload: products });
   }, [products]);
-  
+
   const { productList } = productState;
- 
+
   return (
     <main className="main">
       {/*  header section  */}

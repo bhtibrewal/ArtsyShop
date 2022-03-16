@@ -4,7 +4,7 @@ import {
   useContext,
   useReducer,
 } from "react";
-import { useFetch } from "../custom_hooks/useFetch";
+import { useFetch } from "../custom_hooks/useAxios";
 
 const ProductContext = createContext();
 
