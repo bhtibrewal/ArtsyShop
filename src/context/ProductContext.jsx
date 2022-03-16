@@ -43,7 +43,7 @@ const ProductContextProvider = ({ children }) => {
   };
   const product_reducer_fn = (_state, { type, payload }) => {
     switch (type) {
-      case "ADD_PRODUCT":
+      case "ADD_PRODUCT_LIST":
         return { ..._state, productList: payload };
       case "ADD_TO_CART":
         return;

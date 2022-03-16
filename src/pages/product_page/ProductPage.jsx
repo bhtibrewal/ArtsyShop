@@ -7,9 +7,9 @@ import "./product_page.css";
 export const ProductPage = () => {
   const { productState, productDispatch } = useProductContext();
 
-  const products = useAxios("api/products");
+  const products = useAxios("api/products", "GET", "products");
   useEffect(() => {
-    productDispatch({ type: "ADD_PRODUCT", payload: products });
+    productDispatch({ type: "ADD_PRODUCT_LIST", payload: products });
   }, [products]);
 
   const { productList } = productState;
