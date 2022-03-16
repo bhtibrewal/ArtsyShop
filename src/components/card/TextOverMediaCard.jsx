@@ -1,5 +1,5 @@
 export const TextOverMediaCard = ({ item }) => {
-  console.log(item);
+
   const {
     title: item_name,
     artist: item_by,

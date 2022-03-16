@@ -1,10 +1,9 @@
-
 .hero-section {
   position: relative;
   width: 90vw;
   margin: auto;
 }
-.hero-section img{
+.hero-section img {
   aspect-ratio: 16/9;
 }
 .hero-overlay {
@@ -16,6 +15,16 @@
   backdrop-filter: blur(2px);
   color: var(--light-text);
 }
+.hero-content {
+  padding: 4rem;
+  background: rgba(0, 0, 0, 0.36);
+  display: grid;
+  place-items: center;
+}
+.hero-content > .btn {
+  font-size:2em;
+}
+
 /* category section */
 .category-section {
   padding: 2rem;

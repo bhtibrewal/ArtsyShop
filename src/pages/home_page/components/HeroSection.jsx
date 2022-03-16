@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ButtonPrimary } from "../../../components/buttons";
 
 export const HeroSection = () => {
@@ -10,16 +10,23 @@ export const HeroSection = () => {
   const corouselImages = [img1, img2];
   const [sliderIndex, setSliderIndex] = useState(0);
 
-  const sliderControler = () => setSliderIndex((prev) => (prev + 1) % corouselImages.length);
+  useEffect(() => {
+    const id = setInterval(() => sliderControler(), 5000);
+    return () => clearInterval(id);
+  }, []);
+  const sliderControler = () =>
+    setSliderIndex((prev) => (prev + 1) % corouselImages.length);
 
   return (
     <section className="hero-section grid-overlay">
       <div className="hero-img">
-        <img alt="hero image" src={corouselImages[sliderIndex]} />
+        <img alt="hero" src={corouselImages[sliderIndex]} />
       </div>
       <div className="hero-overlay flex-col">
-        <h2>Discover the creative universe of our artists.</h2>
-        <ButtonPrimary onClick={sliderControler}>Discover</ButtonPrimary>
+        <div className="hero-content">
+          <h1>Discover the creative universe of our artists.</h1>
+          <ButtonPrimary className="hero-sec-button">Discover</ButtonPrimary>
+        </div>
       </div>
     </section>
   );

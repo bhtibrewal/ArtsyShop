@@ -1,7 +1,9 @@
 import React from "react";
+import { useProductContext } from "../../../context";
 
 export const TotalBill = () => {
-  const cart = useCart();
+  const {productState} = useProductContext();
+  // let  total += productState.cart.map(item=>item.price);
   return (
     <section className="cart-price-sec">
       <p>
@@ -9,7 +11,7 @@ export const TotalBill = () => {
       </p>
       <hr />
       <div className="calc-part">
-        <span>Price ({cart.length} Items)</span>
+        <span>Price ({productState.cart.length} Items)</span>
         <span>₹853,200</span> <span>Discount</span>
         <span>-₹85,000</span> <span>Shipping Charges</span>
         <span>₹50,000</span>
