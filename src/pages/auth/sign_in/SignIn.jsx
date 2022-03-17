@@ -2,10 +2,7 @@ import "../auth.css";
 
 export const SignIn = () => {
   return (
-    <section className="flex-col signin-section-overlay">
-      <button className="btn overlay-close">
-        <i className="fa-solid fa-x"></i>
-      </button>
+    <main className="main flex-col">
       <div className="flex-col signup-sec">
         <i className="primary fa-regular fa-user fa-5x"></i>
         <p className="body-l">Login to my user account.</p>
@@ -35,6 +32,6 @@ export const SignIn = () => {
           <div className="link-text-primary">SIGN UP</div>
         </div>
       </div>
-    </section>
+    </main>
   );
 };
