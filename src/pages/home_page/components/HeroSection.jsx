@@ -15,8 +15,8 @@ export const HeroSection = () => {
     },
     {
       img: img2,
-      text: "Discover the creative universe of our artists.",
-      button: "Discover",
+      text: "Discover works by some of today’s most sought after artists, in over 80 different countries.",
+      button: "Explore",
     },
   ];
   const [sliderIndex, setSliderIndex] = useState(0);

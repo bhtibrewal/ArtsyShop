@@ -41,26 +41,27 @@ export const Sidebar = () => {
       <h3>Category</h3>
       <div className="flex-col">
         {categoriesList?.map((category) => {
+          const {categoryName} = category;
           return (
-            <label key={category.categoryName}>
+            <label key={categoryName}>
               <input
                 type="checkbox"
                 checked={showCategories.some(
-                  (item) => item === category.categoryName
+                  (item) => item === categoryName
                 )}
                 onChange={(e) =>
                   e.target.checked
                     ? filterStateDispatch({
                         type: "ADD_CATEGORY",
-                        payload: category.categoryName,
+                        payload: categoryName,
                       })
                     : filterStateDispatch({
                         type: "REMOVE_CATEGORY",
-                        payload: category.categoryName,
+                        payload: categoryName,
                       })
                 }
               />
-              <span className="body-l">{category.categoryName}</span>
+              <span className="body-l">{categoryName}</span>
             </label>
           );
         })}

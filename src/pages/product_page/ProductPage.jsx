@@ -1,6 +1,5 @@
 import { Sidebar, TextOverMediaCard } from "../../components";
 import { useProductContext, useProductFilter } from "../../context";
-
 import {
   getFilteredProductList,
   sortByPrice,
@@ -8,6 +7,7 @@ import {
   filterByCategory,
   filterByDelivery,
   filterByRating,
+  filterByPriceRange,
 } from "../../utils/getFilteredProductList";
 import "./product_page.css";
 
@@ -17,14 +17,14 @@ export const ProductPage = () => {
 
   const { filterState, filterStateDispatch } = useProductFilter();
   const { priceRange } = filterState;
-  // eslint-disable-next-line
   const filteredProductList = getFilteredProductList(
     [
-      sortByPrice,
+      filterByPriceRange,
       filterByCategory,
       filterByStock,
       filterByDelivery,
       filterByRating,
+      sortByPrice,
     ],
     [...productList],
     filterState
@@ -48,20 +48,6 @@ export const ProductPage = () => {
 
       {/* menu section */}
       <section className="menu-sec">
-        <div className="main-drop category-dropdown">
-          <h4>Painting Category</h4>
-          <button className="btn dropdown-box">
-            Nature
-            <i className="fa-solid fa-angle-down"></i>
-          </button>
-          <div className="dropdown">
-            <div>Street life</div>
-            <div>Nature</div>
-            <div>Landscape</div>
-            <div>Abstraction</div>
-          </div>
-        </div>
-
         {/*  */}
         <div className="price-sec">
           <h3>Price</h3>
@@ -74,7 +60,7 @@ export const ProductPage = () => {
               value={priceRange}
               onChange={(e) =>
                 filterStateDispatch({
-                  type: "PriceRange",
+                  type: "PRICE_RANGE",
                   payload: Number(e.target.value),
                 })
               }

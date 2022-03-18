@@ -28,3 +28,7 @@ export const filterByRating = (productsArr, { ratingAbove }) => {
         return productsArr;
     return productsArr.filter(product => product.rating >= ratingAbove)
 }
+
+export const filterByPriceRange= (productsArr, {priceRange})=>{
+return productsArr.filter(product=> product.price<=priceRange)
+}

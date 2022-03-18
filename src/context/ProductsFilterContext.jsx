@@ -28,13 +28,14 @@ const ProductFilterProvider = ({ children }) => {
             (category) => category !== payload
           ),
         };
+      case "PRICE_RANGE":
+        return { ...state, priceRange: payload };
       case "RATING":
         return { ...state, ratingAbove: payload };
-
       case "SORT_BY":
         return { ...state, sortBy: payload };
       default:
-        return;
+        return {...state};
     }
   };
 
