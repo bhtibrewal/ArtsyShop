@@ -1,26 +1,19 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export const useAxios = (
-  url,
-  method,
-  dataType,
-  body = null,
-  headers = null
-) => {
+export const useAxios = (url, method, dataType, body = null, call = true) => {
   const AUTH_TOKEN = localStorage.getItem("token");
   if (AUTH_TOKEN) {
-    axios.defaults.headers.common["Authorization"] = AUTH_TOKEN;
-    console.log("token");
+    axios.defaults.headers.common["authorization"] = AUTH_TOKEN;
   }
   const [data, setData] = useState([]);
   useEffect(() => {
     const fetchAPI = async () => {
       try {
-        const res = await axios(url, {
+        const res = await axios({
+          url,
           method,
           data: body,
-          headers,
         });
         console.log({ res });
         if (res.status === 200 || res.status === 201) {
@@ -28,11 +21,12 @@ export const useAxios = (
         }
       } catch (e) {
         console.log(e.response.data);
-        // throw new Error("error");
       }
     };
-    fetchAPI();
+
+    if (call) {
+      fetchAPI();
+    }
   }, [url]);
-  // console.log("data", data)
   return data;
 };

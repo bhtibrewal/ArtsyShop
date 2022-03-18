@@ -4,6 +4,7 @@ const ProductFilterContext = createContext();
 
 const ProductFilterProvider = ({ children }) => {
   const initialFilterState = {
+    sortBy: null,
     showCategories: [],
     showFastDelivery: false,
     showOutOfStock: true,
@@ -14,10 +15,24 @@ const ProductFilterProvider = ({ children }) => {
     switch (type) {
       case "SEARCH":
         return { ...state };
-      case "FILTER_BY":
-        return;
+      case "OUT_OF_STOCK":
+        return { ...state, showOutOfStock: !state.showOutOfStock };
+      case "FAST_DELIVERY":
+        return { ...state, showFastDelivery: !state.showFastDelivery };
+      case "ADD_CATEGORY":
+        return { ...state, showCategories: [...state.showCategories, payload] };
+      case "REMOVE_CATEGORY":
+        return {
+          ...state,
+          showCategories: state.showCategories.filter(
+            (category) => category !== payload
+          ),
+        };
+      case "RATING":
+        return { ...state, ratingAbove: payload };
+
       case "SORT_BY":
-        return { ...state };
+        return { ...state, sortBy: payload };
       default:
         return;
     }
@@ -30,7 +45,7 @@ const ProductFilterProvider = ({ children }) => {
     //  otherwise set the filterState to initialFilterState
     JSON.parse(localStorage.getItem("filterState")) ?? initialFilterState
   );
-
+  console.log(filterState);
   //store the filter state in local storage
   useEffect(() => {
     localStorage.setItem("filterState", JSON.stringify(filterState));

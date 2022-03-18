@@ -1,17 +1,10 @@
 import "./wishlist_page.css";
 import { BasicCard, ButtonPrimary } from "../../components";
-
-const item = {
-  item_name: "La Porta Rossa Sulla Salita Art Print",
-  item_by: "Guido Borelli",
-  item_desc:
-    "Visit ten places on our planet that are undergoing the biggest changes today.",
-  item_price: 18,
-  item_original_price: 22,
-  item_rating: 4,
-};
+import { useProductContext } from "../../context";
 
 export const WishlistPage = () => {
+  const { productState, productDispatch } = useProductContext();
+  const { wishList, cart } = productState;
   return (
     <main className="main">
       <section className="page-header-section">
@@ -28,18 +21,16 @@ export const WishlistPage = () => {
       </section>
 
       <section className="wishlist-sec">
-        {Array(6)
-          .fill()
-          .map(() => {
-            return (
-              <BasicCard item={item}>
-                <ButtonPrimary>
-                  <i className="fa-solid fa-cart-shopping"></i>
-                  <span> add to cart</span>
-                </ButtonPrimary>
-              </BasicCard>
-            );
-          })}
+        {wishList.map((item) => {
+          return (
+            <BasicCard item={item}>
+              <ButtonPrimary>
+                <i className="fa-solid fa-cart-shopping"></i>
+                <span> add to cart</span>
+              </ButtonPrimary>
+            </BasicCard>
+          );
+        })}
       </section>
     </main>
   );

@@ -1,31 +1,40 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useUserContext } from "../../../context";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useProductContext, useUserContext } from "../../../context";
 import { LoggedInUser } from "./LoggedInUser";
 
 export const RightNav = ({ onClick }) => {
-  const loginState = useUserContext();
+  const { loginState } = useUserContext();
   const navigate = useNavigate();
+  const { productState, productDispatch } = useProductContext();
+  const { wishList, cart } = productState;
   return (
     <div className="right-side">
-      <Link to="/mockman">Mockman</Link>
+      <NavLink to="/mockman">Mockman</NavLink>
 
-      {!loginState ? (
+      {loginState ? (
         <div onClick={() => navigate("/sign-in")} className="user">
           <i className="fa-regular fa-user fa-xl"></i>
         </div>
       ) : (
         <LoggedInUser />
       )}
-
-      <Link to="/wishlist" className="wishlist">
+      <div
+        className="wishlist"
+        onClick={() =>
+          loginState ? navigate("/wishlist") : navigate("/sign-in")
+        }
+      >
         <i className="fa-regular fa-heart fa-xl"></i>
-        <span className="items">25</span>
-      </Link>
+        <span className="items">{wishList.length}</span>
+      </div>
 
-      <Link to="/cart" className="cart">
+      <div
+        className="cart"
+        onClick={() => (loginState ? navigate("/cart") : navigate("/sign-in"))}
+      >
         <i className="fa-solid fa-bag-shopping fa-xl"></i>
-        <span className="items">25</span>
-      </Link>
+        <span className="items">{cart.length}</span>
+      </div>
     </div>
   );
 };

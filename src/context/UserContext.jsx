@@ -3,11 +3,12 @@ import { createContext, useContext, useState } from "react";
 const UserContext = createContext();
 
 const UserContextProvider = ({ children }) => {
-  const initialUserState = false;
-  const [loginState, loginDispatch] = useState(initialUserState);
+  const initialUserState =
+    localStorage.getItem("token") !== null ? true : false;
+  const [loginState, setLoginState] = useState(initialUserState);
 
   return (
-    <UserContext.Provider value={{ loginState, loginDispatch }}>
+    <UserContext.Provider value={{ loginState, setLoginState }}>
       {children}
     </UserContext.Provider>
   );

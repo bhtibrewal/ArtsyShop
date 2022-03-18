@@ -1,13 +1,70 @@
 import { useProductFilter } from "../../context/ProductsFilterContext";
+import { useAxios } from "../../custom_hooks/useAxios";
 import "./sidebar.css";
 
 export const Sidebar = () => {
   const { filterState, filterStateDispatch } = useProductFilter();
-  const { showCategories, sortBy, ratingAbove } = filterState;
+  const {
+    showCategories,
+    showOutOfStock,
+    showFastDelivery,
+    sortBy,
+    ratingAbove,
+  } = filterState;
+  // console.log(showCategories);
+  const categoriesList = useAxios("/api/categories", "GET", "categories");
 
   return (
     <aside className="product_page-aside">
+      <div className="flex-col">
+        <label>
+          <input
+            type="checkbox"
+            checked={showOutOfStock}
+            onChange={() => {
+              filterStateDispatch({ type: "OUT_OF_STOCK" });
+            }}
+          />{" "}
+          <span className="body-l">Include Out Of Stock</span>
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={showFastDelivery}
+            onChange={() => {
+              filterStateDispatch({ type: "FAST_DELIVERY" });
+            }}
+          />
+          <span className="body-l">Fast Delivery</span>
+        </label>
+      </div>
       <h3>Category</h3>
+      <div className="flex-col">
+        {categoriesList?.map((category) => {
+          return (
+            <label key={category.categoryName}>
+              <input
+                type="checkbox"
+                checked={showCategories.some(
+                  (item) => item === category.categoryName
+                )}
+                onChange={(e) =>
+                  e.target.checked
+                    ? filterStateDispatch({
+                        type: "ADD_CATEGORY",
+                        payload: category.categoryName,
+                      })
+                    : filterStateDispatch({
+                        type: "REMOVE_CATEGORY",
+                        payload: category.categoryName,
+                      })
+                }
+              />
+              <span className="body-l">{category.categoryName}</span>
+            </label>
+          );
+        })}
+      </div>
       <div className="flex-col"></div>
       <h3>Sort By</h3>
       <div className="flex-col">
@@ -15,8 +72,10 @@ export const Sidebar = () => {
         <label>
           <input
             type="radio"
-            checked={sortBy === "HighToLow"}
-            onChange={() => filterStateDispatch({ type: "SORT_BY" })}
+            checked={sortBy === "HIGH_TO_LOW"}
+            onChange={() =>
+              filterStateDispatch({ type: "SORT_BY", payload: "HIGH_TO_LOW" })
+            }
             name="sort_by_price"
           />
           High To Low
@@ -24,8 +83,10 @@ export const Sidebar = () => {
         <label>
           <input
             type="radio"
-            checked={sortBy === "LowToHigh"}
-            onChange={() => filterStateDispatch({ type: "SORT_BY" })}
+            checked={sortBy === "LOW_TO_HIGH"}
+            onChange={() =>
+              filterStateDispatch({ type: "SORT_BY", payload: "LOW_TO_HIGH" })
+            }
             name="sort_by_price"
           />
           Low To High
@@ -33,42 +94,23 @@ export const Sidebar = () => {
       </div>
       <div className="flex-col">
         <p className="body-l">Rating</p>
-        <label>
-          <input
-            type="radio"
-            checked={ratingAbove === 4}
-            onChange={() => filterStateDispatch({ type: "FILTER_BY", payload: 4 })}
-            name="rating_sector"
-          />
-          Above 4 Star
-        </label>
-        <label>
-          <input
-            type="radio"
-            checked={ratingAbove === 3}
-            onChange={() => filterStateDispatch({ type: "FILTER_BY", payload: 3 })}
-            name="rating_sector"
-          />
-          Above 3 Star
-        </label>
-        <label>
-          <input
-            type="radio"
-            checked={ratingAbove === 2}
-            onChange={() => filterStateDispatch({ type: "FILTER_BY", payload: 2 })}
-            name="rating_sector"
-          />
-          Above 2 Star
-        </label>
-        <label>
-          <input
-            type="radio"
-            checked={ratingAbove === 1}
-            onChange={() => filterStateDispatch({ type: "FILTER_BY", payload: 1 })}
-            name="rating_sector"
-          />
-          Above 1 Star
-        </label>
+        {Array(4)
+          .fill()
+          .map((e, index) => {
+            return (
+              <label key={4 - index}>
+                <input
+                  type="radio"
+                  checked={ratingAbove === 4 - index}
+                  onChange={() =>
+                    filterStateDispatch({ type: "RATING", payload: 4 - index })
+                  }
+                  name="rating_sector"
+                />
+                Above {4 - index} Star
+              </label>
+            );
+          })}
       </div>
     </aside>
   );

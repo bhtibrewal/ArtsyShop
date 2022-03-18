@@ -1,9 +1,10 @@
 import "./App.css";
-import { Routes, Route, Outlet } from "react-router-dom";
+import { Routes, Route, Outlet, Navigate, useNavigate } from "react-router-dom";
 import { Navbar } from "./components/navbar/Navbar";
 import {
   CartPage,
   HomePage,
+  ProductDetails,
   ProductPage,
   SignIn,
   SignUp,
@@ -11,7 +12,8 @@ import {
 } from "./pages";
 import MockAPI from "./backend/Mockman";
 import { ProductFilterProvider } from "./context/ProductsFilterContext";
-const WithNavbar = () => {
+
+export const WithNavbar = () => {
   return (
     <>
       <Navbar />
@@ -19,6 +21,7 @@ const WithNavbar = () => {
     </>
   );
 };
+
 function App() {
   return (
     <div className="body">
@@ -34,6 +37,7 @@ function App() {
               </ProductFilterProvider>
             }
           />
+          <Route path={`/product-details`} element={<ProductDetails />}></Route>
           <Route path="/wishlist" element={<WishlistPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/mockman" element={<MockAPI />} />

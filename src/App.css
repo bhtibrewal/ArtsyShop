@@ -117,6 +117,9 @@ img {
 .section-bg img {
   height: 100%;
 }
+.text-o-media .card-img{
+  height:100%;
+}
 .section-content {
   grid-column: 1/2;
   grid-row: 1/2;

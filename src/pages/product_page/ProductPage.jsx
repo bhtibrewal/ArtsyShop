@@ -1,34 +1,36 @@
-import { useEffect } from "react";
 import { Sidebar, TextOverMediaCard } from "../../components";
 import { useProductContext, useProductFilter } from "../../context";
-import { useAxios } from "../../custom_hooks/useAxios";
+
 import {
   getFilteredProductList,
-  filterBy,
-  sortBy,
+  sortByPrice,
+  filterByStock,
+  filterByCategory,
+  filterByDelivery,
+  filterByRating,
 } from "../../utils/getFilteredProductList";
 import "./product_page.css";
 
 export const ProductPage = () => {
-  
-  const { productState, productDispatch } = useProductContext();
-
-  const products = useAxios("api/products", "GET", "products");
-
-  useEffect(() => {
-    productDispatch({ type: "ADD_PRODUCT_LIST", payload: products });
-  }, [products]);
-
+  const { productState } = useProductContext();
   const { productList } = productState;
 
-
   const { filterState, filterStateDispatch } = useProductFilter();
-  const { showOutOfStock, showFastDelivery, priceRange } = filterState;
-  const { filteredProductList } = getFilteredProductList(
-    [sortBy, filterBy],
-    productList,
+  const { priceRange } = filterState;
+  // eslint-disable-next-line
+  const filteredProductList = getFilteredProductList(
+    [
+      sortByPrice,
+      filterByCategory,
+      filterByStock,
+      filterByDelivery,
+      filterByRating,
+    ],
+    [...productList],
     filterState
   );
+  console.log(productList, filteredProductList);
+  if (productList.length === 0) return <div>Loading...</div>;
   return (
     <main className="main">
       {/*  header section  */}
@@ -46,29 +48,6 @@ export const ProductPage = () => {
 
       {/* menu section */}
       <section className="menu-sec">
-        <fieldset className="flex-col">
-          <legend>Filter By</legend>
-          <label>
-            <input
-              type="checkbox"
-              checked={showOutOfStock}         
-              onChange={() => {
-                filterStateDispatch({ type: "FILTER_BY" });
-              }}
-            />{" "}
-            Include Out Of Stock
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              checked={showFastDelivery}
-              onChange={() => {
-                filterStateDispatch({ type: "FILTER_BY" });
-              }}
-            />{" "}
-            Fast Delivery
-          </label>
-        </fieldset>
         <div className="main-drop category-dropdown">
           <h4>Painting Category</h4>
           <button className="btn dropdown-box">
@@ -126,7 +105,7 @@ export const ProductPage = () => {
         <Sidebar />
         <section className="products-sec">
           <div className="grid-3 products-grid">
-            {productList.map((product) => {
+            {filteredProductList.map((product) => {
               return <TextOverMediaCard key={product._id} item={product} />;
             })}
           </div>

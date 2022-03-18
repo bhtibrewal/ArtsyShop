@@ -1,6 +1,19 @@
+import { useEffect } from "react";
+import { useUserContext } from "../../../context";
+import { useAxios } from "../../../custom_hooks/useAxios";
 import "../auth.css";
 
 export const SignIn = () => {
+  const { loginState, setLoginState } = useUserContext();
+  const login = useAxios("/api/auth/login", "POST", "encodedToken", {
+    email: "adarshbalak@gmail.com",
+    password: "adarshBalaki123",
+  });
+  useEffect(() => {
+    localStorage.setItem("token", login);
+    setLoginState(true);
+  }, [login]);
+
   return (
     <main className="main flex-col">
       <div className="flex-col signup-sec">

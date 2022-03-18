@@ -22,15 +22,16 @@ export const TextOverMediaCard = ({ item: art }) => {
 
   const { productState } = useProductContext();
   const { wishList, cart } = productState;
-  console.log(wishList);
+
   return (
     <div className="card w-30 text-o-media">
       <div className="content">
         <img className="card-img" src={img_src} alt="" />
         <button className="icon favourite-icon">
           <i
-            className={`${() =>
-              inWhisList(wishList, art) ? "fas" : "fa-regular"} fa-heart fa-2x`}
+            className={`${
+              // () =>inWhisList(wishList, art) ? "fas" :
+               "fa-regular"} fa-heart fa-2x`}
           ></i>
         </button>
 
