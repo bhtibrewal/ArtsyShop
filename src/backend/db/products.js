@@ -11,7 +11,7 @@ export const products = [
     rating: 3,
     categoryName: "Digital Art",
     inStock: true,
-    inWhislist: false,
+
   },
   {
     _id: uuid(),
@@ -23,7 +23,7 @@ export const products = [
     rating: 4,
     categoryName: "Nature",
     inStock: true,
-    inWhislist: false,
+    fastDelivery : true,
   },
   {
     _id: uuid(),
@@ -35,7 +35,7 @@ export const products = [
     rating: 5,
     categoryName: "Lanscape",
     inStock: true,
-    inWhislist: true,
+    fastDelivery : true,
   },
   {
     _id: uuid(),
@@ -47,7 +47,7 @@ export const products = [
     rating: 4,
     categoryName: "Abstarction",
     inStock: true,
-    inWhislist: false,
+    fastDelivery : true,
   },
   {
     _id: uuid(),
@@ -59,6 +59,6 @@ export const products = [
     rating: 4,
     categoryName: "Abstarction",
     inStock: false,
-    inWhislist: false,
+    fastDelivery : true,
   },
 ];

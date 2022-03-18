@@ -1,9 +1,9 @@
-export const TextOverMediaCard = ({ item }) => {
+import { RatingPalleteIcon } from "../index";
 
+export const TextOverMediaCard = ({ item }) => {
   const {
     title: item_name,
     artist: item_by,
-    desc: item_desc,
     img: img_src,
     item_original_price,
     price: item_price,
@@ -20,6 +20,7 @@ export const TextOverMediaCard = ({ item }) => {
         <div className="card-header">
           <h1>{item_name}</h1>
           <h2>by {item_by}</h2>
+          {/* <RatingPalleteIcon rating={item_rating} /> */}
           <div className="price-sec">
             <h3>${item_price}</h3>
             <span className="strike-price">${item_original_price}</span>

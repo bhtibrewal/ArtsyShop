@@ -1,12 +1,12 @@
 import "./navbar.css";
-
+import { LeftNav, RightNav, Search } from "./components";
 
 export const Navbar = (props) => {
   return (
     <header className="arstyShop-header header">
-      {props.leftNav}
-      {props.search}
-      {props.rightNav}
+      <LeftNav />
+      <Search />
+      <RightNav />
     </header>
   );
 };

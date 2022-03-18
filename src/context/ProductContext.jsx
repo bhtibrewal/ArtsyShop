@@ -4,22 +4,10 @@ import {
   useContext,
   useReducer,
 } from "react";
-import { useFetch } from "../custom_hooks/useAxios";
 
 const ProductContext = createContext();
 
 const ProductContextProvider = ({ children }) => {
-
-  // const fetchProduct = async () => {
-  //   try {
-  //     const res = await axios.get("api/products");
-  //     if (res.status === 200) {
-  //       setProductList(res.data.products);
-  //     }
-  //   } catch {
-  //     throw new Error("error");
-  //   }
-  // };
 
   const fetchCart = async () => {
     try {
@@ -61,7 +49,7 @@ const ProductContextProvider = ({ children }) => {
     product_reducer_fn,
     initialProductState
   );
-  console.log("this is productstate", productState);
+
   return (
     <ProductContext.Provider value={{ productState, productDispatch }}>
       {children}
