@@ -1,25 +1,22 @@
 import { RatingPalleteIcon } from "../index";
 
-export const BasicCard = ({ item , children}) => {
+export const BasicCard = ({ item: art, children }) => {
   const {
-    item_name,
-    item_by,
-    item_desc,
+    title: item_name,
+    artist: item_by,
+    img: img_src,
     item_original_price,
-    item_price,
-    item_rating,
-  } = item;
+    price: item_price,
+    rating: item_rating,
+    desc: item_desc,
+  } = art;
   return (
     <div className="card w-30 basic">
       <button className="icon favourite-icon">
         <i className="fa-regular fa-heart fa-2x"></i>
       </button>
       <div className="content">
-        <img
-          className="card-img"
-          src="https://render.fineartamerica.com/images/images-new-artwork/images-medium-5/la-porta-rossa-sulla-salita-guido-borelli.jpg?v=2"
-          alt=""
-        />
+        <img className="card-img" src={img_src} alt="" />
 
         <div className="card-header">
           <h1>{item_name}</h1>
@@ -33,9 +30,7 @@ export const BasicCard = ({ item , children}) => {
         </div>
       </div>
 
-      <div className="card-actions">
-        {children}
-      </div>
+      <div className="card-actions">{children}</div>
     </div>
   );
 };

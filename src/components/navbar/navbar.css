@@ -10,11 +10,14 @@
 .arstyShop-header > * {
   color: var(--light-text);
 }
+.left-side{
+  cursor: pointer;
+}
 .right-side {
   display: flex;
   align-items: center;
   gap: 2rem;
-  font-size: 1.5em;
+  font-size: 1.2em;
 }
 .right-side > i:hover {
   cursor: pointer;
@@ -23,8 +26,7 @@
 .items {
   color: var(--primary-color);
   font-size: smaller;
-  font-weight: bold;
-  margin-left:1rem;
+  margin-left: 1rem;
 }
 .user {
   cursor: pointer;
@@ -43,6 +45,7 @@
   padding: 1rem 0;
   border-radius: 0.4rem;
   display: none;
+  z-index: var(--user-dropdown-index);
 }
 .user-dropdown > * {
   align-self: stretch;

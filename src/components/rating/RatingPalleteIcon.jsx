@@ -3,8 +3,8 @@ export const RatingPalleteIcon = ({ rating }) => {
     <div className="artsy-rating-sec">
       {Array(rating)
         .fill()
-        .map(() => {
-          return <i className="fa-solid fa-palette filled"></i>;
+        .map((e, index) => {
+          return <i key={index} className="fa-solid fa-palette filled"></i>;
         })}
     </div>
   );

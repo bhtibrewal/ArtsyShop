@@ -1,29 +1,11 @@
 import axios from "axios";
-import {
-  createContext,
-  useContext,
-  useReducer,
-} from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
+import { useAxios } from "../custom_hooks/useAxios";
+import { useUserContext } from "./UserContext";
 
 const ProductContext = createContext();
 
 const ProductContextProvider = ({ children }) => {
-
-  const fetchCart = async () => {
-    try {
-      const res = await axios("/api/user/cart", {
-        method: "GET",
-        headers: {
-          authorization:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI4MmIxNjYwYi0yMTg2LTRiMmEtOTRlOC1mYzNmODUyYjcxNTQiLCJlbWFpbCI6ImpvaG5kb2VAZ21haWwuY29tIiwiaWF0IjoxNjQ3MzQ3OTY1fQ.CsaRbb8b9jWPRPUMY8OIt-TWE1bcRbFiUDz22YbNAoY",
-        },
-      });
-      return res.data.cart;
-    } catch (error) {
-      console.log(`couldn't get cart`, { error });
-    }
-  };
-
   const initialProductState = {
     productList: [],
     wishList: [],
@@ -33,10 +15,15 @@ const ProductContextProvider = ({ children }) => {
     switch (type) {
       case "ADD_PRODUCT_LIST":
         return { ..._state, productList: payload };
+      case "ADD_WISHLIST":
+        return { ..._state, wishList: [...payload] };
+      case "ADD_CART":
+        return { ..._state, cart: [...payload] };
+
       case "ADD_TO_CART":
-        return;
+        return { ..._state };
       case "REMOVE_FROM_CART":
-        return;
+        return { ..._state };
       case "ADD_TO_WISHLIST":
         return;
       case "REMOVE_FROM_WISHLIST":
@@ -49,6 +36,37 @@ const ProductContextProvider = ({ children }) => {
     product_reducer_fn,
     initialProductState
   );
+  const { loginState } = useUserContext();
+  const fetchedProductList = useAxios("api/products", "GET", "products");
+
+  const fetchWishlist = useAxios(
+    "/api/user/wishlist",
+    "GET",
+    "wishlist",
+    undefined,
+    loginState
+  );
+  const fetchedCart = useAxios(
+    "/api/user/cart",
+    "GET",
+    "cart",
+    undefined,
+    loginState
+  );
+
+  useEffect(() => {
+    if (fetchedProductList.length !== 0)
+      productDispatch({
+        type: "ADD_PRODUCT_LIST",
+        payload: fetchedProductList,
+      });
+  }, [fetchedProductList]);
+  useEffect(() => {
+    productDispatch({ type: "ADD_WISHLIST", payload: fetchWishlist });
+  }, [fetchWishlist]);
+  useEffect(() => {
+    productDispatch({ type: "ADD_CART", payload: fetchedCart });
+  }, [fetchedCart]);
 
   return (
     <ProductContext.Provider value={{ productState, productDispatch }}>

@@ -7,7 +7,18 @@ export const HeroSection = () => {
   const img2 =
     "https://images.unsplash.com/photo-1606819717115-9159c900370b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGFydCUyMGdhbGxlcnl8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60";
 
-  const corouselImages = [img1, img2];
+  const carousel = [
+    {
+      img: img1,
+      text: "Discover the creative universe of our artists.",
+      button: "Discover",
+    },
+    {
+      img: img2,
+      text: "Discover works by some of today’s most sought after artists, in over 80 different countries.",
+      button: "Explore",
+    },
+  ];
   const [sliderIndex, setSliderIndex] = useState(0);
 
   useEffect(() => {
@@ -15,17 +26,19 @@ export const HeroSection = () => {
     return () => clearInterval(id);
   }, []);
   const sliderControler = () =>
-    setSliderIndex((prev) => (prev + 1) % corouselImages.length);
+    setSliderIndex((prev) => (prev + 1) % carousel.length);
 
   return (
     <section className="hero-section grid-overlay">
       <div className="hero-img">
-        <img alt="hero" src={corouselImages[sliderIndex]} />
+        <img alt="hero" src={carousel[sliderIndex].img} />
       </div>
       <div className="hero-overlay flex-col">
         <div className="hero-content">
-          <h1>Discover the creative universe of our artists.</h1>
-          <ButtonPrimary className="hero-sec-button">Discover</ButtonPrimary>
+          <h1>{carousel[sliderIndex].text}</h1>
+          <ButtonPrimary className="hero-sec-button">
+            {carousel[sliderIndex].button}
+          </ButtonPrimary>
         </div>
       </div>
     </section>

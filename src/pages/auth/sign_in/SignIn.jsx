@@ -1,11 +1,21 @@
+import { useEffect } from "react";
+import { useUserContext } from "../../../context";
+import { useAxios } from "../../../custom_hooks/useAxios";
 import "../auth.css";
 
 export const SignIn = () => {
+  const { loginState, setLoginState } = useUserContext();
+  const login = useAxios("/api/auth/login", "POST", "encodedToken", {
+    email: "adarshbalak@gmail.com",
+    password: "adarshBalaki123",
+  });
+  useEffect(() => {
+    localStorage.setItem("token", login);
+    setLoginState(true);
+  }, [login]);
+
   return (
-    <section className="flex-col signin-section-overlay">
-      <button className="btn overlay-close">
-        <i className="fa-solid fa-x"></i>
-      </button>
+    <main className="main flex-col">
       <div className="flex-col signup-sec">
         <i className="primary fa-regular fa-user fa-5x"></i>
         <p className="body-l">Login to my user account.</p>
@@ -35,6 +45,6 @@ export const SignIn = () => {
           <div className="link-text-primary">SIGN UP</div>
         </div>
       </div>
-    </section>
+    </main>
   );
 };

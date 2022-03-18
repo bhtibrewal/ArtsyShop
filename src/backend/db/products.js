@@ -11,7 +11,7 @@ export const products = [
     rating: 3,
     categoryName: "Digital Art",
     inStock: true,
-
+    fastDelivery: true,
   },
   {
     _id: uuid(),
@@ -23,7 +23,7 @@ export const products = [
     rating: 4,
     categoryName: "Nature",
     inStock: true,
-    fastDelivery : true,
+    fastDelivery: false,
   },
   {
     _id: uuid(),
@@ -33,9 +33,9 @@ export const products = [
     img: "https://cdn.singulart.com/artworks/v2/cropped/26567/main/fhd/1534622_d831b72484f36574ed27f16a4c4fe368.jpeg",
     price: "625000",
     rating: 5,
-    categoryName: "Lanscape",
+    categoryName: "Landscape",
     inStock: true,
-    fastDelivery : true,
+    fastDelivery: true,
   },
   {
     _id: uuid(),
@@ -44,10 +44,10 @@ export const products = [
     desc: "Acrylic on Canvas, 58.4x55.9cm",
     img: "https://cdn.singulart.com/artworks/v2/cropped/5855/main/fhd/536679_0be0c153cb7128d992de966f7a8d35c8.jpeg",
     price: "40000",
-    rating: 4,
-    categoryName: "Abstarction",
+    rating: 2,
+    categoryName: "Abstraction",
     inStock: true,
-    fastDelivery : true,
+    fastDelivery: true,
   },
   {
     _id: uuid(),
@@ -57,8 +57,8 @@ export const products = [
     img: "https://cdn.singulart.com/artworks/v2/cropped/4727/main/fhd/125759_a5ff8af5eae137fce9a62bb70678bb32.jpeg",
     price: "100000",
     rating: 4,
-    categoryName: "Abstarction",
+    categoryName: "Abstraction",
     inStock: false,
-    fastDelivery : true,
+    fastDelivery: true,
   },
 ];
