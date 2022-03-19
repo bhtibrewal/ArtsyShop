@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ButtonPrimary, InputField, PasswordInput } from "../../../components";
 
 export const SignUp = () => {
@@ -71,9 +71,9 @@ export const SignUp = () => {
           />
           <span className="checkbox-text">
             By registering, I accept the
-            <a className="primary" href="#">
+            <Link to="me" className="primary" >
               General terms and conditions.
-            </a>
+            </Link>
           </span>
         </label>
         <ButtonPrimary type="submit" className={` ${isDisabled && "diabled-btn"}`}>

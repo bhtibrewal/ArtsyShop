@@ -1,6 +1,5 @@
 @import url("https://artsyui.netlify.app/src/artsyUI.css");
 
-
 :root{
   --user-dropdown-index: 2;
 }
@@ -121,11 +120,10 @@ img {
   height:100%;
 }
 .favourite-icon{
-  background:var(--primary-color)
+  background:var(--primary-color);
+  color: var(--light-text);
 }
-.wishlisted {
-  color: red;
-}
+
 .section-content {
   grid-column: 1/2;
   grid-row: 1/2;

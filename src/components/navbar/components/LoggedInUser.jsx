@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useUserContext } from "../../../context";
 import { logOut } from "../../../services";
 
@@ -8,13 +9,12 @@ export const LoggedInUser = () => {
     <div className="user">
       <div className="avatar-text avatar-s">BT</div>
       <div className="user-dropdown flex-col">
-        <a
+        <Link to="me"
           className="flex-align-center"
-          href="/pages/user-profile/user-profile.html"
         >
           <span>My Account</span>
           <i className="fa-solid fa-angle-right"></i>
-        </a>
+        </Link>
         <div className="flex-align-center">
           <span>My offers</span>
           <i className="fa-solid fa-angle-right"></i>

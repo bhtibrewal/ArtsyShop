@@ -1,4 +1,4 @@
-
+import { useLocation } from "react-router-dom";
 import { Sidebar, TextOverMediaCard } from "../../components";
 import { useProductContext, useProductFilter } from "../../context";
 import { useDocumentTitle } from "../../custom_hooks/useDocumentTitle";
@@ -15,6 +15,7 @@ import "./product_page.css";
 
 export const ProductPage = () => {
   useDocumentTitle("Product Page");
+  let location = useLocation();
   const { productState } = useProductContext();
   const { productList } = productState;
 
@@ -33,6 +34,7 @@ export const ProductPage = () => {
     filterState
   );
   console.log(productState);
+
   if (productList.length === 0) return <div>Loading...</div>;
   return (
     <main className="main">

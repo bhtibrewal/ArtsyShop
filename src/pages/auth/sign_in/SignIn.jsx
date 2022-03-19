@@ -1,19 +1,16 @@
 import "../auth.css";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { useUserContext } from "../../../context";
-import { useDocumentTitle, useAxios } from "../../../custom_hooks";
-import {
-  ButtonPrimary,
-  InputField,
-  OutlineButtonPrimary,
-  PasswordInput,
-} from "../../../components";
+import { useDocumentTitle } from "../../../custom_hooks";
+import { ButtonPrimary, InputField, PasswordInput } from "../../../components";
 import { signIn } from "../../../services";
 
 export const SignIn = () => {
   useDocumentTitle("Sign In");
   const navigate = useNavigate();
+  let location = useLocation();
+  console.log(location);
   const { setLoginState, userDataDispatch } = useUserContext();
   const [inputValues, setInputValues] = useState({
     email: "adarshbalika@gmail.com",
@@ -25,8 +22,12 @@ export const SignIn = () => {
       <form
         className="flex-col signup-sec"
         onSubmit={(e) => {
-          e.preventDefault();
-          signIn({ data: inputValues, userDataDispatch, setLoginState });
+          signIn({
+            data: inputValues,
+            userDataDispatch,
+            setLoginState,
+            navigate,
+          });
         }}
       >
         <i className="primary fa-regular fa-user fa-5x"></i>
@@ -55,9 +56,9 @@ export const SignIn = () => {
           <i className="fa-solid fa-arrow-right-long"></i>
         </ButtonPrimary>
 
-        <a href="" className="link-text-primary">
+        <Link to="me" className="link-text-primary">
           Forgot your password?
-        </a>
+        </Link>
         <div>
           <p className="body-md">Still don't have an account ?</p>
           <div
