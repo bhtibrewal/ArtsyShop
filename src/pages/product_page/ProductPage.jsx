@@ -1,5 +1,7 @@
+import { useLocation } from "react-router-dom";
 import { Sidebar, TextOverMediaCard } from "../../components";
 import { useProductContext, useProductFilter } from "../../context";
+import { useDocumentTitle } from "../../custom_hooks/useDocumentTitle";
 import {
   getFilteredProductList,
   sortByPrice,
@@ -12,6 +14,8 @@ import {
 import "./product_page.css";
 
 export const ProductPage = () => {
+  useDocumentTitle("Product Page");
+  let location = useLocation();
   const { productState } = useProductContext();
   const { productList } = productState;
 
@@ -29,7 +33,8 @@ export const ProductPage = () => {
     [...productList],
     filterState
   );
-  console.log(productList, filteredProductList);
+  console.log(productState);
+
   if (productList.length === 0) return <div>Loading...</div>;
   return (
     <main className="main">
@@ -54,9 +59,9 @@ export const ProductPage = () => {
           <div>
             <input
               type="range"
-              max="1000"
+              max="1000000"
               min="0"
-              step="100"
+              step="10000"
               value={priceRange}
               onChange={(e) =>
                 filterStateDispatch({

@@ -5,6 +5,7 @@ import { useProductContext } from "../../context";
 export const WishlistPage = () => {
   const { productState, productDispatch } = useProductContext();
   const { wishList, cart } = productState;
+
   return (
     <main className="main">
       <section className="page-header-section">
@@ -21,16 +22,20 @@ export const WishlistPage = () => {
       </section>
 
       <section className="wishlist-sec">
-        {wishList.map((item) => {
-          return (
-            <BasicCard item={item}>
-              <ButtonPrimary>
-                <i className="fa-solid fa-cart-shopping"></i>
-                <span> add to cart</span>
-              </ButtonPrimary>
-            </BasicCard>
-          );
-        })}
+        {wishList.length === 0 ? (
+          <h2>No items in Wishlist</h2>
+        ) : (
+          wishList.map((item) => {
+            return (
+              <BasicCard key={item._id} item={item}>
+                <ButtonPrimary>
+                  <i className="fa-solid fa-cart-shopping"></i>
+                  <span> Add to Cart</span>
+                </ButtonPrimary>
+              </BasicCard>
+            );
+          })
+        )}
       </section>
     </main>
   );

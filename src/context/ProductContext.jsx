@@ -21,13 +21,13 @@ const ProductContextProvider = ({ children }) => {
         return { ..._state, cart: [...payload] };
 
       case "ADD_TO_CART":
-        return { ..._state };
+        return { ..._state, cart: payload };
       case "REMOVE_FROM_CART":
-        return { ..._state };
+        return { ..._state , cart: payload};
       case "ADD_TO_WISHLIST":
-        return;
+        return { ..._state, wishList: payload };
       case "REMOVE_FROM_WISHLIST":
-        return;
+        return { ..._state, wishList: payload };
       default:
         return;
     }

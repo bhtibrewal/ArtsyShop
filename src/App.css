@@ -1,6 +1,5 @@
 @import url("https://artsyui.netlify.app/src/artsyUI.css");
 
-
 :root{
   --user-dropdown-index: 2;
 }
@@ -120,6 +119,11 @@ img {
 .text-o-media .card-img{
   height:100%;
 }
+.favourite-icon{
+  background:var(--primary-color);
+  color: var(--light-text);
+}
+
 .section-content {
   grid-column: 1/2;
   grid-row: 1/2;
