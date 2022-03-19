@@ -1,11 +1,17 @@
 import "./cart_page.css";
-import { HorizontalCard } from "../../components";
+import {
+  ButtonPrimary,
+  HorizontalCard,
+  OutlineButtonSecondary,
+} from "../../components";
 import { TotalBill } from "./component/TotalBill";
 import { useProductContext } from "../../context";
 import { useDocumentTitle } from "../../custom_hooks/useDocumentTitle";
+import { removeFromCart } from "../../services/cart/removeFromCart";
 
 export const CartPage = () => {
-  useDocumentTitle("Homepage");
+  useDocumentTitle("Cart Page");
+  
   const { productState, productDispatch } = useProductContext();
   const { wishList, cart } = productState;
 
@@ -13,8 +19,18 @@ export const CartPage = () => {
     <main className="main cart-page">
       <section className="cart-sec">
         <p className="body-l">My Cart({cart.length})</p>
-        {cart.map((item) => {
-          return <HorizontalCard key={item._id} item={item} />;
+        {cart.map((product) => {
+          const { _id } = product;
+          return (
+            <HorizontalCard key={_id} item={product}>
+              <ButtonPrimary
+                onClick={() => removeFromCart({ _id, productDispatch })}
+              >
+                <i className="fa-solid fa-cart-shopping"></i>
+                <span>Remove from Cart</span>
+              </ButtonPrimary>
+            </HorizontalCard>
+          );
         })}
       </section>
 

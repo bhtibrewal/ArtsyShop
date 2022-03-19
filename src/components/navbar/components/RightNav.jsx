@@ -7,16 +7,17 @@ export const RightNav = ({ onClick }) => {
   const navigate = useNavigate();
   const { productState, productDispatch } = useProductContext();
   const { wishList, cart } = productState;
+  console.log({ loginState });
   return (
     <div className="right-side">
       <NavLink to="/mockman">Mockman</NavLink>
 
       {loginState ? (
+        <LoggedInUser />
+      ) : (
         <div onClick={() => navigate("/sign-in")} className="user">
           <i className="fa-regular fa-user fa-xl"></i>
         </div>
-      ) : (
-        <LoggedInUser />
       )}
       <div
         className="wishlist"

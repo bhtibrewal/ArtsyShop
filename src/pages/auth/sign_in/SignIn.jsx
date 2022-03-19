@@ -1,50 +1,73 @@
-import { useEffect } from "react";
-import { useUserContext } from "../../../context";
-import { useAxios } from "../../../custom_hooks/useAxios";
 import "../auth.css";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useUserContext } from "../../../context";
+import { useDocumentTitle, useAxios } from "../../../custom_hooks";
+import {
+  ButtonPrimary,
+  InputField,
+  OutlineButtonPrimary,
+  PasswordInput,
+} from "../../../components";
+import { signIn } from "../../../services";
 
 export const SignIn = () => {
-  const { loginState, setLoginState } = useUserContext();
-  const login = useAxios("/api/auth/login", "POST", "encodedToken", {
-    email: "adarshbalak@gmail.com",
-    password: "adarshBalaki123",
+  useDocumentTitle("Sign In");
+  const navigate = useNavigate();
+  const { setLoginState, userDataDispatch } = useUserContext();
+  const [inputValues, setInputValues] = useState({
+    email: "adarshbalika@gmail.com",
+    password: "adarshBalika123",
   });
-  useEffect(() => {
-    localStorage.setItem("token", login);
-    setLoginState(true);
-  }, [login]);
 
   return (
     <main className="main flex-col">
-      <div className="flex-col signup-sec">
+      <form
+        className="flex-col signup-sec"
+        onSubmit={(e) => {
+          e.preventDefault();
+          signIn({ data: inputValues, userDataDispatch, setLoginState });
+        }}
+      >
         <i className="primary fa-regular fa-user fa-5x"></i>
         <p className="body-l">Login to my user account.</p>
 
-        <div className="artsy-input">
-          <input type="text" />
-          <span className="input-label">Email</span>
-        </div>
-        <div className="artsy-input passwrd-input">
-          <input type="password" />
-          <i className="fas fa-eye-slash"></i>
-          <span className="input-label">Password</span>
-        </div>
+        <InputField
+          value={inputValues.email}
+          onChange={(e) =>
+            setInputValues({ ...inputValues, email: e.target.value })
+          }
+          label={"Email"}
+        />
+        <PasswordInput
+          value={inputValues.password}
+          onChange={(e) =>
+            setInputValues({ ...inputValues, password: e.target.value })
+          }
+          label={"Password"}
+        />
         <label className="flex-align-center">
           <input type="checkbox" />
           <span className="checkbox-text"> Keep me logged in. </span>
         </label>
-        <button className="btn btn-primary">
+        <ButtonPrimary type="submit">
           <span>validate</span>
           <i className="fa-solid fa-arrow-right-long"></i>
-        </button>
+        </ButtonPrimary>
+
         <a href="" className="link-text-primary">
           Forgot your password?
         </a>
         <div>
           <p className="body-md">Still don't have an account ?</p>
-          <div className="link-text-primary">SIGN UP</div>
+          <div
+            className="link-text-primary"
+            onClick={() => navigate("/sign-up")}
+          >
+            SIGN UP
+          </div>
         </div>
-      </div>
+      </form>
     </main>
   );
 };

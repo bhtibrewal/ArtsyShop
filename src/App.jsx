@@ -12,6 +12,7 @@ import {
 } from "./pages";
 import MockAPI from "./backend/Mockman";
 import { ProductFilterProvider } from "./context/ProductsFilterContext";
+import { HorizontalCard } from "./components";
 
 export const WithNavbar = () => {
   return (
@@ -37,7 +38,8 @@ function App() {
               </ProductFilterProvider>
             }
           />
-          <Route path={`/product-details`} element={<ProductDetails />}></Route>
+        
+          <Route path="/products/:productId" element={<ProductDetails />} />
           <Route path="/wishlist" element={<WishlistPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/mockman" element={<MockAPI />} />

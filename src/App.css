@@ -120,6 +120,12 @@ img {
 .text-o-media .card-img{
   height:100%;
 }
+.favourite-icon{
+  background:var(--primary-color)
+}
+.wishlisted {
+  color: red;
+}
 .section-content {
   grid-column: 1/2;
   grid-row: 1/2;

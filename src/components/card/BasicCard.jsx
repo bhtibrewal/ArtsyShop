@@ -1,7 +1,10 @@
+import { useProductContext } from "../../context";
+import { removeFromWishlist } from "../../services/wishlist/removeFromWishlist";
 import { RatingPalleteIcon } from "../index";
 
 export const BasicCard = ({ item: art, children }) => {
   const {
+    _id,
     title: item_name,
     artist: item_by,
     img: img_src,
@@ -10,14 +13,18 @@ export const BasicCard = ({ item: art, children }) => {
     rating: item_rating,
     desc: item_desc,
   } = art;
+  const { productState, productDispatch } = useProductContext();
+
   return (
     <div className="card w-30 basic">
-      <button className="icon favourite-icon">
+      <button
+        className="icon favourite-icon"
+        onClick={() => removeFromWishlist({ _id, productDispatch })}
+      >
         <i className="fa-regular fa-heart fa-2x"></i>
       </button>
       <div className="content">
         <img className="card-img" src={img_src} alt="" />
-
         <div className="card-header">
           <h1>{item_name}</h1>
           <h2>by {item_by}</h2>
