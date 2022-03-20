@@ -1,37 +1,17 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useReducer } from "react";
 import { useAxios } from "../custom_hooks/useAxios";
+import { product_reducer_fn } from "../reducers/product_reducer_fn";
 import { useUserContext } from "./UserContext";
 
 const ProductContext = createContext();
-
 const ProductContextProvider = ({ children }) => {
   const initialProductState = {
     productList: [],
     wishList: [],
     cart: [],
   };
-  const product_reducer_fn = (_state, { type, payload }) => {
-    switch (type) {
-      case "ADD_PRODUCT_LIST":
-        return { ..._state, productList: payload };
-      case "ADD_WISHLIST":
-        return { ..._state, wishList: [...payload] };
-      case "ADD_CART":
-        return { ..._state, cart: [...payload] };
 
-      case "ADD_TO_CART":
-        return { ..._state, cart: payload };
-      case "REMOVE_FROM_CART":
-        return { ..._state , cart: payload};
-      case "ADD_TO_WISHLIST":
-        return { ..._state, wishList: payload };
-      case "REMOVE_FROM_WISHLIST":
-        return { ..._state, wishList: payload };
-      default:
-        return;
-    }
-  };
   const [productState, productDispatch] = useReducer(
     product_reducer_fn,
     initialProductState
@@ -67,7 +47,6 @@ const ProductContextProvider = ({ children }) => {
   useEffect(() => {
     productDispatch({ type: "ADD_CART", payload: fetchedCart });
   }, [fetchedCart]);
-
   return (
     <ProductContext.Provider value={{ productState, productDispatch }}>
       {children}

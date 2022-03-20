@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ButtonPrimary, InputField, PasswordInput } from "../../../components";
+import { useUserContext } from "../../../context";
+import { signUp } from "../../../services";
 
 export const SignUp = () => {
   const navigate = useNavigate();
-
+  const { setLoginState, userDataDispatch } = useUserContext();
   const [inputValues, setInputValues] = useState({
     firstName: "",
     lastName: "",
@@ -30,8 +32,8 @@ export const SignUp = () => {
     return agreeToTerms && canSubmit();
   };
   return (
-    <main className="main flex-col">
-      <form className="flex-col signup-sec">
+    <main className="main flex-align-center">
+      <div className="flex-col signup-sec">
         <i className="primary fa-regular fa-user fa-5x"></i>
         <p className="body-l">Create my account on Artsy Shop!</p>
 
@@ -71,12 +73,22 @@ export const SignUp = () => {
           />
           <span className="checkbox-text">
             By registering, I accept the
-            <Link to="me" className="primary" >
+            <Link to="me" className="primary">
               General terms and conditions.
             </Link>
           </span>
         </label>
-        <ButtonPrimary type="submit" className={` ${isDisabled && "diabled-btn"}`}>
+        <ButtonPrimary
+          onClick={() =>
+            signUp({
+              data: inputValues,
+              userDataDispatch,
+              setLoginState,
+              navigate,
+            })
+          }
+          className={` ${isDisabled && "diabled-btn"}`}
+        >
           <span>Create Account</span>
         </ButtonPrimary>
         <div>
@@ -88,7 +100,7 @@ export const SignUp = () => {
             SIGN IN
           </div>
         </div>
-      </form>
+      </div>
     </main>
   );
 };

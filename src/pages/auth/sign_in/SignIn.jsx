@@ -9,8 +9,6 @@ import { signIn } from "../../../services";
 export const SignIn = () => {
   useDocumentTitle("Sign In");
   const navigate = useNavigate();
-  let location = useLocation();
-  console.log(location);
   const { setLoginState, userDataDispatch } = useUserContext();
   const [inputValues, setInputValues] = useState({
     email: "adarshbalika@gmail.com",
@@ -19,17 +17,7 @@ export const SignIn = () => {
 
   return (
     <main className="main flex-col">
-      <form
-        className="flex-col signup-sec"
-        onSubmit={(e) => {
-          signIn({
-            data: inputValues,
-            userDataDispatch,
-            setLoginState,
-            navigate,
-          });
-        }}
-      >
+      <div className="flex-col signup-sec">
         <i className="primary fa-regular fa-user fa-5x"></i>
         <p className="body-l">Login to my user account.</p>
 
@@ -51,7 +39,14 @@ export const SignIn = () => {
           <input type="checkbox" />
           <span className="checkbox-text"> Keep me logged in. </span>
         </label>
-        <ButtonPrimary type="submit">
+        <ButtonPrimary onClick={(e) => {
+          signIn({
+            data: inputValues,
+            userDataDispatch,
+            setLoginState,
+            navigate,
+          });
+        }}>
           <span>validate</span>
           <i className="fa-solid fa-arrow-right-long"></i>
         </ButtonPrimary>
@@ -68,7 +63,7 @@ export const SignIn = () => {
             SIGN UP
           </div>
         </div>
-      </form>
+      </div>
     </main>
   );
 };

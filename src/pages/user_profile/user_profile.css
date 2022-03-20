@@ -1,0 +1,48 @@
+.user-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.user-page h1 {
+  text-align: center;
+}
+.sec {
+  background: var(--light-bg);
+  padding: 2rem 0;
+}
+.user-grid {
+  padding: 0 5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas: dense;
+  gap: 2rem;
+}
+.user-grid .sec {
+  height: fit-content;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.contact-dets {
+  padding: 4rem;
+}
+.contact-dets .btn {
+  align-self: flex-end;
+}
+.user-page .btn {
+  width: fit-content;
+  padding: 1rem 2rem;
+  text-transform: uppercase;
+}
+.inputs {
+  align-self: stretch;
+  align-items: stretch;
+  gap: 2rem;
+  width: 80%;
+  margin: auto;
+}
+.payment-dets {
+  gap: 1rem;
+}

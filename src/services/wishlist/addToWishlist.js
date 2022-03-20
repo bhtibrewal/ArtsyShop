@@ -6,6 +6,6 @@ export const addToWishlist = async ({ product, productDispatch }) => {
         productDispatch({ type: "ADD_TO_WISHLIST", payload: wishlist })
     }
     catch (e) {
-        console.log(e);
+        console.log(e.error);
     }
 }

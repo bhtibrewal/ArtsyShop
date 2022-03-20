@@ -1,10 +1,11 @@
 import "./wishlist_page.css";
-import { BasicCard, ButtonPrimary } from "../../components";
+import { BasicCard } from "../../components";
 import { useProductContext } from "../../context";
 
 export const WishlistPage = () => {
-  const { productState, productDispatch } = useProductContext();
-  const { wishList, cart } = productState;
+  const {
+    productState: { wishList },      
+  } = useProductContext();
 
   return (
     <main className="main">
@@ -25,15 +26,8 @@ export const WishlistPage = () => {
         {wishList.length === 0 ? (
           <h2>No items in Wishlist</h2>
         ) : (
-          wishList.map((item) => {
-            return (
-              <BasicCard key={item._id} item={item}>
-                <ButtonPrimary>
-                  <i className="fa-solid fa-cart-shopping"></i>
-                  <span> Add to Cart</span>
-                </ButtonPrimary>
-              </BasicCard>
-            );
+          wishList.map((product) => {
+            return <BasicCard key={product._id} item={product} />;
           })
         )}
       </section>

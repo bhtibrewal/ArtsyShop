@@ -1,10 +1,9 @@
-import React from "react";
-import {Link} from 'react-router-dom'
+import { ButtonPrimary } from "../../../components";
 import { useProductContext } from "../../../context";
 
-export const TotalBill = () => {
+export const TotalBill = ({ onClick }) => {
   const {
-    productState: { cart }
+    productState: { cart },
   } = useProductContext();
 
   // const priceDetails = {
@@ -41,12 +40,11 @@ export const TotalBill = () => {
         <input type="checkbox" />
         <span className="checkbox-text"> This artwork is a gift.</span>
       </label>
-      <Link to="me">
-        <button className="btn btn-primary">
-          <span>place order</span>
-          <i className="fa-solid fa-arrow-right-long"></i>
-        </button>
-      </Link>
+
+      <ButtonPrimary onClick={onClick}>
+        <span>place order</span>
+        <i className="fa-solid fa-arrow-right-long"></i>
+      </ButtonPrimary>
     </section>
   );
 };

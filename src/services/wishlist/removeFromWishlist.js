@@ -6,6 +6,6 @@ export const removeFromWishlist = async ({ _id, productDispatch }) => {
         productDispatch({ type: "REMOVE_FROM_WISHLIST", payload: wishlist })
     }
     catch (e) {
-        console.log(e);
+        console.log(e.error);
     }
 }

@@ -9,18 +9,25 @@ export const signIn = async ({
     try {
         const {
             data: {
-                foundUser,
+                foundUser: {
+                    firstName, lastName, email, createdAt
+                },
                 encodedToken
             }
         } = await axios.post("/api/auth/login", data)
         userDataDispatch({
             type: "LOGIN_USER",
-            payload: foundUser
+            payload: {
+                firstName, lastName, email, createdAt
+            }
         })
         setLoginState(true);
-        localStorage.setItem("token", encodedToken)
-        navigate("/")
+        localStorage.setItem("token", encodedToken);
+        localStorage.setItem('user', JSON.stringify({
+            firstName, lastName, email, createdAt
+        }))
+        navigate(-1);
     } catch (e) {
-        console.log(e.response.data);
+        console.log(e.error);
     }
 }

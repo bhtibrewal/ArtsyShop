@@ -8,9 +8,11 @@ import { TotalBill } from "./component/TotalBill";
 import { useProductContext } from "../../context";
 import { useDocumentTitle } from "../../custom_hooks/useDocumentTitle";
 import { removeFromCart } from "../../services/cart/removeFromCart";
+import { useNavigate } from "react-router-dom";
 
 export const CartPage = () => {
   useDocumentTitle("Cart Page");
+  const navigate = useNavigate();
   
   const { productState, productDispatch } = useProductContext();
   const { wishList, cart } = productState;
@@ -22,7 +24,7 @@ export const CartPage = () => {
         {cart.map((product) => {
           const { _id } = product;
           return (
-            <HorizontalCard key={_id} item={product}>
+            <HorizontalCard key={_id} product={product}>
               <ButtonPrimary
                 onClick={() => removeFromCart({ _id, productDispatch })}
               >
@@ -34,7 +36,7 @@ export const CartPage = () => {
         })}
       </section>
 
-      <TotalBill />
+      <TotalBill onClick={()=> navigate("/checkout")}/>
     </main>
   );
 };

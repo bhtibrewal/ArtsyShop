@@ -1,6 +1,5 @@
-.main-sec{
-  display:flex;
-  
+.main-sec {
+  display: flex;
 }
 
 /*  */
@@ -75,9 +74,9 @@
 /* products section */
 .products-sec {
   margin-top: 2rem;
+  width: 100%;
+  background: var(--light-bg);
 }
 .products-grid {
   padding: 2rem 5%;
-  margin: 2rem 0;
-  background: var(--light-bg);
 }
