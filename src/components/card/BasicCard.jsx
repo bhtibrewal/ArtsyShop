@@ -1,8 +1,11 @@
-import { useProductContext } from "../../context";
-import { removeFromWishlist } from "../../services/wishlist/removeFromWishlist";
+import { useNavigate } from "react-router-dom";
+import { useProductContext, useUserContext } from "../../context";
+import { addToCart, removeFromWishlist } from "../../services";
+import { inCart } from "../../utils/cart.utils";
+import { ButtonPrimary } from "../buttons";
 import { RatingPalleteIcon } from "../index";
 
-export const BasicCard = ({ item: art, children }) => {
+export const BasicCard = ({ product }) => {
   const {
     _id,
     title: item_name,
@@ -12,8 +15,13 @@ export const BasicCard = ({ item: art, children }) => {
     price: item_price,
     rating: item_rating,
     desc: item_desc,
-  } = art;
-  const { productState, productDispatch } = useProductContext();
+  } = product;
+  const { loginState } = useUserContext();
+  const navigate = useNavigate();
+  const {
+    productState: { cart },
+    productDispatch,
+  } = useProductContext();
 
   return (
     <div className="card w-30 basic">
@@ -21,10 +29,14 @@ export const BasicCard = ({ item: art, children }) => {
         className="icon favourite-icon"
         onClick={() => removeFromWishlist({ _id, productDispatch })}
       >
-        <i className="fa-regular fa-heart fa-2x"></i>
+        <i className="fa-solid fa-heart fa-2x"></i>
       </button>
       <div className="content">
-        <img className="card-img" src={img_src} alt="" />
+        <img
+          className="card-img"
+          src={img_src}
+          alt={`${item_name} ${item_by}`}
+        />
         <div className="card-header">
           <h1>{item_name}</h1>
           <h2>by {item_by}</h2>
@@ -36,8 +48,20 @@ export const BasicCard = ({ item: art, children }) => {
           </div>
         </div>
       </div>
-
-      <div className="card-actions">{children}</div>
+      <div className="card-actions">
+        <ButtonPrimary
+          onClick={() => {
+            loginState
+              ? !inCart(cart, product)
+                ? addToCart({ product, productDispatch })
+                : navigate("/cart")
+              : navigate("/sign-in");
+          }}
+        >
+          <i className="fa-solid fa-cart-shopping"></i>
+          <span>{!inCart(cart, product) ? "Add to Cart" : "Go To Cart"}</span>
+        </ButtonPrimary>
+      </div>
     </div>
   );
 };

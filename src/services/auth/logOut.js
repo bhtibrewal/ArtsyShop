@@ -1,5 +1,9 @@
-export const logOut = ({ setLoginState, userDataDispatch }) => {
+export const logOut = ({ pathname, navigate, setLoginState, userDataDispatch, productDispatch }) => {
+    const privateRoutes = ['/cart', '/wishlist', '/checkout'];
+    privateRoutes.some(route => route === pathname && navigate("/"));
     setLoginState(false);
     localStorage.clear("token");
-    userDataDispatch({ type: "LOGOUT_USER" })
+    localStorage.clear("user");
+    productDispatch({ type: "RESET_CART_WISHLIST" });
+    userDataDispatch({ type: "LOGOUT_USER" });
 }

@@ -3,11 +3,13 @@ import { Routes, Route, Outlet } from "react-router-dom";
 import { Navbar } from "./components/navbar/Navbar";
 import {
   CartPage,
+  Checkout,
   HomePage,
   ProductDetails,
   ProductPage,
   SignIn,
   SignUp,
+  UserProfile,
   WishlistPage,
 } from "./pages";
 import MockAPI from "./backend/Mockman";
@@ -38,10 +40,11 @@ function App() {
               </ProductFilterProvider>
             }
           />
-        
+          <Route path="/user_profile" element={<UserProfile />} />
           <Route path="/products/:productId" element={<ProductDetails />} />
           <Route path="/wishlist" element={<WishlistPage />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/mockman" element={<MockAPI />} />
         </Route>
 

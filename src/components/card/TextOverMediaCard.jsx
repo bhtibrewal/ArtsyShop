@@ -1,12 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { useProductContext } from "../../context";
+import { useProductContext, useUserContext } from "../../context";
 import { addToWishlist } from "../../services/wishlist/addToWishlist";
 import { removeFromWishlist } from "../../services/wishlist/removeFromWishlist";
+import { inWhisList } from "../../utils/cart.utils";
 import { RatingPalleteIcon } from "../index";
-
-export function inWhisList(wishList, product) {
-  return wishList.some((item) => item._id === product._id);
-}
 
 export const TextOverMediaCard = ({ item: product }) => {
   const {
@@ -19,29 +16,35 @@ export const TextOverMediaCard = ({ item: product }) => {
     rating: item_rating,
   } = product;
   const navigate = useNavigate();
-  const { productState, productDispatch } = useProductContext();
-  const { wishList } = productState;
-  console.log(inWhisList(wishList, product));
+  const { loginState } = useUserContext();
+  const {
+    productState: { wishList },
+    productDispatch,
+  } = useProductContext();
   return (
     <div className="card w-30 text-o-media">
       <button
         className="icon favourite-icon"
         onClick={() =>
-          inWhisList(wishList, product)
-            ? removeFromWishlist({ _id, productDispatch })
-            : addToWishlist({ product, productDispatch })
+          loginState
+            ? inWhisList(wishList, product)
+              ? removeFromWishlist({ _id, productDispatch })
+              : addToWishlist({ product, productDispatch })
+            : navigate("/sign-in")
         }
       >
         <i
           className={`${
-            inWhisList(wishList, product)
-              ? "fa-solid wishlisted"
-              : "fa-regular"
+            inWhisList(wishList, product) ? "fa-solid wishlisted" : "fa-regular"
           } fa-heart fa-2x`}
         ></i>
       </button>
       <div className="content" onClick={() => navigate(`${_id}`)}>
-        <img className="card-img" src={img_src} alt="" />
+        <img
+          className="card-img"
+          src={img_src}
+          alt={`${item_name} ${item_by}`}
+        />
         <div className="card-header">
           <h1>{item_name}</h1>
           <h2>by {item_by}</h2>

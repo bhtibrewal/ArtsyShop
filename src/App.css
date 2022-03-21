@@ -1,6 +1,6 @@
 @import url("https://artsyui.netlify.app/src/artsyUI.css");
 
-:root{
+:root {
   --user-dropdown-index: 2;
 }
 @media screen and (max-width: 300px) {
@@ -77,9 +77,12 @@ img {
   margin: auto;
 }
 .btn.diabled-btn {
-  cursor:default;
+  cursor: default;
   background-color: var(--gray-bg);
   color: var(--primary-text-color);
+}
+.capitalize{
+  text-transform: capitalize;
 }
 
 /* page layout */
@@ -97,11 +100,9 @@ img {
   grid-area: main;
   overflow: auto;
 }
-
 .header {
   grid-area: header;
 }
-
 .page-header-section {
   display: grid;
 }
@@ -116,11 +117,31 @@ img {
 .section-bg img {
   height: 100%;
 }
-.text-o-media .card-img{
-  height:100%;
+.card {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
 }
-.favourite-icon{
-  background:var(--primary-color);
+.text-o-media {
+  display: flex;
+}
+.basic {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.text-o-media .card-img {
+  height: 100%;
+}
+.text-o-media .content {
+  background: var(--light-text);
+  backdrop-filter: blur(.5);
+}
+.hori .favourite-icon{
+  left:1rem;
+}
+.favourite-icon {
+  background: var(--primary-color);
   color: var(--light-text);
 }
 

@@ -5,5 +5,6 @@ import { CartPage } from "./cart_page/CartPage";
 import { SignIn } from "./auth/sign_in/SignIn";
 import { SignUp } from "./auth/sign_up/SignUp";
 import { ProductDetails } from "./product_details_page/ProductDetails";
-
-export { HomePage, ProductPage, WishlistPage, CartPage, SignIn, SignUp , ProductDetails};
+import { Checkout } from "./checkout/Checkout";
+import { UserProfile } from "./user_profile/UserProfile";
+export { HomePage, ProductPage, WishlistPage, CartPage, SignIn, SignUp , ProductDetails, Checkout, UserProfile};

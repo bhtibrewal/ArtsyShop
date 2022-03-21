@@ -1,17 +1,18 @@
+import "./sidebar.css";
 import { useProductFilter } from "../../context/ProductsFilterContext";
 import { useAxios } from "../../custom_hooks/useAxios";
-import "./sidebar.css";
 
 export const Sidebar = () => {
-  const { filterState, filterStateDispatch } = useProductFilter();
   const {
-    showCategories,
-    showOutOfStock,
-    showFastDelivery,
-    sortBy,
-    ratingAbove,
-  } = filterState;
-  // console.log(showCategories);
+    filterState: {
+      showCategories,
+      showOutOfStock,
+      showFastDelivery,
+      sortBy,
+      ratingAbove,
+    },
+    filterStateDispatch,
+  } = useProductFilter();
   const categoriesList = useAxios("/api/categories", "GET", "categories");
 
   return (
@@ -24,8 +25,8 @@ export const Sidebar = () => {
             onChange={() => {
               filterStateDispatch({ type: "OUT_OF_STOCK" });
             }}
-          />{" "}
-          <span className="body-l">Include Out Of Stock</span>
+          />
+          <span>Include Out Of Stock</span>
         </label>
         <label>
           <input
@@ -35,20 +36,18 @@ export const Sidebar = () => {
               filterStateDispatch({ type: "FAST_DELIVERY" });
             }}
           />
-          <span className="body-l">Fast Delivery</span>
+          <span>Fast Delivery</span>
         </label>
       </div>
-      <h3>Category</h3>
       <div className="flex-col">
+        <p className="body-l">Category</p>
         {categoriesList?.map((category) => {
-          const {categoryName} = category;
+          const { categoryName } = category;
           return (
             <label key={categoryName}>
               <input
                 type="checkbox"
-                checked={showCategories.some(
-                  (item) => item === categoryName
-                )}
+                checked={showCategories.some((item) => item === categoryName)}
                 onChange={(e) =>
                   e.target.checked
                     ? filterStateDispatch({
@@ -61,37 +60,28 @@ export const Sidebar = () => {
                       })
                 }
               />
-              <span className="body-l">{categoryName}</span>
+              <span className="capitalize">{categoryName}</span>
             </label>
           );
         })}
       </div>
-      <div className="flex-col"></div>
-      <h3>Sort By</h3>
       <div className="flex-col">
         <p className="body-l">Price</p>
-        <label>
-          <input
-            type="radio"
-            checked={sortBy === "HIGH_TO_LOW"}
-            onChange={() =>
-              filterStateDispatch({ type: "SORT_BY", payload: "HIGH_TO_LOW" })
-            }
-            name="sort_by_price"
-          />
-          High To Low
-        </label>
-        <label>
-          <input
-            type="radio"
-            checked={sortBy === "LOW_TO_HIGH"}
-            onChange={() =>
-              filterStateDispatch({ type: "SORT_BY", payload: "LOW_TO_HIGH" })
-            }
-            name="sort_by_price"
-          />
-          Low To High
-        </label>
+        {["HIGH_TO_LOW", "LOW_TO_HIGH"].map((element) => {
+          return (
+            <label>
+              <input
+                type="radio"
+                checked={sortBy === element}
+                onChange={() =>
+                  filterStateDispatch({ type: "SORT_BY", payload: element })
+                }
+                name="sort_by_price"
+              />
+              {element.split("_").join(" ")}
+            </label>
+          );
+        })}
       </div>
       <div className="flex-col">
         <p className="body-l">Rating</p>
@@ -108,7 +98,7 @@ export const Sidebar = () => {
                   }
                   name="rating_sector"
                 />
-                Above {4 - index} Star
+                {4 - index} Star and Above
               </label>
             );
           })}
