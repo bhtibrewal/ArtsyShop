@@ -1,5 +1,6 @@
 import "./App.css";
-import { Routes, Route, Outlet } from "react-router-dom";
+import {useEffect} from 'react';
+import { Routes, Route, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Navbar } from "./components/navbar/Navbar";
 import {
   CartPage,
@@ -13,8 +14,8 @@ import {
   WishlistPage,
 } from "./pages";
 import MockAPI from "./backend/Mockman";
-import { ProductFilterProvider } from "./context/ProductsFilterContext";
-import { HorizontalCard } from "./components";
+import { ProductFilterProvider, useTheme, useUserContext } from "./context";
+import {privateRouting} from './utils/privateRouting'
 
 export const WithNavbar = () => {
   return (
@@ -26,8 +27,16 @@ export const WithNavbar = () => {
 };
 
 function App() {
+  const {loginState} = useUserContext();
+  const {pathname} = useLocation();
+  const navigate = useNavigate();
+  useEffect(() => {
+    privateRouting({loginState, pathname, navigate});
+  }, [pathname, loginState]);
+  const {darkMode} = useTheme();
+
   return (
-    <div className="body">
+    <div className={`body ${darkMode && 'dark-theme'}`}>
       <Routes>
         <Route path="/" element={<WithNavbar />}>
           <Route index element={<HomePage />} />
@@ -39,8 +48,17 @@ function App() {
                 <ProductPage />
               </ProductFilterProvider>
             }
-          />
-          <Route path="/user_profile" element={<UserProfile />} />
+          >
+          </Route>
+           <Route
+              path="/category/:categoryname"
+              element={
+                <ProductFilterProvider>
+                  <ProductPage />
+                </ProductFilterProvider>
+              }
+            />
+          <Route path="/user-profile" element={<UserProfile />} />
           <Route path="/products/:productId" element={<ProductDetails />} />
           <Route path="/wishlist" element={<WishlistPage />} />
           <Route path="/cart" element={<CartPage />} />

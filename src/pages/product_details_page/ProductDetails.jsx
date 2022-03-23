@@ -1,34 +1,24 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { ButtonPrimary, HorizontalCard } from "../../components";
-import { useProductContext, useUserContext } from "../../context";
-import { addToCart } from "../../services";
-import { inCart } from "../../utils/cart.utils";
+import './product_details_page.css'
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { SingleProductCard } from "../../components/card/SingleProductCard";
+import { useDocumentTitle } from "../../custom_hooks";
+import { fetchProduct } from "../../services";
 
 export const ProductDetails = () => {
-  const { loginState } = useUserContext();
   const { productId } = useParams();
+  const [product, setProduct] = useState({});
 
-  const navigate = useNavigate();
-  const { productState, productDispatch } = useProductContext();
-  const { productList, wishList, cart } = productState;
-  const product = productList.find((item) => item._id === productId);
-  console.log(productId, productState);
+  useEffect(() => {
+    fetchProduct(setProduct, productId);
+    return () => {};
+  }, []);
+  useDocumentTitle(`| ${product.title}`);
+
+  if (product === null) return <h1> Loading...</h1>;
   return (
-    <main className="main">
-      <HorizontalCard item={product}>
-        <ButtonPrimary
-          onClick={() => {
-            loginState
-              ? !inCart(cart, product)
-                ? addToCart({ product, productDispatch })
-                : navigate("/cart")
-              : navigate("/sign-in");
-          }}
-        >
-          <i className="fa-solid fa-cart-shopping"></i>
-          <span>{!inCart(cart, product) ? "Add to Cart" : "Go To Cart"}</span>
-        </ButtonPrimary>
-      </HorizontalCard>
+    <main className="main center">
+      <SingleProductCard product={product} />
     </main>
   );
 };

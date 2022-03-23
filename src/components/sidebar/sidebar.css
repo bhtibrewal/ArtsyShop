@@ -1,5 +1,13 @@
 .product_page-aside {
-  padding: 3rem 5%;
+  padding: 3rem 3%;
+  flex-basis: 30rem;
+  border-right: 1px solid;
+}
+.product_page-aside .heading{
+  border-bottom:1px solid;
+}
+.product_page-aside .link-text-primary {
+  margin-left: auto;
 }
 .aside-sec {
   display: flex;

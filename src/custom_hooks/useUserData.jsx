@@ -37,6 +37,5 @@ export const useUserData = () => {
     user_data_reducer,
     initialUserData
   );
-  console.log(userData);
   return { loginState, setLoginState, userData, userDataDispatch };
 };

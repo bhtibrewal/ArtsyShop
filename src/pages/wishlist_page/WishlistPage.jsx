@@ -1,10 +1,12 @@
 import "./wishlist_page.css";
 import { BasicCard } from "../../components";
 import { useProductContext } from "../../context";
+import { useDocumentTitle } from "../../custom_hooks";
 
 export const WishlistPage = () => {
+  useDocumentTitle("| Wshlist Page");
   const {
-    productState: { wishList },      
+    productState: { wishList },
   } = useProductContext();
 
   return (
@@ -24,10 +26,12 @@ export const WishlistPage = () => {
 
       <section className="wishlist-sec">
         {wishList.length === 0 ? (
-          <h2>No items in Wishlist</h2>
+          <p className="body-l">
+            Looks like you haven't added any artwork to your wishlist.
+          </p>
         ) : (
           wishList.map((product) => {
-            return <BasicCard key={product._id} item={product} />;
+            return <BasicCard key={product._id} product={product} />;
           })
         )}
       </section>

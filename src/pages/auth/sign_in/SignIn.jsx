@@ -7,8 +7,9 @@ import { ButtonPrimary, InputField, PasswordInput } from "../../../components";
 import { signIn } from "../../../services";
 
 export const SignIn = () => {
-  useDocumentTitle("Sign In");
+  useDocumentTitle("| Sign In");
   const navigate = useNavigate();
+  const [signinError, setSigninError] = useState();
   const { setLoginState, userDataDispatch } = useUserContext();
   const [inputValues, setInputValues] = useState({
     email: "adarshbalika@gmail.com",
@@ -16,37 +17,40 @@ export const SignIn = () => {
   });
 
   return (
-    <main className="main flex-col">
-      <div className="flex-col signup-sec">
+    <main className="main center">
+      <form onSubmit={(e)=>{
+        e.preventDefault();
+        signIn({
+          setSigninError,
+          data: inputValues,
+          userDataDispatch,
+          setLoginState,
+          navigate,
+        });
+      }} className="flex-col signup-sec">
         <i className="primary fa-regular fa-user fa-5x"></i>
         <p className="body-l">Login to my user account.</p>
-
         <InputField
+          label={"Email"}
           value={inputValues.email}
           onChange={(e) =>
             setInputValues({ ...inputValues, email: e.target.value })
           }
-          label={"Email"}
         />
         <PasswordInput
+          label={"Password"}
           value={inputValues.password}
           onChange={(e) =>
             setInputValues({ ...inputValues, password: e.target.value })
           }
-          label={"Password"}
         />
         <label className="flex-align-center">
           <input type="checkbox" />
           <span className="checkbox-text"> Keep me logged in. </span>
         </label>
-        <ButtonPrimary onClick={(e) => {
-          signIn({
-            data: inputValues,
-            userDataDispatch,
-            setLoginState,
-            navigate,
-          });
-        }}>
+        <ButtonPrimary
+          type='submit'
+        >
           <span>validate</span>
           <i className="fa-solid fa-arrow-right-long"></i>
         </ButtonPrimary>
@@ -63,7 +67,9 @@ export const SignIn = () => {
             SIGN UP
           </div>
         </div>
-      </div>
+        
+        <p className="error-msg">{signinError}</p>
+      </form>
     </main>
   );
 };

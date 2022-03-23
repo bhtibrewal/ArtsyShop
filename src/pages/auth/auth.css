@@ -3,7 +3,7 @@
 .login-section-overlay,
 .signup-section-overlay,
 .signin-section-overlay {
-  background: rgba(0, 0, 0, 0.4);
+  background: var(--light-black);
   backdrop-filter: blur(2px);
   width: 100vw;
   height: 100vh;
@@ -63,6 +63,9 @@
 }
 .primary {
   color: var(--primary-color);
+}
+.error-msg {
+  color: var(--input-err);
 }
 .signup-sec input[type="checkbox"] {
   width: 2rem;

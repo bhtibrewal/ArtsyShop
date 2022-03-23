@@ -1,6 +1,5 @@
 import "./sidebar.css";
-import { useProductFilter } from "../../context/ProductsFilterContext";
-import { useAxios } from "../../custom_hooks/useAxios";
+import { useProductContext, useProductFilter } from "../../context";
 
 export const Sidebar = () => {
   const {
@@ -12,12 +11,27 @@ export const Sidebar = () => {
       ratingAbove,
     },
     filterStateDispatch,
+    initialFilterState,
   } = useProductFilter();
-  const categoriesList = useAxios("/api/categories", "GET", "categories");
-
+  const {
+    productState: { categoriesList },
+  } = useProductContext();
   return (
     <aside className="product_page-aside">
-      <div className="flex-col">
+      <div className="flex-align-center heading">
+        <h3>Filters</h3>
+        {/* clear button */}
+        <span
+          className="link-text-primary"
+          onClick={() =>
+            filterStateDispatch({ type: "CLEAR", payload: initialFilterState })
+          }
+        >
+          Clear
+        </span>
+      </div>
+      {/* out of stock and fast delivery */}
+      <div className="aside-sec">
         <label>
           <input
             type="checkbox"
@@ -26,7 +40,7 @@ export const Sidebar = () => {
               filterStateDispatch({ type: "OUT_OF_STOCK" });
             }}
           />
-          <span>Include Out Of Stock</span>
+          <span className="checkbox-text">Include Out Of Stock</span>
         </label>
         <label>
           <input
@@ -36,10 +50,12 @@ export const Sidebar = () => {
               filterStateDispatch({ type: "FAST_DELIVERY" });
             }}
           />
-          <span>Fast Delivery</span>
+          <span className="checkbox-text">Fast Delivery</span>
         </label>
       </div>
-      <div className="flex-col">
+
+      {/* categories */}
+      <div className="aside-sec">
         <p className="body-l">Category</p>
         {categoriesList?.map((category) => {
           const { categoryName } = category;
@@ -60,16 +76,18 @@ export const Sidebar = () => {
                       })
                 }
               />
-              <span className="capitalize">{categoryName}</span>
+              <span className="capitalize checkbox-text">{categoryName}</span>
             </label>
           );
         })}
       </div>
-      <div className="flex-col">
+
+      {/* sort by price */}
+      <div className="aside-sec">
         <p className="body-l">Price</p>
-        {["HIGH_TO_LOW", "LOW_TO_HIGH"].map((element) => {
+        {["HIGH_TO_LOW", "LOW_TO_HIGH"].map((element, index) => {
           return (
-            <label>
+            <label key={index}>
               <input
                 type="radio"
                 checked={sortBy === element}
@@ -78,12 +96,14 @@ export const Sidebar = () => {
                 }
                 name="sort_by_price"
               />
-              {element.split("_").join(" ")}
+              <span className="checkbox-text">
+                {element.split("_").join(" ")}
+              </span>
             </label>
           );
         })}
       </div>
-      <div className="flex-col">
+      <div className="aside-sec">
         <p className="body-l">Rating</p>
         {Array(4)
           .fill()
@@ -98,7 +118,9 @@ export const Sidebar = () => {
                   }
                   name="rating_sector"
                 />
-                {4 - index} Star and Above
+                <span className="checkbox-text">
+                  {4 - index} Star and Above
+                </span>
               </label>
             );
           })}

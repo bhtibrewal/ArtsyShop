@@ -1,17 +1,21 @@
 import { useUserContext } from "../../context";
 import { ButtonPrimary } from "../../components";
+import { useDocumentTitle } from "../../custom_hooks";
 
 export const UserProfile = () => {
   const {
     userData: { firstName, lastName, createdAt },
   } = useUserContext();
+  useDocumentTitle(`| ${firstName}`);
   return (
     <main className="main user-page">
       {/* <!-- header section --> */}
       <section className="sec user-header-sec flex-col">
         <div className="avatar-text avatar-m">{`${firstName[0]}${lastName[0]}`}</div>
         <h1>Hello {firstName}</h1>
-        <p className="body-l">Artsy collector since {createdAt.split("T")[0]}</p>
+        <p className="body-l">
+          Artsy collector since {createdAt.split("T")[0]}
+        </p>
       </section>
       <h1>My Account</h1>
 

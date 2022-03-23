@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { ButtonPrimary } from "../../../components/buttons";
+import { useNavigate } from "react-router-dom";
+import { ButtonPrimary } from "../../../components";
 
 export const HeroSection = () => {
+  const navigate = useNavigate();
   const img1 =
     "https://d17h7hjnfv5s46.cloudfront.net/assets/build/images/elements/home/home_slider4.49d888a3.jpg";
   const img2 =
@@ -36,8 +38,12 @@ export const HeroSection = () => {
       <div className="hero-overlay flex-col">
         <div className="hero-content">
           <h1>{carousel[sliderIndex].text}</h1>
-          <ButtonPrimary className="hero-sec-button">
-            {carousel[sliderIndex].button}
+          <ButtonPrimary
+            onClick={() => navigate("/products")}
+            className="hero-sec-button"
+          >
+            <h3>{carousel[sliderIndex].button}</h3>
+            <i className="fa-solid fa-arrow-right-long"></i>
           </ButtonPrimary>
         </div>
       </div>

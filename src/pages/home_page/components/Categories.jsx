@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
-export const Categories = ({ link, category, img_url }) => {
+export const Categories = ({ category: { id, categoryName, img_src } }) => {
   return (
-    <Link to="/products">
+    <Link to={`/category/${categoryName}`}>
       <div className="categories">
-        <img src={img_url} alt={category} />
-        <button className="btn category-name">{category}</button>
+        <img src={img_src} alt={categoryName} />
+        <h2 className="category-name"><strong>{categoryName}</strong></h2>
       </div>
     </Link>
   );
