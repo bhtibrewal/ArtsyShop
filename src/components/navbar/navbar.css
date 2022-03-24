@@ -56,3 +56,6 @@
   background: var(--secondary-color);
   color: var(--light-bg);
 }
+.search-input{
+  width:100%;
+}
