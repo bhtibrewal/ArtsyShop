@@ -1,7 +1,7 @@
 import "../auth.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useUserContext } from "../../../context";
+import { useProductContext, useUserContext } from "../../../context";
 import { useDocumentTitle } from "../../../custom_hooks";
 import { ButtonPrimary, InputField, PasswordInput } from "../../../components";
 import { signIn } from "../../../services";
@@ -11,6 +11,7 @@ export const SignIn = () => {
   const navigate = useNavigate();
   const [signinError, setSigninError] = useState();
   const { setLoginState, userDataDispatch } = useUserContext();
+  const { productDispatch } = useProductContext();
   const [inputValues, setInputValues] = useState({
     email: "adarshbalika@gmail.com",
     password: "adarshBalika123",
@@ -18,16 +19,20 @@ export const SignIn = () => {
 
   return (
     <main className="main center">
-      <form onSubmit={(e)=>{
-        e.preventDefault();
-        signIn({
-          setSigninError,
-          data: inputValues,
-          userDataDispatch,
-          setLoginState,
-          navigate,
-        });
-      }} className="flex-col signup-sec">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          signIn({
+            setSigninError,
+            productDispatch,
+            data: inputValues,
+            userDataDispatch,
+            setLoginState,
+            navigate,
+          });
+        }}
+        className="flex-col signup-sec"
+      >
         <i className="primary fa-regular fa-user fa-5x"></i>
         <p className="body-l">Login to my user account.</p>
         <InputField
@@ -48,14 +53,24 @@ export const SignIn = () => {
           <input type="checkbox" />
           <span className="checkbox-text"> Keep me logged in. </span>
         </label>
-        <ButtonPrimary
-          type='submit'
-        >
+        <ButtonPrimary type="submit">
           <span>validate</span>
           <i className="fa-solid fa-arrow-right-long"></i>
         </ButtonPrimary>
-
-        <Link to="me" className="link-text-primary">
+        <ButtonPrimary
+          onClick={() =>
+            signIn({
+              setSigninError,
+              data: inputValues,
+              userDataDispatch,
+              setLoginState,
+              navigate,
+            })
+          }
+        >
+          Guest login
+        </ButtonPrimary>
+        <Link to="/" className="link-text-primary">
           Forgot your password?
         </Link>
         <div>
@@ -67,7 +82,7 @@ export const SignIn = () => {
             SIGN UP
           </div>
         </div>
-        
+
         <p className="error-msg">{signinError}</p>
       </form>
     </main>

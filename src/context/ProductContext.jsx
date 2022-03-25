@@ -21,18 +21,11 @@ const ProductContextProvider = ({ children }) => {
     product_reducer_fn,
     initialProductState
   );
-  const { loginState } = useUserContext();
 
   useEffect(() => {
     fetchProductList(productDispatch);
     fetchCategories(productDispatch);
   }, []);
-  useEffect(() => {
-    if (loginState) {
-      fetchCart(productDispatch);
-      fetchWishlist(productDispatch);
-    }
-  }, [loginState]);
   return (
     <ProductContext.Provider value={{ productState, productDispatch }}>
       {children}

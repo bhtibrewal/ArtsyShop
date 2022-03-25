@@ -3,9 +3,6 @@ import { useProductContext, useUserContext } from "../../../context";
 import { logOut } from "../../../services";
 
 export const LoggedInUser = () => {
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
-
   const { setLoginState, userData, userDataDispatch } = useUserContext();
   const { productDispatch } = useProductContext();
   return (
@@ -24,8 +21,6 @@ export const LoggedInUser = () => {
           className="flex-align-center"
           onClick={() =>
             logOut({
-              pathname,
-              navigate,
               setLoginState,
               userDataDispatch,
               productDispatch,

@@ -1,4 +1,6 @@
 import axios from "axios";
+import { fetchCart } from "../fetch_data/fetchCart";
+import { fetchWishlist } from "../fetch_data/fetchWishlist";
 
 export const signIn = async ({
     setSigninError,
@@ -27,6 +29,8 @@ export const signIn = async ({
         localStorage.setItem('user', JSON.stringify({
             firstName, lastName, email, createdAt
         }))
+        fetchCart(productDispatch);
+        fetchWishlist(productDispatch)
         navigate(-1);
     } catch (e) {
 
