@@ -5,7 +5,7 @@ export const product_reducer_fn = (state, { type, payload }) => {
     case "ADD_CATEGORIES":
       return { ...state, categoriesList: payload };
     case "ADD_CART_WISHLIST":
-      return { ...state, cart: payload.cart, wishList: payload.wishlist };
+      return { ...state, cart: [...payload.cart], wishList: [...payload.wishlist] };
 
     case "RESET_CART_WISHLIST":
       return { ...state, cart: [], wishList: [] };
