@@ -6,6 +6,7 @@ export const signIn = async ({
     setSigninError,
     data,
     userDataDispatch,
+    productDispatch,
     setLoginState,
     navigate
 }) => {
