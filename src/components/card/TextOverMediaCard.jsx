@@ -3,11 +3,12 @@ import { useProductContext, useUserContext } from "../../context";
 import { addToWishlist } from "../../services/wishlist/addToWishlist";
 import { removeFromWishlist } from "../../services/wishlist/removeFromWishlist";
 import { inWhisList } from "../../utils/cart.utils";
-import { RatingPalleteIcon } from "../index";
+import { Rating } from "../index";
 
 export const TextOverMediaCard = ({ item: product }) => {
   const {
     _id,
+    id,
     title: item_name,
     artist: item_by,
     img: img_src,
@@ -39,7 +40,7 @@ export const TextOverMediaCard = ({ item: product }) => {
           } fa-heart fa-2x`}
         ></i>
       </button>
-      <div className="content" onClick={() => navigate(`${_id}`)}>
+      <div className="content" onClick={() => navigate(`/products/${id}`)}>
         <img
           className="card-img"
           src={img_src}
@@ -48,10 +49,9 @@ export const TextOverMediaCard = ({ item: product }) => {
         <div className="card-header">
           <h1>{item_name}</h1>
           <h2>by {item_by}</h2>
-          <RatingPalleteIcon rating={item_rating} />
+          <Rating rating={item_rating} />
           <div className="price-sec">
-            <h4>${item_price}</h4>
-            <span className="strike-price">${item_original_price}</span>
+            <span className="body-l">Rs.{item_price}</span>
           </div>
         </div>
       </div>

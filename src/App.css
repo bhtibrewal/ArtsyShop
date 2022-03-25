@@ -1,8 +1,23 @@
 @import url("https://artsyui.netlify.app/src/artsyUI.css");
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700&family=Nunito:wght@300;400;500;600&display=swap");
 
 :root {
   --user-dropdown-index: 2;
+  --light-black: rgba(0, 0, 0, 0.36);
+  --light-white: rgba(255, 255, 255, 0.36);
+  --header-text:rgba(250,250,250);
 }
+.body {
+  color: var(--primary-text);
+}
+.body.dark-theme {
+  --light-text: rgb(20, 20, 20);
+  --light-bg: rgb(31, 31, 31);
+  --primary-text: rgb(255, 255, 255);
+  --light-black: rgba(255, 255, 255, 0.36);
+  --light-white:  rgba(0, 0, 0, 0.36);
+}
+
 @media screen and (max-width: 300px) {
   html {
     font-size: 30%;
@@ -69,7 +84,9 @@ img {
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
 }
-
+input{
+  background: transparent;
+}
 .checkbox-text {
   margin: 0 1rem;
 }
@@ -81,7 +98,7 @@ img {
   background-color: var(--gray-bg);
   color: var(--primary-text-color);
 }
-.capitalize{
+.capitalize {
   text-transform: capitalize;
 }
 
@@ -122,8 +139,8 @@ img {
   width: 100%;
   height: 100%;
 }
-.text-o-media {
-  display: flex;
+.card .content > * {
+  font-family: "Nunito", sans-serif;
 }
 .basic {
   display: flex;
@@ -134,15 +151,28 @@ img {
   height: 100%;
 }
 .text-o-media .content {
-  background: var(--light-text);
-  backdrop-filter: blur(.5);
+  height: 100%;
 }
-.hori .favourite-icon{
-  left:1rem;
+.text-o-media .card-header {
+  background: var(--light-black);
+  backdrop-filter: blur(0.5);
+}
+.hori {
+  width: fit-content;
+}
+.hori .btn {
+  font-size: 1em;
+  max-width: fit-content;
+}
+.hori .card-header > h1 {
+  font-size: 2em;
+}
+.hori .card-img {
+  max-height: revert;
 }
 .favourite-icon {
-  background: var(--primary-color);
-  color: var(--light-text);
+  padding: 0.8rem;
+  color: var(--primary-color);
 }
 
 .section-content {

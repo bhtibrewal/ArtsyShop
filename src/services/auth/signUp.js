@@ -7,9 +7,9 @@ export const signUp = async ({ data, userDataDispatch, setLoginState, navigate }
                 foundUser, encodedToken
             }
         } = await axios.post("/api/auth/signup", data)
-        userDataDispatch({ type: "LOGIN_USER", payload: foundUser })
-        setLoginState(true);
-        localStorage.setItem("token", encodedToken);
+        // userDataDispatch({ type: "LOGIN_USER", payload: foundUser })
+        // setLoginState(true);
+        // localStorage.setItem("token", encodedToken);
         navigate("/sign-in")
     }
     catch (e) {

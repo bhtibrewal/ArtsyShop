@@ -1,16 +1,14 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useProductContext, useUserContext } from "../../../context";
+import { useProductContext, useTheme, useUserContext } from "../../../context";
 import { LoggedInUser } from "./LoggedInUser";
 
-export const RightNav = ({ onClick }) => {
+export const RightNav = () => {
   const { loginState } = useUserContext();
   const navigate = useNavigate();
-  const { productState, productDispatch } = useProductContext();
-  const { wishList, cart } = productState;
+  const { productState:{ wishList, cart } } = useProductContext();
+  const {darkMode, setDarkMode} = useTheme();
   return (
     <div className="right-side">
-      <NavLink to="/mockman">Mockman</NavLink>
-
       {loginState ? (
         <LoggedInUser />
       ) : (
@@ -34,6 +32,9 @@ export const RightNav = ({ onClick }) => {
       >
         <i className="fa-solid fa-bag-shopping fa-xl"></i>
         <span className="items">{cart.length}</span>
+      </div>
+      <div onClick= {()=>setDarkMode(prev=>!prev)}>
+        <i className={`fa-solid ${darkMode? "fa-cloud-moon": "fa-cloud-sun"}`}/>
       </div>
     </div>
   );

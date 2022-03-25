@@ -1,5 +1,11 @@
-import { useLocation } from "react-router-dom";
-import { Sidebar, TextOverMediaCard } from "../../components";
+import "./product_page.css";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import {
+  OutlineButtonPrimary,
+  Sidebar,
+  TextOverMediaCard,
+} from "../../components";
 import { useProductContext, useProductFilter } from "../../context";
 import { useDocumentTitle } from "../../custom_hooks/useDocumentTitle";
 import {
@@ -11,16 +17,37 @@ import {
   filterByRating,
   filterByPriceRange,
 } from "../../utils/getFilteredProductList";
-import "./product_page.css";
+import { Dropdown, PageHeader } from "./components";
 
 export const ProductPage = () => {
-  useDocumentTitle("Product Page");
-  let location = useLocation();
-  const { productState } = useProductContext();
-  const { productList } = productState;
-
+  useDocumentTitle("| Product Page");
+  const { categoryname } = useParams();
+  const [category, setCategory] = useState();
+  const [sidebarDisplay, setSidebarDisplay] = useState(true);
+  const {
+    productState: { productList, categoriesList },
+  } = useProductContext();
   const { filterState, filterStateDispatch } = useProductFilter();
   const { priceRange } = filterState;
+
+  useEffect(() => {
+    if (categoryname) {
+      const foundCategory = categoriesList?.find(
+        (item) => item.categoryName === categoryname
+      );
+      setCategory(foundCategory);
+      foundCategory &&
+        filterStateDispatch({
+          type: "SET_CATEGORY",
+          payload: foundCategory?.categoryName,
+        });
+    }
+    return () =>
+      filterStateDispatch({
+        type: "CLEAR_CATEGORY",
+      });
+  }, [categoriesList, categoryname]);
+
   const filteredProductList = getFilteredProductList(
     [
       filterByPriceRange,
@@ -33,27 +60,28 @@ export const ProductPage = () => {
     [...productList],
     filterState
   );
-  console.log(productState);
+  const options = ["Relevance", "Popularity"];
+  const [value, setValue] = useState();
 
   if (productList.length === 0) return <div>Loading...</div>;
   return (
     <main className="main">
       {/*  header section  */}
-      <section className="page-header-section">
-        <div className="section-bg">
-          <img
-            src="https://d17h7hjnfv5s46.cloudfront.net/assets/build/images/banners/search/desktop/categorie/nature.90ad9bf4.jpg"
-            alt=""
-          />
-        </div>
-        <div className="section-content">
-          <h1>Nature Painting</h1>
-        </div>
-      </section>
-
+      {category && <PageHeader category={category} />}
       {/* menu section */}
-      <section className="menu-sec">
+      <section className="menu-sec ">
         {/*  */}
+        <OutlineButtonPrimary className='aside-toggle-btn'
+          onClick={() => setSidebarDisplay((prev) => !prev)}
+        >
+          <span >Filter</span>
+          <i
+            className={`fa-solid ${
+              sidebarDisplay ? "fa-angle-left" : "fa-angle-right"
+            }`}
+          ></i>
+        </OutlineButtonPrimary>
+
         <div className="price-sec">
           <h3>Price</h3>
           <div>
@@ -61,7 +89,7 @@ export const ProductPage = () => {
               type="range"
               max="1000000"
               min="0"
-              step="10000"
+              step="100000"
               value={priceRange}
               onChange={(e) =>
                 filterStateDispatch({
@@ -75,27 +103,19 @@ export const ProductPage = () => {
         </div>
 
         {/*  sort by dropdown  */}
-        <div className="dropdown-container sortBy-con">
-          <button className="btn dropdown-btn">
-            Sort By
-            <i className="fa-solid fa-angle-down"></i>
-          </button>
-          <div className="dropdown">
-            <div className="body-md">
-              <b>Relevance</b>
-            </div>
-            <div className="body-md">
-              <b>Popularity</b>
-            </div>
-          </div>
-        </div>
+        <Dropdown
+          value={value}
+          setValue={setValue}
+          options={options}
+          heading={"Sort BY"}
+        />
       </section>
 
       {/* products section */}
       <div className="main-sec">
-        <Sidebar />
+        {sidebarDisplay && <Sidebar />}
         <section className="products-sec">
-          <div className="grid-3 products-grid">
+          <div className=" products-grid">
             {filteredProductList.map((product) => {
               return <TextOverMediaCard key={product._id} item={product} />;
             })}

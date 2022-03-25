@@ -2,6 +2,8 @@ export const product_reducer_fn = (state, { type, payload }) => {
   switch (type) {
     case "ADD_PRODUCT_LIST":
       return { ...state, productList: payload };
+    case "ADD_CATEGORIES":
+      return { ...state, categoriesList: payload };
     case "ADD_WISHLIST":
       return { ...state, wishList: [...payload] };
     case "ADD_CART":

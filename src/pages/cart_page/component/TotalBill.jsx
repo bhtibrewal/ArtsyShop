@@ -6,12 +6,14 @@ export const TotalBill = ({ onClick }) => {
     productState: { cart },
   } = useProductContext();
 
-  // const priceDetails = {
-  //   price: cart.reduce((acc, item) => acc + item.price, 0),
-  //   discount: cart.reduce((acc, item) => acc + item.discount, 0),
-  //   shipping: cart.reduce((acc, item) => acc + item.shipping, 0),
-  //   total: price - discount + shipping,
-  // };
+  const priceDetails = {
+    price: cart?.reduce((acc, item) => acc + item.original_price, 0),
+    discount: cart?.reduce(
+      (acc, item) => acc + (item.original_price - item.price),
+      0
+    ),
+    shipping: cart?.reduce((acc, item) => acc + item.shipping, 0) || 50000,
+  };
   return (
     <section className="cart-price-sec">
       <p>
@@ -20,11 +22,11 @@ export const TotalBill = ({ onClick }) => {
       <hr />
       <div className="calc-part">
         <span>Price ( Items)</span>
-        <span>₹</span>
+        <span>Rs.{priceDetails.price}</span>
         <span>Discount</span>
-        <span>-₹</span>
+        <span>-Rs.{priceDetails.discount}</span>
         <span>Shipping Charges</span>
-        <span>₹</span>
+        <span>Rs.{priceDetails.shipping}</span>
       </div>
       <hr />
       <div className="total-part">
@@ -32,7 +34,10 @@ export const TotalBill = ({ onClick }) => {
           <strong>Total</strong>
         </span>
         <span>
-          <strong>₹</strong>
+          <strong>
+            Rs.
+            {priceDetails.price - priceDetails.discount + priceDetails.shipping}
+          </strong>
         </span>
       </div>
       <hr />

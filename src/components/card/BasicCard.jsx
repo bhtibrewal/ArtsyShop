@@ -3,7 +3,7 @@ import { useProductContext, useUserContext } from "../../context";
 import { addToCart, removeFromWishlist } from "../../services";
 import { inCart } from "../../utils/cart.utils";
 import { ButtonPrimary } from "../buttons";
-import { RatingPalleteIcon } from "../index";
+import { Rating } from "../index";
 
 export const BasicCard = ({ product }) => {
   const {
@@ -41,10 +41,10 @@ export const BasicCard = ({ product }) => {
           <h1>{item_name}</h1>
           <h2>by {item_by}</h2>
           <div className="card-body">{item_desc}</div>
-          <RatingPalleteIcon rating={item_rating} />
+          <Rating rating={item_rating} />
           <div className="price-sec">
-            <h3>${item_price}</h3>
-            <span className="strike-price">${item_original_price}</span>
+            <span className="body-l">Rs.{item_price}</span>
+            <span className="strike-price">Rs.{item_original_price}</span>
           </div>
         </div>
       </div>

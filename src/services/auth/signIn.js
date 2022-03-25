@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const signIn = async ({
+    setSigninError,
     data,
     userDataDispatch,
     setLoginState,
@@ -28,6 +29,7 @@ export const signIn = async ({
         }))
         navigate(-1);
     } catch (e) {
-        console.log(e.error);
+
+        setSigninError(e.response.data.errors);
     }
 }

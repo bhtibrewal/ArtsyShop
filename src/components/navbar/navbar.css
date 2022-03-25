@@ -2,15 +2,38 @@
 .arstyShop-header {
   padding: 2rem 4rem;
   display: flex;
+  gap: 1rem;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 100%;
   background: var(--secondary-color);
 }
 .arstyShop-header > * {
-  color: var(--light-text);
+  color: var(--header-text);
 }
-.left-side{
+.arstyShop-header > .flex-align-center {
+  width: 100%;
+  justify-content: space-between;
+}
+.mobile-search {
+  display: none;
+  justify-self: center;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .arstyShop-header {
+    flex-wrap: wrap;
+  }
+  .web-search {
+    display: none;
+  }
+  .mobile-search {
+    display: flex;
+  }
+}
+
+.left-side {
   cursor: pointer;
 }
 .right-side {

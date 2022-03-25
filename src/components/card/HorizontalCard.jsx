@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useProductContext, useUserContext } from "../../context";
 import { addToWishlist, removeFromWishlist } from "../../services";
 import { inWhisList } from "../../utils/cart.utils";
-import { RatingPalleteIcon } from "../rating/RatingPalleteIcon";
+import { Rating } from "../rating/Rating";
 
 export const HorizontalCard = ({ product, children }) => {
   const {
@@ -11,7 +11,7 @@ export const HorizontalCard = ({ product, children }) => {
     title: item_name,
     artist: item_by,
     img: img_src,
-    item_original_price,
+    original_price,
     price: item_price,
     rating: item_rating,
     desc: item_desc,
@@ -22,8 +22,9 @@ export const HorizontalCard = ({ product, children }) => {
     productState: { wishList },
     productDispatch,
   } = useProductContext();
+
   return (
-    <div className="card w-40 hori">
+    <div className="card hori">
       <button
         className="icon favourite-icon"
         onClick={() =>
@@ -50,15 +51,16 @@ export const HorizontalCard = ({ product, children }) => {
           <h1>{item_name}</h1>
           <h2>by {item_by}</h2>
           <div className="card-body">{item_desc}</div>
-          <RatingPalleteIcon rating={item_rating} />
+          <Rating rating={item_rating} />
           <div className="price-sec">
-            <h3>${item_price}</h3>
-            <span className="strike-price">${item_original_price}</span>
+            <span className="body-l">Rs.{item_price}</span>
+            <span className="strike-price">Rs.{original_price}</span>
           </div>
+          <div className="card-actions">{children}</div>
         </div>
       </div>
 
-      <div className="card-actions">{children}</div>
+      
     </div>
   );
 };

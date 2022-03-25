@@ -12,7 +12,7 @@ export const LoggedInUser = () => {
     <div className="user">
       <div className="avatar-text avatar-s">{`${userData.firstName[0]}${userData.lastName[0]}`}</div>
       <div className="user-dropdown flex-col">
-        <Link to="/user_profile" className="flex-align-center">
+        <Link to="/user-profile" className="flex-align-center">
           <span>My Account</span>
           <i className="fa-solid fa-angle-right"></i>
         </Link>

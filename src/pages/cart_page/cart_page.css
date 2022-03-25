@@ -12,6 +12,15 @@
   padding: 2rem 5%;
   background: var(--light-bg);
 }
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:1rem;
+}
+.empty-cart-gif {
+  width: 50%;
+}
 .cart-price-sec {
   padding: 2rem;
   background: var(--light-bg);

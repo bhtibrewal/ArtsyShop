@@ -1,4 +1,6 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
+import { filter_product_reducer } from "../reducers/filter_product_reducer.js";
+
 
 const ProductFilterContext = createContext();
 
@@ -11,49 +13,24 @@ const ProductFilterProvider = ({ children }) => {
     ratingAbove: 1,
     priceRange: 1000000,
   };
-  const filter_product_reducer = (state, { type, payload }) => {
-    switch (type) {
-      case "SEARCH":
-        return { ...state };
-      case "OUT_OF_STOCK":
-        return { ...state, showOutOfStock: !state.showOutOfStock };
-      case "FAST_DELIVERY":
-        return { ...state, showFastDelivery: !state.showFastDelivery };
-      case "ADD_CATEGORY":
-        return { ...state, showCategories: [...state.showCategories, payload] };
-      case "REMOVE_CATEGORY":
-        return {
-          ...state,
-          showCategories: state.showCategories.filter(
-            (category) => category !== payload
-          ),
-        };
-      case "PRICE_RANGE":
-        return { ...state, priceRange: payload };
-      case "RATING":
-        return { ...state, ratingAbove: payload };
-      case "SORT_BY":
-        return { ...state, sortBy: payload };
-      default:
-        return {...state};
-    }
-  };
-
+  
   const [filterState, filterStateDispatch] = useReducer(
     filter_product_reducer,
 
-    //if there is prev filterState stored in the local storage then get it,
-    //  otherwise set the filterState to initialFilterState
+    /* if there is prev filterState stored in the local storage then get it,
+       otherwise set the filterState to initialFilterState */
     JSON.parse(localStorage.getItem("filterState")) ?? initialFilterState
   );
-  console.log(filterState);
+  
   //store the filter state in local storage
   useEffect(() => {
     localStorage.setItem("filterState", JSON.stringify(filterState));
   }, [filterState]);
 
   return (
-    <ProductFilterContext.Provider value={{ filterState, filterStateDispatch }}>
+    <ProductFilterContext.Provider
+      value={{ filterState, filterStateDispatch, initialFilterState }}
+    >
       {children}
     </ProductFilterContext.Provider>
   );
