@@ -14,7 +14,7 @@ export const signIn = async ({
         const {
             data: {
                 foundUser: {
-                    firstName, lastName, email, createdAt, cart, wishlist
+                    firstName, lastName, email, createdAt
                 },
                 encodedToken
             }
@@ -30,7 +30,8 @@ export const signIn = async ({
         localStorage.setItem('user', JSON.stringify({
             firstName, lastName, email, createdAt
         }))
-        productDispatch({ type: "ADD_CART_WISHLIST", payload:{cart, wishlist} });
+        fetchCart(productDispatch);
+        fetchWishlist(productDispatch)
         navigate(-1);
     } catch (e) {
 
