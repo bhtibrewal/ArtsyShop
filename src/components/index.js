@@ -7,4 +7,5 @@ import { ButtonPrimary, ButtonSecondary, OutlineButtonPrimary, OutlineButtonSeco
 import { Sidebar } from './sidebar/Sidebar';
 import { InputField } from './input/InputField';
 import { PasswordInput } from './input/PasswordInput';
+
 export { InputField, PasswordInput, TextOverMediaCard, BasicCard, HorizontalCard, Rating, ButtonPrimary, ButtonSecondary, OutlineButtonPrimary, OutlineButtonSecondary, Sidebar };

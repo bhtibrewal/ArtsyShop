@@ -2,15 +2,13 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useProductContext, useTheme, useUserContext } from "../../../context";
 import { LoggedInUser } from "./LoggedInUser";
 
-export const RightNav = ({ onClick }) => {
+export const RightNav = () => {
   const { loginState } = useUserContext();
   const navigate = useNavigate();
   const { productState:{ wishList, cart } } = useProductContext();
   const {darkMode, setDarkMode} = useTheme();
   return (
     <div className="right-side">
-      <NavLink to="/mockman">Mockman</NavLink>
-
       {loginState ? (
         <LoggedInUser />
       ) : (

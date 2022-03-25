@@ -5,6 +5,7 @@
   --user-dropdown-index: 2;
   --light-black: rgba(0, 0, 0, 0.36);
   --light-white: rgba(255, 255, 255, 0.36);
+  --header-text:rgba(250,250,250);
 }
 .body {
   color: var(--primary-text);
@@ -83,7 +84,9 @@ img {
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
 }
-
+input{
+  background: transparent;
+}
 .checkbox-text {
   margin: 0 1rem;
 }

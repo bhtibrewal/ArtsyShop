@@ -16,6 +16,7 @@ import {
 import MockAPI from "./backend/Mockman";
 import { ProductFilterProvider, useTheme, useUserContext } from "./context";
 import {privateRouting} from './utils/privateRouting'
+import { Footer } from "./components";
 
 export const WithNavbar = () => {
   return (

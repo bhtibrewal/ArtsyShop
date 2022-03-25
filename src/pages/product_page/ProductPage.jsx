@@ -46,7 +46,7 @@ export const ProductPage = () => {
       filterStateDispatch({
         type: "CLEAR_CATEGORY",
       });
-  }, [categoriesList]);
+  }, [categoriesList, categoryname]);
 
   const filteredProductList = getFilteredProductList(
     [

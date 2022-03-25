@@ -6,7 +6,6 @@ const ThemeContext = createContext();
 const ThemeProvider = ({ children }) => {
   const preferDarkMode = matchMedia("(prefers-color-scheme: dark)").matches;
   const localMode = JSON.parse(localStorage.getItem("mode"));
-  console.log(preferDarkMode, localMode);
   const [darkMode, setDarkMode] = useState(localMode ?? preferDarkMode  );
   useEffect(() => {
     localStorage.setItem("mode", darkMode);
