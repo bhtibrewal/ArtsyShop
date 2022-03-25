@@ -57,19 +57,7 @@ export const SignIn = () => {
           <span>validate</span>
           <i className="fa-solid fa-arrow-right-long"></i>
         </ButtonPrimary>
-        <ButtonPrimary
-          onClick={() =>
-            signIn({
-              setSigninError,
-              data: inputValues,
-              userDataDispatch,
-              setLoginState,
-              navigate,
-            })
-          }
-        >
-          Guest login
-        </ButtonPrimary>
+        
         <Link to="/" className="link-text-primary">
           Forgot your password?
         </Link>
