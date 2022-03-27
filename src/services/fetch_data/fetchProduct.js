@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 export const fetchProduct = async (setProduct, productId) => {
   try {
     const res = await axios.get(`/api/products/${productId}`);

@@ -2,7 +2,6 @@ import "./cart_page.css";
 import {
   ButtonPrimary,
   HorizontalCard,
-  OutlineButtonSecondary,
 } from "../../components";
 import { TotalBill } from "./component/TotalBill";
 import { useProductContext } from "../../context";

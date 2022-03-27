@@ -1,10 +1,8 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import { product_reducer_fn } from "../reducers/product_reducer_fn.js";
 import {
-  fetchCart,
   fetchCategories,
   fetchProductList,
-  fetchWishlist,
 } from "../services";
 
 import { useUserContext } from "./UserContext";
