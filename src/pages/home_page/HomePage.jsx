@@ -1,5 +1,4 @@
 import "./home_page.css";
-import { useState } from "react";
 import {
   CategoriesSection,
   CollectionSection,

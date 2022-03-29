@@ -9,6 +9,7 @@ export const EmptyCart = () => {
         <h2>My Cart(0)</h2>
         <img
           className="empty-cart-gif"
+          alt="empty cart"
           src="https://assets.materialup.com/uploads/87d4df96-a55f-4f4b-9a17-a696eded97f3/preview.gif"
         />
         <p className="body-l">

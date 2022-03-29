@@ -1,8 +1,10 @@
+import axios from "axios";
 import { useReducer, useState } from "react";
 
 export const useUserData = () => {
-  const initialLoginState =
-    localStorage.getItem("token") !== null ? true : false;
+  const encodedToken = localStorage.getItem("token");
+  const initialLoginState = encodedToken !== null ? true : false;
+  axios.defaults.headers.common["authorization"] = encodedToken;
   const [loginState, setLoginState] = useState(initialLoginState);
   const address = { street: "", city: "", country: "", zip_code: "" };
   const localUserData = JSON.parse(localStorage.getItem("user"));

@@ -1,4 +1,4 @@
-export const logOut = ({ pathname, navigate, setLoginState, userDataDispatch, productDispatch }) => {
+export const logOut = ({  setLoginState, userDataDispatch, productDispatch }) => {
     setLoginState(false);
     localStorage.clear("token");
     localStorage.clear("user");

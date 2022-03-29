@@ -27,7 +27,8 @@ export const ProductPage = () => {
   const {
     productState: { productList, categoriesList },
   } = useProductContext();
-  const { filterState, filterStateDispatch } = useProductFilter();
+  const { filterState, filterStateDispatch, initialFilterState } =
+    useProductFilter();
   const { priceRange } = filterState;
 
   useEffect(() => {
@@ -41,10 +42,10 @@ export const ProductPage = () => {
           type: "SET_CATEGORY",
           payload: foundCategory?.categoryName,
         });
-    }
-    return () =>
+    } else
       filterStateDispatch({
         type: "CLEAR_CATEGORY",
+        payload: initialFilterState,
       });
   }, [categoriesList, categoryname]);
 
@@ -71,10 +72,11 @@ export const ProductPage = () => {
       {/* menu section */}
       <section className="menu-sec ">
         {/*  */}
-        <OutlineButtonPrimary className='aside-toggle-btn'
+        <OutlineButtonPrimary
+          className="aside-toggle-btn"
           onClick={() => setSidebarDisplay((prev) => !prev)}
         >
-          <span >Filter</span>
+          <span>Filter</span>
           <i
             className={`fa-solid ${
               sidebarDisplay ? "fa-angle-left" : "fa-angle-right"

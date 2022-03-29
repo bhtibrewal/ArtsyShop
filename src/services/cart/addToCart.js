@@ -7,6 +7,6 @@ export const addToCart = async ({ product, productDispatch }) => {
         productDispatch({ type: "ADD_TO_CART", payload: cart })
     }
     catch (e) {
-        console.log(e.error);
+        console.error(e);
     }
 }

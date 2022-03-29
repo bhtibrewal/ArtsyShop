@@ -1,9 +1,10 @@
 import axios from "axios";
 
 export const signIn = async ({
-    setSigninError,
+    setSigninError,  
     data,
     userDataDispatch,
+    productDispatch,
     setLoginState,
     navigate
 }) => {
@@ -11,7 +12,7 @@ export const signIn = async ({
         const {
             data: {
                 foundUser: {
-                    firstName, lastName, email, createdAt
+                    firstName, lastName, email, createdAt, cart, wishlist
                 },
                 encodedToken
             }
@@ -19,17 +20,19 @@ export const signIn = async ({
         userDataDispatch({
             type: "LOGIN_USER",
             payload: {
-                firstName, lastName, email, createdAt
+                firstName, lastName, email, createdAt, cart, wishlist
             }
         })
+        console.log('here');
         setLoginState(true);
         localStorage.setItem("token", encodedToken);
+        axios.defaults.headers.common["authorization"] = encodedToken;
         localStorage.setItem('user', JSON.stringify({
             firstName, lastName, email, createdAt
         }))
+        productDispatch({ type: "ADD_CART_WISHLIST", payload: {cart, wishlist }});
         navigate(-1);
     } catch (e) {
-
         setSigninError(e.response.data.errors);
     }
 }

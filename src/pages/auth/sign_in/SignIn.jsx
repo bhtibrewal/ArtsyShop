@@ -1,60 +1,75 @@
 import "../auth.css";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useUserContext } from "../../../context";
+import { useProductContext, useUserContext } from "../../../context";
 import { useDocumentTitle } from "../../../custom_hooks";
-import { ButtonPrimary, InputField, PasswordInput } from "../../../components";
+import {
+  ButtonPrimary,
+  InputField,
+  OutlineButtonPrimary,
+  PasswordInput,
+} from "../../../components";
 import { signIn } from "../../../services";
 
 export const SignIn = () => {
   useDocumentTitle("| Sign In");
   const navigate = useNavigate();
-  const [signinError, setSigninError] = useState();
+  const [error, setSigninError] = useState();
+  const { productDispatch } = useProductContext();
   const { setLoginState, userDataDispatch } = useUserContext();
   const [inputValues, setInputValues] = useState({
-    email: "adarshbalika@gmail.com",
-    password: "adarshBalika123",
+    email: "",
+    password: "",
   });
+  const guestLogin = {
+    email: "adarshbalak@gmail.com",
+    password: "adarshBalaki123",
+  };
 
   return (
     <main className="main center">
-      <form onSubmit={(e)=>{
-        e.preventDefault();
-        signIn({
-          setSigninError,
-          data: inputValues,
-          userDataDispatch,
-          setLoginState,
-          navigate,
-        });
-      }} className="flex-col signup-sec">
-        <i className="primary fa-regular fa-user fa-5x"></i>
+      <form
+        className="flex-col signup-sec"
+        onSubmit={(e) => {
+          e.preventDefault();
+          console.log("this");
+          signIn({
+            setSigninError,
+            data: inputValues,
+            productDispatch,
+            userDataDispatch,
+            setLoginState,
+            navigate,
+          });
+        }}
+      >
         <p className="body-l">Login to my user account.</p>
+
         <InputField
-          label={"Email"}
           value={inputValues.email}
           onChange={(e) =>
             setInputValues({ ...inputValues, email: e.target.value })
           }
+          label={"Email"}
         />
         <PasswordInput
-          label={"Password"}
           value={inputValues.password}
           onChange={(e) =>
             setInputValues({ ...inputValues, password: e.target.value })
           }
+          label={"Password"}
         />
         <label className="flex-align-center">
           <input type="checkbox" />
           <span className="checkbox-text"> Keep me logged in. </span>
         </label>
-        <ButtonPrimary
-          type='submit'
-        >
+        <ButtonPrimary type="submit">
           <span>validate</span>
           <i className="fa-solid fa-arrow-right-long"></i>
         </ButtonPrimary>
-
+        <OutlineButtonPrimary onClick={() => setInputValues(guestLogin)}>
+          Login as Guest
+        </OutlineButtonPrimary>
         <Link to="me" className="link-text-primary">
           Forgot your password?
         </Link>
@@ -67,8 +82,7 @@ export const SignIn = () => {
             SIGN UP
           </div>
         </div>
-        
-        <p className="error-msg">{signinError}</p>
+        <div className="err-msg">{error}</div>
       </form>
     </main>
   );

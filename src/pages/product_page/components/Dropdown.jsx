@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 
 export const Dropdown = ({ value, setValue, options, heading }) => {
   return (

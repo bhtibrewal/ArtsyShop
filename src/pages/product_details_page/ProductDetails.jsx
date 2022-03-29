@@ -11,7 +11,6 @@ export const ProductDetails = () => {
 
   useEffect(() => {
     fetchProduct(setProduct, productId);
-    return () => {};
   }, []);
   useDocumentTitle(`| ${product.title}`);
 
