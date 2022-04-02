@@ -9,6 +9,6 @@ export const addToWishlist = async ({ product, productDispatch, showToast }) => 
         }
     }
     catch (e) {
-        showToast({ title: e.respoanse.data.errors, type: 'error' });
+        showToast({ title: e.response.data.errors, type: 'error' });
     }
 }

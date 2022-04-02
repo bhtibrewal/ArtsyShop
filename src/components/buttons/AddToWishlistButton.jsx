@@ -12,20 +12,19 @@ export const AddToWishlistButton = ({ product }) => {
     productState: { wishList },
     productDispatch,
   } = useProductContext();
+  const isAddedToWishlist = inWhisList(wishList, product);
+  const handleAddToWishlist = () => {
+    if (loginState)
+      if (isAddedToWishlist)
+        removeFromWishlist({ _id, productDispatch, showToast });
+      else addToWishlist({ product, productDispatch, showToast });
+    else navigate("/sign-in");
+  };
   return (
-    <button
-      className="icon favourite-icon"
-      onClick={() =>
-        loginState
-          ? inWhisList(wishList, product)
-            ? removeFromWishlist({ _id, productDispatch, showToast })
-            : addToWishlist({ product, productDispatch, showToast })
-          : navigate("/sign-in")
-      }
-    >
+    <button className="icon favourite-icon" onClick={handleAddToWishlist}>
       <i
         className={`${
-          inWhisList(wishList, product) ? "fa-solid" : "fa-regular"
+          isAddedToWishlist ? "fa-solid" : "fa-regular"
         } fa-heart fa-2x`}
       ></i>
     </button>

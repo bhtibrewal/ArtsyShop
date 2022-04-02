@@ -16,6 +16,14 @@ export const WishlistPage = () => {
     productState: { wishList, cart },
     productDispatch,
   } = useProductContext();
+  const isInCart = inCart(cart, product);
+
+  const handleAddToCart = (product) => {
+    if (loginState)
+      if (!isInCart) addToCart({ product, productDispatch, showToast });
+      else navigate("/cart");
+    else navigate("/sign-in");
+  };
 
   return (
     <main className="main">
@@ -30,19 +38,9 @@ export const WishlistPage = () => {
           wishList.map((product) => {
             return (
               <BasicCard key={product._id} product={product}>
-                <ButtonPrimary
-                  onClick={() => {
-                    loginState
-                      ? !inCart(cart, product)
-                        ? addToCart({ product, productDispatch, showToast })
-                        : navigate("/cart")
-                      : navigate("/sign-in");
-                  }}
-                >
+                <ButtonPrimary onClick={() => handleAddToCart(product)}>
                   <i className="fa-solid fa-cart-shopping"></i>
-                  <span>
-                    {!inCart(cart, product) ? "Add to Cart" : "Go To Cart"}
-                  </span>
+                  <span>{!isInCart ? "Add to Cart" : "Go To Cart"}</span>
                 </ButtonPrimary>
               </BasicCard>
             );
