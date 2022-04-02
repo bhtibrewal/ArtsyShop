@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
-import { filter_product_reducer } from "../reducers/filter_product_reducer.js";
+import { filterProductReducer } from "../reducers/filterProductReducer.js";
 
 
 const ProductFilterContext = createContext();
@@ -12,10 +12,11 @@ const ProductFilterProvider = ({ children }) => {
     showOutOfStock: true,
     ratingAbove: 1,
     priceRange: 1000000,
+    searchKeyword:'',
   };
   
   const [filterState, filterStateDispatch] = useReducer(
-    filter_product_reducer,
+    filterProductReducer,
 
     /* if there is prev filterState stored in the local storage then get it,
        otherwise set the filterState to initialFilterState */

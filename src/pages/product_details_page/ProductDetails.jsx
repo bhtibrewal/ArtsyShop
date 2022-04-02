@@ -1,7 +1,7 @@
-import './product_details_page.css'
+import "./product_details_page.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { SingleProductCard } from "../../components/card/SingleProductCard";
+import { SingleProductCard } from "../../components";
 import { useDocumentTitle } from "../../custom_hooks";
 import { fetchProduct } from "../../services";
 
@@ -10,8 +10,9 @@ export const ProductDetails = () => {
   const [product, setProduct] = useState({});
 
   useEffect(() => {
-    fetchProduct(setProduct, productId);
+    if (productId) fetchProduct(setProduct, productId);
   }, []);
+
   useDocumentTitle(`| ${product.title}`);
 
   if (product === null) return <h1> Loading...</h1>;

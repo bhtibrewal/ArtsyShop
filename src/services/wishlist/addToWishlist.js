@@ -1,11 +1,14 @@
 import axios from "axios"
 
-export const addToWishlist = async ({ product, productDispatch }) => {
+export const addToWishlist = async ({ product, productDispatch, showToast }) => {
     try {
-        const { data: { wishlist } } = await axios.post("/api/user/wishlist", { product });
-        productDispatch({ type: "ADD_TO_WISHLIST", payload: wishlist })
+        const res = await axios.post("/api/user/wishlist", { product });
+        if (res.status === 201) {
+            productDispatch({ type: "ADD_TO_WISHLIST", payload: res.data.wishlist })
+            showToast({ title: 'added to wishlist', type: 'success' });
+        }
     }
     catch (e) {
-        console.log(e.error);
+        showToast({ title: e.respoanse.data.errors, type: 'error' });
     }
 }

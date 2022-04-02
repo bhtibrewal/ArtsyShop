@@ -1,12 +1,15 @@
 import axios from "axios"
 
-export const addToCart = async ({ product, productDispatch }) => {
+export const addToCart = async ({ product, productDispatch, showToast }) => {
 
     try {
-        const { data: { cart } } = await axios.post("/api/user/cart", { product });
-        productDispatch({ type: "ADD_TO_CART", payload: cart })
+        const res = await axios.post("/api/user/cart", { product });
+        if (res.status === 201) {
+            productDispatch({ type: "ADD_TO_CART", payload: res.data.cart })
+            showToast({ title: 'added to cart', type: 'success' });
+        }
     }
     catch (e) {
-        console.error(e);
+        showToast({ title: e.respoanse.data.errors, type: 'error' });
     }
 }

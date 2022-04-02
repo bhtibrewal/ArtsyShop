@@ -1,7 +1,7 @@
 import "../auth.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useProductContext, useUserContext } from "../../../context";
+import { useProductContext, useToast, useUserContext } from "../../../context";
 import { useDocumentTitle } from "../../../custom_hooks";
 import {
   ButtonPrimary,
@@ -15,8 +15,6 @@ export const SignIn = () => {
   useDocumentTitle("| Sign In");
   const navigate = useNavigate();
   const [error, setSigninError] = useState();
-  const { productDispatch } = useProductContext();
-  const { setLoginState, userDataDispatch } = useUserContext();
   const [inputValues, setInputValues] = useState({
     email: "",
     password: "",
@@ -26,6 +24,10 @@ export const SignIn = () => {
     password: "adarshBalaki123",
   };
 
+  const { productDispatch } = useProductContext();
+  const { setLoginState, userDataDispatch } = useUserContext();
+  const {showToast} =useToast();
+  
   return (
     <main className="main center">
       <form
@@ -39,6 +41,7 @@ export const SignIn = () => {
             productDispatch,
             userDataDispatch,
             setLoginState,
+            showToast,
             navigate,
           });
         }}

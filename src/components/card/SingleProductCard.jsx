@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { useProductContext, useUserContext } from "../../context";
+import { useProductContext, useToast, useUserContext } from "../../context";
 import { addToCart, addToWishlist, removeFromWishlist } from "../../services";
 import { inCart, inWhisList } from "../../utils/cart.utils";
-import { ButtonPrimary, OutlineButtonPrimary } from "../buttons";
+import { AddToWishlistButton } from "../buttons/AddToWishlistButton";
+import { ButtonPrimary } from "../buttons/ButtonPrimary";
+import { OutlineButtonPrimary } from "../buttons/OutlineButtonPrimary";
 import { Rating } from "../rating/Rating";
 
 export const SingleProductCard = ({ product }) => {
@@ -22,6 +24,7 @@ export const SingleProductCard = ({ product }) => {
   } = product;
   const navigate = useNavigate();
   const { loginState } = useUserContext();
+  const { showToast } = useToast();
   const {
     productState: { wishList, cart },
     productDispatch,
@@ -29,22 +32,7 @@ export const SingleProductCard = ({ product }) => {
 
   return (
     <div className="card single-product_card">
-      <button
-        className="icon favourite-icon"
-        onClick={() =>
-          loginState
-            ? inWhisList(wishList, product)
-              ? removeFromWishlist({ _id, productDispatch })
-              : addToWishlist({ product, productDispatch })
-            : navigate("/sign-in")
-        }
-      >
-        <i
-          className={`${
-            inWhisList(wishList, product) ? "fa-solid" : "fa-regular"
-          } fa-heart fa-2x`}
-        ></i>
-      </button>
+      <AddToWishlistButton product={product} />
       <img className="card-img" src={img_src} alt={`${title} ${artist}`} />
 
       <div className="content">
@@ -64,14 +52,13 @@ export const SingleProductCard = ({ product }) => {
             <p> Original Work</p>
           </div>
           <div className="flex-col">
-          <i className="fa-solid fa-box-open"></i>
+            <i className="fa-solid fa-box-open"></i>
             <p>Free 14 days return</p>
           </div>
         </div>
 
         <span className="flex-align-center">
-          <Rating rating={rating} />
-          | {rated_by} reviews
+          <Rating rating={rating} />| {rated_by} reviews
         </span>
         <div className="price-sec">
           <span className="body-l">Rs{price}</span>
@@ -83,13 +70,15 @@ export const SingleProductCard = ({ product }) => {
             onClick={() => {
               loginState
                 ? !inCart(cart, product)
-                  ? addToCart({ product, productDispatch })
+                  ? addToCart({ product, productDispatch, showToast })
                   : navigate("/cart")
                 : navigate("/sign-in");
             }}
           >
             <i className="fa-solid fa-cart-shopping"></i>
-            <span>{!inCart(cart, product) ? "Acquire This Artwork" : "Go To Cart"}</span>
+            <span>
+              {!inCart(cart, product) ? "Acquire This Artwork" : "Go To Cart"}
+            </span>
           </OutlineButtonPrimary>
         </div>
       </div>

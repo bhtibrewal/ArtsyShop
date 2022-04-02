@@ -1,10 +1,7 @@
 import "./cart_page.css";
-import {
-  ButtonPrimary,
-  HorizontalCard,
-} from "../../components";
+import { BasicCard, ButtonPrimary } from "../../components";
 import { TotalBill } from "./component/TotalBill";
-import { useProductContext } from "../../context";
+import { useProductContext, useToast } from "../../context";
 import { useDocumentTitle } from "../../custom_hooks/useDocumentTitle";
 import { removeFromCart } from "../../services/cart/removeFromCart";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +10,7 @@ import { EmptyCart } from "./component/EmptyCart";
 export const CartPage = () => {
   useDocumentTitle("| Cart Page");
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   const { productState, productDispatch } = useProductContext();
   const { cart } = productState;
@@ -26,14 +24,16 @@ export const CartPage = () => {
         {cart?.map((product) => {
           const { _id } = product;
           return (
-            <HorizontalCard key={_id} product={product}>
+            <BasicCard key={_id} product={product}>
               <ButtonPrimary
-                onClick={() => removeFromCart({ _id, productDispatch })}
+                onClick={() =>
+                  removeFromCart({ _id, productDispatch, showToast })
+                }
               >
                 <i className="fa-solid fa-cart-shopping"></i>
                 <span>Remove from Cart</span>
               </ButtonPrimary>
-            </HorizontalCard>
+            </BasicCard>
           );
         })}
       </section>

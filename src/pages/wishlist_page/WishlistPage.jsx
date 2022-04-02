@@ -1,28 +1,25 @@
 import "./wishlist_page.css";
-import { BasicCard } from "../../components";
-import { useProductContext } from "../../context";
+import { BasicCard, ButtonPrimary } from "../../components";
+import { useProductContext, useToast, useUserContext } from "../../context";
 import { useDocumentTitle } from "../../custom_hooks";
+import { PageHeader } from "./component/PageHeader";
+import { inCart } from "../../utils/cart.utils";
+import { addToCart } from "../../services";
+import { useNavigate } from "react-router-dom";
 
 export const WishlistPage = () => {
   useDocumentTitle("| Wshlist Page");
+  const { loginState } = useUserContext();
+  const navigate = useNavigate();
+  const { showToast } = useToast();
   const {
-    productState: { wishList },
+    productState: { wishList, cart },
+    productDispatch,
   } = useProductContext();
 
   return (
     <main className="main">
-      <section className="page-header-section">
-        <div className="section-bg">
-          <img
-            src="https://d17h7hjnfv5s46.cloudfront.net/assets/build/images/banner_wishlist_no_connect.cbbca931.jpg"
-            alt=""
-          />
-        </div>
-        <div className="section-content flex-col">
-          <i className="fas fa-heart fa-4x"></i>
-          <h1>My Favourites</h1>
-        </div>
-      </section>
+      <PageHeader />
 
       <section className="wishlist-sec">
         {wishList.length === 0 ? (
@@ -31,7 +28,24 @@ export const WishlistPage = () => {
           </p>
         ) : (
           wishList.map((product) => {
-            return <BasicCard key={product._id} product={product} />;
+            return (
+              <BasicCard key={product._id} product={product}>
+                <ButtonPrimary
+                  onClick={() => {
+                    loginState
+                      ? !inCart(cart, product)
+                        ? addToCart({ product, productDispatch, showToast })
+                        : navigate("/cart")
+                      : navigate("/sign-in");
+                  }}
+                >
+                  <i className="fa-solid fa-cart-shopping"></i>
+                  <span>
+                    {!inCart(cart, product) ? "Add to Cart" : "Go To Cart"}
+                  </span>
+                </ButtonPrimary>
+              </BasicCard>
+            );
           })
         )}
       </section>

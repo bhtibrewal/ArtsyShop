@@ -1,5 +1,12 @@
 export const getFilteredProductList = (functionsArr, productsArr, filterState) => {
-    functionsArr.forEach((currFunction) => productsArr = currFunction(productsArr, filterState))
+    /* 
+        functionsArr = [filterByPriceRange, filterByCategory, filterByStock, filterByDelivery, filterByRating, sortByPrice,]
+        productArr = functionsArr[0](productsArr, filterState);
+        productArr = functionsArr[1](productsArr, filterState);
+        ...
+        productArr = functionsArr[arr.length-1](productsArr, filterState);
+     */
+    functionsArr.forEach((currentFunction) => productsArr = currentFunction(productsArr, filterState))
     return productsArr;
 }
 
@@ -29,6 +36,10 @@ export const filterByRating = (productsArr, { ratingAbove }) => {
     return productsArr.filter(product => product.rating >= ratingAbove)
 }
 
-export const filterByPriceRange= (productsArr, {priceRange})=>{
-return productsArr.filter(product=> product.price<=priceRange)
+export const filterByPriceRange = (productsArr, { priceRange }) => {
+    return productsArr.filter(product => product.price <= priceRange)
+}
+export const search = (productsArr, { searchKeyword }) => {
+    if (searchKeyword === '') return productsArr;
+    return productsArr.filter(product => product.title.includes(searchKeyword));
 }

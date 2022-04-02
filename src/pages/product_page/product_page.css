@@ -1,5 +1,6 @@
 .main-sec {
   display: flex;
+  position:relative;
 }
 
 /*  */
@@ -9,6 +10,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 2rem 5%;
+  
 }
 .aside-toggle-btn{
   padding: .8rem 2.4rem;

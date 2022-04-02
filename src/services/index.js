@@ -1,12 +1,11 @@
-import { logOut } from "./auth/logOut";
-import { signIn } from "./auth/signIn";
-import { signUp } from "./auth/signUp";
-import { addToWishlist } from "./wishlist/addToWishlist";
-import { removeFromWishlist } from "./wishlist/removeFromWishlist";
-import { addToCart } from "./cart/addToCart";
-import { removeFromCart } from "./cart/removeFromCart";
-import { fetchCategories } from "./fetch_data/fetchCategories";
-import { fetchProductList } from "./fetch_data/fetchProductList";
-import { fetchProduct } from "./fetch_data/fetchProduct";
-import { fetchCategory } from "./fetch_data/fetchCategory";
-export { logOut, signIn, signUp, addToWishlist, removeFromWishlist, addToCart, removeFromCart, fetchProductList, fetchCategories, fetchProduct, fetchCategory }
+export { logOut } from "./auth/logOut";
+export { signIn } from "./auth/signIn";
+export { signUp } from "./auth/signUp";
+export { addToWishlist } from "./wishlist/addToWishlist";
+export { removeFromWishlist } from "./wishlist/removeFromWishlist";
+export { addToCart } from "./cart/addToCart";
+export { removeFromCart } from "./cart/removeFromCart";
+export { fetchCategories } from "./fetch_data/fetchCategories";
+export { fetchProductList } from "./fetch_data/fetchProductList";
+export { fetchProduct } from "./fetch_data/fetchProduct";
+export { fetchCategory } from "./fetch_data/fetchCategory";

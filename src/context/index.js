@@ -1,8 +1,6 @@
-import { ProductContextProvider, useProductContext } from "./ProductContext";
-import { UserContextProvider, useUserContext } from "./UserContext";
-import { ProductFilterProvider, useProductFilter } from './ProductsFilterContext'
-import { ThemeProvider, useTheme } from "./ThemeContext";
+export { ProductContextProvider, useProductContext } from "./ProductContext";
+export { UserContextProvider, useUserContext } from "./UserContext";
+export { ProductFilterProvider, useProductFilter } from './ProductsFilterContext'
+export { ThemeProvider, useTheme } from "./ThemeContext";
+export {ToastProvider, useToast} from './ToastContext';
 
-export {
-    ProductContextProvider, UserContextProvider, ProductFilterProvider, useProductContext, useUserContext, useProductFilter, ThemeProvider, useTheme
-};

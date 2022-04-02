@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import './index.css';
 import App from './App';
 import { makeServer } from "./server";
-import { ProductContextProvider, ThemeProvider, UserContextProvider } from './context';
+import { ProductContextProvider, ThemeProvider, ToastProvider, UserContextProvider, ProductFilterProvider } from './context';
 
 // Call make Server
 makeServer();
@@ -15,7 +15,11 @@ ReactDOM.render(
       <ThemeProvider>
         <UserContextProvider>
           <ProductContextProvider>
-            <App />
+            <ProductFilterProvider>
+              <ToastProvider>
+                <App />
+              </ToastProvider>
+            </ProductFilterProvider>
           </ProductContextProvider>
         </UserContextProvider>
       </ThemeProvider>

@@ -1,4 +1,4 @@
-export const product_reducer_fn = (state, { type, payload }) => {
+export const productStateReducer = (state, { type, payload }) => {
   switch (type) {
     case "ADD_PRODUCT_LIST":
       return { ...state, productList: payload };

@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   OutlineButtonPrimary,
+  ProductListingCard,
   Sidebar,
-  TextOverMediaCard,
 } from "../../components";
 import { useProductContext, useProductFilter } from "../../context";
 import { useDocumentTitle } from "../../custom_hooks/useDocumentTitle";
@@ -16,6 +16,7 @@ import {
   filterByDelivery,
   filterByRating,
   filterByPriceRange,
+  search,
 } from "../../utils/getFilteredProductList";
 import { Dropdown, PageHeader } from "./components";
 
@@ -57,6 +58,7 @@ export const ProductPage = () => {
       filterByDelivery,
       filterByRating,
       sortByPrice,
+      search,
     ],
     [...productList],
     filterState
@@ -119,7 +121,7 @@ export const ProductPage = () => {
         <section className="products-sec">
           <div className=" products-grid">
             {filteredProductList.map((product) => {
-              return <TextOverMediaCard key={product._id} item={product} />;
+              return <ProductListingCard key={product._id} item={product} />;
             })}
           </div>
         </section>
