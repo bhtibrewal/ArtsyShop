@@ -1,10 +1,12 @@
-export const getFilteredProductList = (functionsArr, productsArr, filterState) => {
+export const getFilteredProductList = (productsArr, filterState) => {
+    const functionsArr = [
+        filterByPriceRange, filterByCategory, filterByStock, filterByDelivery, filterByRating, sortByPrice, search,
+    ];
     /* 
-        functionsArr = [filterByPriceRange, filterByCategory, filterByStock, filterByDelivery, filterByRating, sortByPrice,]
         productArr = functionsArr[0](productsArr, filterState);
         productArr = functionsArr[1](productsArr, filterState);
         ...
-        productArr = functionsArr[arr.length-1](productsArr, filterState);
+        productArr = functionsArr[length-1](productsArr, filterState);
      */
     functionsArr.forEach((currentFunction) => productsArr = currentFunction(productsArr, filterState))
     return productsArr;
@@ -41,5 +43,5 @@ export const filterByPriceRange = (productsArr, { priceRange }) => {
 }
 export const search = (productsArr, { searchKeyword }) => {
     if (searchKeyword === '') return productsArr;
-    return productsArr.filter(product => product.title.includes(searchKeyword));
+    return productsArr.filter(product => product.title.toLowerCase().includes(searchKeyword.toLowerCase()));
 }

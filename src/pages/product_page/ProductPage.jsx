@@ -8,16 +8,7 @@ import {
 } from "../../components";
 import { useProductContext, useProductFilter } from "../../context";
 import { useDocumentTitle } from "../../custom_hooks/useDocumentTitle";
-import {
-  getFilteredProductList,
-  sortByPrice,
-  filterByStock,
-  filterByCategory,
-  filterByDelivery,
-  filterByRating,
-  filterByPriceRange,
-  search,
-} from "../../utils/getFilteredProductList";
+import { getFilteredProductList } from "../../utils/getFilteredProductList";
 import { Dropdown, PageHeader } from "./components";
 
 export const ProductPage = () => {
@@ -51,15 +42,6 @@ export const ProductPage = () => {
   }, [categoriesList, categoryname]);
 
   const filteredProductList = getFilteredProductList(
-    [
-      filterByPriceRange,
-      filterByCategory,
-      filterByStock,
-      filterByDelivery,
-      filterByRating,
-      sortByPrice,
-      search,
-    ],
     [...productList],
     filterState
   );
