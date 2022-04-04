@@ -1,11 +1,6 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
-import { product_reducer_fn } from "../reducers/product_reducer_fn.js";
-import {
-  fetchCategories,
-  fetchProductList,
-} from "../services";
-
-import { useUserContext } from "./UserContext";
+import { productStateReducer } from "../reducers/productStateReducer.js";
+import { fetchCategories, fetchProductList } from "../services";
 
 const ProductContext = createContext();
 const ProductContextProvider = ({ children }) => {
@@ -16,7 +11,7 @@ const ProductContextProvider = ({ children }) => {
     cart: [],
   };
   const [productState, productDispatch] = useReducer(
-    product_reducer_fn,
+    productStateReducer,
     initialProductState
   );
 

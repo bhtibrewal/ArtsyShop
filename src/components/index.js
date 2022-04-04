@@ -1,11 +1,13 @@
-import { TextOverMediaCard } from './card/TextOverMediaCard';
-import { BasicCard } from './card/BasicCard';
-import { HorizontalCard } from './card/HorizontalCard';
-import { SingleProductCard } from './card/SingleProductCard';
-import { Rating } from './rating/Rating';
-import { ButtonPrimary, ButtonSecondary, OutlineButtonPrimary, OutlineButtonSecondary } from './buttons'
-import { Sidebar } from './sidebar/Sidebar';
-import { InputField } from './input/InputField';
-import { PasswordInput } from './input/PasswordInput';
+/* cards */
+export { ProductListingCard } from './card/ProductListingCard';
+export { BasicCard } from './card/BasicCard';
+export { SingleProductCard } from './card/SingleProductCard';
 
-export { InputField, PasswordInput, TextOverMediaCard, BasicCard, HorizontalCard, Rating, ButtonPrimary, ButtonSecondary, OutlineButtonPrimary, OutlineButtonSecondary, Sidebar };
+/* buttons */
+export { ButtonPrimary, OutlineButtonPrimary, AddToWishlistButton, AddToCartButton } from './buttons';
+
+export { Sidebar } from './sidebar/Sidebar';
+export { InputField } from './input/InputField';
+export { PasswordInput } from './input/PasswordInput';
+export { Toast } from './toast/Toast';
+export { Rating } from './rating/Rating';

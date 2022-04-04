@@ -3,21 +3,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   OutlineButtonPrimary,
+  ProductListingCard,
   Sidebar,
-  TextOverMediaCard,
 } from "../../components";
 import { useProductContext, useProductFilter } from "../../context";
 import { useDocumentTitle } from "../../custom_hooks/useDocumentTitle";
-import {
-  getFilteredProductList,
-  sortByPrice,
-  filterByStock,
-  filterByCategory,
-  filterByDelivery,
-  filterByRating,
-  filterByPriceRange,
-} from "../../utils/getFilteredProductList";
-import { Dropdown, PageHeader } from "./components";
+import { getFilteredProductList } from "../../utils/getFilteredProductList";
+import { Dropdown, PageHeader, Search } from "./components";
 
 export const ProductPage = () => {
   useDocumentTitle("| Product Page");
@@ -50,19 +42,9 @@ export const ProductPage = () => {
   }, [categoriesList, categoryname]);
 
   const filteredProductList = getFilteredProductList(
-    [
-      filterByPriceRange,
-      filterByCategory,
-      filterByStock,
-      filterByDelivery,
-      filterByRating,
-      sortByPrice,
-    ],
     [...productList],
     filterState
   );
-  const options = ["Relevance", "Popularity"];
-  const [value, setValue] = useState();
 
   if (productList.length === 0) return <div>Loading...</div>;
   return (
@@ -84,9 +66,11 @@ export const ProductPage = () => {
           ></i>
         </OutlineButtonPrimary>
 
+        <Search />
+
         <div className="price-sec">
           <h3>Price</h3>
-          <div>
+          <div className='price-range'>
             <input
               type="range"
               max="1000000"
@@ -100,17 +84,10 @@ export const ProductPage = () => {
                 })
               }
             />
-            <span>{priceRange}</span>
+            <span className="slider-tooltip">Rs. {priceRange}</span>
           </div>
         </div>
 
-        {/*  sort by dropdown  */}
-        <Dropdown
-          value={value}
-          setValue={setValue}
-          options={options}
-          heading={"Sort BY"}
-        />
       </section>
 
       {/* products section */}
@@ -119,7 +96,7 @@ export const ProductPage = () => {
         <section className="products-sec">
           <div className=" products-grid">
             {filteredProductList.map((product) => {
-              return <TextOverMediaCard key={product._id} item={product} />;
+              return <ProductListingCard key={product._id} item={product} />;
             })}
           </div>
         </section>

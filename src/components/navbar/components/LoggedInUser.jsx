@@ -1,10 +1,11 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useProductContext, useUserContext } from "../../../context";
+import { useProductContext, useToast, useUserContext } from "../../../context";
 import { logOut } from "../../../services";
 
 export const LoggedInUser = () => {
   const { setLoginState, userData, userDataDispatch } = useUserContext();
   const { productDispatch } = useProductContext();
+  const { showToast } = useToast();
   return (
     <div className="user">
       <div className="avatar-text avatar-s">{`${userData.firstName[0]}${userData.lastName[0]}`}</div>
@@ -24,6 +25,7 @@ export const LoggedInUser = () => {
               setLoginState,
               userDataDispatch,
               productDispatch,
+              showToast
             })
           }
         >

@@ -1,10 +1,11 @@
-import { HomePage } from "./home_page/HomePage";
-import { ProductPage } from "./product_page/ProductPage";
-import { WishlistPage } from "./wishlist_page/WishlistPage";
-import { CartPage } from "./cart_page/CartPage";
-import { SignIn } from "./auth/sign_in/SignIn";
-import { SignUp } from "./auth/sign_up/SignUp";
-import { ProductDetails } from "./product_details_page/ProductDetails";
-import { Checkout } from "./checkout/Checkout";
-import { UserProfile } from "./user_profile/UserProfile";
-export { HomePage, ProductPage, WishlistPage, CartPage, SignIn, SignUp , ProductDetails, Checkout, UserProfile};
+export { HomePage } from "./home_page/HomePage";
+export { ProductPage } from "./product_page/ProductPage";
+export { WishlistPage } from "./wishlist_page/WishlistPage";
+export { CartPage } from "./cart_page/CartPage";
+export { SignIn } from "./auth/sign_in/SignIn";
+export { SignUp } from "./auth/sign_up/SignUp";
+export { ProductDetails } from "./product_details_page/ProductDetails";
+export { Checkout } from "./checkout/Checkout";
+export { UserProfile } from "./user_profile/UserProfile";
+export { Page404 } from './page_404/Page404';
+

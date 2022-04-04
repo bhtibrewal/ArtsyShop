@@ -28,7 +28,6 @@ export const useUserData = () => {
       case "LOGOUT_USER":
         return { ...initialUserData };
       case "ADD_ADDRESS":
-        console.log(payload);
         return { ...state, address: { ...payload } };
       default:
         return { ...state };

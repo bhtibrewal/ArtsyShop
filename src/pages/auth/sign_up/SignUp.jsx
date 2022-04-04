@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ButtonPrimary, InputField, PasswordInput } from "../../../components";
-import { useUserContext } from "../../../context";
+import { useToast, useUserContext } from "../../../context";
 import { signUp } from "../../../services";
 
 export const SignUp = () => {
   const navigate = useNavigate();
   const { setLoginState, userDataDispatch } = useUserContext();
+  const {showToast} =useToast();
   const [inputValues, setInputValues] = useState({
     firstName: "",
     lastName: "",
@@ -45,6 +46,7 @@ export const SignUp = () => {
             data: inputValues,
             userDataDispatch,
             setLoginState,
+            showToast,
             navigate,
           });
         }}
