@@ -1,10 +1,8 @@
-import { useNavigate } from "react-router-dom";
-import { useProductContext, useToast, useUserContext } from "../../context";
-import { addToCart, addToWishlist, removeFromWishlist } from "../../services";
-import { inCart, inWhisList } from "../../utils/cart.utils";
-import { AddToWishlistButton } from "../buttons/AddToWishlistButton";
-import { ButtonPrimary } from "../buttons/ButtonPrimary";
-import { OutlineButtonPrimary } from "../buttons/OutlineButtonPrimary";
+import {
+  AddToCartButton,
+  AddToWishlistButton,
+  ButtonPrimary,
+} from "../buttons";
 import { Rating } from "../rating/Rating";
 
 export const SingleProductCard = ({ product }) => {
@@ -22,13 +20,6 @@ export const SingleProductCard = ({ product }) => {
     inStock,
     fastDelivery,
   } = product;
-  const navigate = useNavigate();
-  const { loginState } = useUserContext();
-  const { showToast } = useToast();
-  const {
-    productState: { wishList, cart },
-    productDispatch,
-  } = useProductContext();
 
   return (
     <div className="card single-product_card">
@@ -66,20 +57,7 @@ export const SingleProductCard = ({ product }) => {
         </div>
         <div className="card-actions">
           <ButtonPrimary>Buy Now</ButtonPrimary>
-          <OutlineButtonPrimary
-            onClick={() => {
-              loginState
-                ? !inCart(cart, product)
-                  ? addToCart({ product, productDispatch, showToast })
-                  : navigate("/cart")
-                : navigate("/sign-in");
-            }}
-          >
-            <i className="fa-solid fa-cart-shopping"></i>
-            <span>
-              {!inCart(cart, product) ? "Acquire This Artwork" : "Go To Cart"}
-            </span>
-          </OutlineButtonPrimary>
+          <AddToCartButton className="outline-btn-primary" product={product} />
         </div>
       </div>
     </div>

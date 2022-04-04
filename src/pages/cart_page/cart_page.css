@@ -2,21 +2,23 @@
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
-  margin: 2rem 0;
+  padding: 2rem 0;
   width: 100%;
-  padding: 0 2rem;
   gap: 2rem;
 }
 .cart-sec {
   flex-grow: 1;
   padding: 2rem 5%;
   background: var(--light-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 .empty-cart {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap:1rem;
+  gap: 1rem;
 }
 .empty-cart-gif {
   width: 50%;
@@ -28,6 +30,8 @@
   flex-direction: column;
   gap: 1rem;
   min-width: 25rem;
+  position: sticky;
+  top: 0;
 }
 .cart-price-sec > *:nth-child(1) {
   text-transform: uppercase;

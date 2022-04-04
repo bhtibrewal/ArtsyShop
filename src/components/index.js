@@ -1,11 +1,10 @@
 /* cards */
-export {ProductListingCard } from './card/ProductListingCard';
+export { ProductListingCard } from './card/ProductListingCard';
 export { BasicCard } from './card/BasicCard';
 export { SingleProductCard } from './card/SingleProductCard';
 
 /* buttons */
-export { ButtonPrimary } from './buttons/ButtonPrimary';
-export { OutlineButtonPrimary } from './buttons/OutlineButtonPrimary';
+export { ButtonPrimary, OutlineButtonPrimary, AddToWishlistButton, AddToCartButton } from './buttons';
 
 export { Sidebar } from './sidebar/Sidebar';
 export { InputField } from './input/InputField';

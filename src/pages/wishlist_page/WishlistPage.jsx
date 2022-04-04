@@ -1,29 +1,15 @@
 import "./wishlist_page.css";
-import { BasicCard, ButtonPrimary } from "../../components";
-import { useProductContext, useToast, useUserContext } from "../../context";
+import { AddToCartButton, BasicCard } from "../../components";
 import { useDocumentTitle } from "../../custom_hooks";
 import { PageHeader } from "./component/PageHeader";
-import { inCart } from "../../utils/cart.utils";
-import { addToCart } from "../../services";
-import { useNavigate } from "react-router-dom";
+import { useProductContext } from "../../context";
 
 export const WishlistPage = () => {
   useDocumentTitle("| Wshlist Page");
-  const { loginState } = useUserContext();
-  const navigate = useNavigate();
-  const { showToast } = useToast();
   const {
-    productState: { wishList, cart },
+    productState: { wishList },
     productDispatch,
   } = useProductContext();
-
-  const handleAddToCart = (isInCart, product) => {
-    if (loginState)
-      if (!isInCart) addToCart({ product, productDispatch, showToast });
-      else navigate("/cart");
-    else navigate("/sign-in");
-  };
-
   return (
     <main className="main">
       <PageHeader />
@@ -35,15 +21,9 @@ export const WishlistPage = () => {
           </p>
         ) : (
           wishList.map((product) => {
-            const isInCart = inCart(cart, product);
             return (
               <BasicCard key={product._id} product={product}>
-                <ButtonPrimary
-                  onClick={() => handleAddToCart(isInCart, product)}
-                >
-                  <i className="fa-solid fa-cart-shopping"></i>
-                  <span>{!isInCart ? "Add to Cart" : "Go To Cart"}</span>
-                </ButtonPrimary>
+                <AddToCartButton className="btn-primary" product={product} />
               </BasicCard>
             );
           })
