@@ -15,7 +15,7 @@ export const signIn = async ({
             const {
                 data: {
                     foundUser: {
-                        firstName, lastName, email, createdAt, cart, wishlist
+                        firstName, lastName, email, createdAt, cart, wishlist, addresses
                     },
                     encodedToken
                 }
@@ -23,14 +23,14 @@ export const signIn = async ({
             userDataDispatch({
                 type: "LOGIN_USER",
                 payload: {
-                    firstName, lastName, email, createdAt, cart, wishlist
+                    firstName, lastName, email, createdAt, cart, wishlist, addresses
                 }
             })
             setLoginState(true);
             localStorage.setItem("token", encodedToken);
             axios.defaults.headers.common["authorization"] = encodedToken;
             localStorage.setItem('user', JSON.stringify({
-                firstName, lastName, email, createdAt
+                firstName, lastName, email, createdAt, addresses
             }))
             productDispatch({ type: "ADD_CART_WISHLIST", payload: { cart, wishlist } });
             navigate(-1);

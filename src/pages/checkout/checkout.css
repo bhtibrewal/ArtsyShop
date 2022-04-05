@@ -1,0 +1,20 @@
+.address-management {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+.address-card {
+  padding: 1rem;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  background-color: var(--light-text);
+}
+.card-delete-btn {
+  color: var(--primary-text);
+}
+.address-list {
+  flex-direction: column;
+  display: flex;
+  gap: 2rem;
+}

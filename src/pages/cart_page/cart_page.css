@@ -24,7 +24,7 @@
   width: 50%;
 }
 .cart-price-sec {
-  padding: 2rem;
+  padding: 4rem;
   background: var(--light-bg);
   display: flex;
   flex-direction: column;
