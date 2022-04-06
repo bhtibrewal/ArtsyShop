@@ -63,7 +63,7 @@ function App() {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
-      <Toast position={"top-right"} />
+      <Toast position={"top-left"} />
     </div>
   );
 }

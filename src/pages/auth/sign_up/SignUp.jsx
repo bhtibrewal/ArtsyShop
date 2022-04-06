@@ -102,7 +102,7 @@ export const SignUp = () => {
         </label>
         <ButtonPrimary
           type="submit"
-          className={` ${disabled && "diabled-btn"}`}
+          className={` ${disabled && "disabled-btn"}`}
         >
           <span>Create Account</span>
           <i className="fa-solid fa-arrow-right" />

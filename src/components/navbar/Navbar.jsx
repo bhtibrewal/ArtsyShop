@@ -6,10 +6,8 @@ export const Navbar = () => {
     <header className="arstyShop-header header">
       <div className="flex-align-center">
         <LeftNav />
-        <Search className="web-search" />
         <RightNav />
       </div>
-      <Search className="mobile-search" />
     </header>
   );
 };

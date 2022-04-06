@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
-
 import { AddToWishlistButton } from "../buttons/AddToWishlistButton";
 import { Rating } from "../rating/Rating";
+import { QuantitySection } from "./components/QuantitySection";
 
 export const BasicCard = ({ product, children }) => {
   const {
@@ -12,6 +11,7 @@ export const BasicCard = ({ product, children }) => {
     original_price,
     price: item_price,
     rating: item_rating,
+    qty,
     desc: item_desc,
   } = product;
 
@@ -32,6 +32,7 @@ export const BasicCard = ({ product, children }) => {
           <div className="price-sec">
             <span className="body-l">Rs.{item_price}</span>
             <span className="strike-price">Rs.{original_price}</span>
+            {qty && <QuantitySection _id={_id} qty={qty} />}
           </div>
           <div className="card-actions">{children}</div>
         </div>
