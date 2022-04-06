@@ -13,10 +13,12 @@ export const Toast = ({ position }) => {
   }, [toastList]);
   const getIcon = (type) => {
     switch (type) {
+      case "primary":
+        return "fa-circle-info";
       case "success":
         return "fa-circle-check";
       case "error":
-        return "fa-circle-exclamation"
+        return "fa-circle-exclamation";
     }
   };
   return (

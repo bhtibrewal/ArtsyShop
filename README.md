@@ -18,6 +18,8 @@ Build with React
 - Address Management
 - Private Routing
 - Toasts for success/ error
+- Keep user logged in
+- Apply Coupons
 - Responsive Sidebar
 - Dark-Light theme
 

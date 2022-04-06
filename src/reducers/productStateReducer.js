@@ -17,6 +17,8 @@ export const productStateReducer = (state, { type, payload }) => {
       return { ...state, wishList: [...payload] };
     case "REMOVE_FROM_WISHLIST":
       return { ...state, wishList: [...payload] };
+    case 'SET_COUPON_DISCOUNT':
+      return { ...state, couponDiscount: payload };
     default:
       return { ...state };
   }

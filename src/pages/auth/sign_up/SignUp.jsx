@@ -7,27 +7,28 @@ import { signUp } from "../../../services";
 export const SignUp = () => {
   const navigate = useNavigate();
   const { setLoginState, userDataDispatch } = useUserContext();
-  const {showToast} =useToast();
+  const { showToast } = useToast();
   const [inputValues, setInputValues] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
   });
+  const { firstName, lastName, email, password } = inputValues;
   const [agreeToTerms, setAgreeToTerms] = useState(false);
 
   /* email and password validation */
   var passwordPattern =
     /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{9,16}$/;
-  const validPassword = passwordPattern.test(inputValues.password);
+  const validPassword = passwordPattern.test(password);
 
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-  const validEmail = emailPattern.test(inputValues.email);
+  const validEmail = emailPattern.test(email);
 
   const canSubmit = () => {
     return (
-      inputValues.firstName !== "" &&
-      inputValues.lastName !== "" &&
+      firstName !== "" &&
+      lastName !== "" &&
       validEmail &&
       validPassword
     );
@@ -41,43 +42,46 @@ export const SignUp = () => {
       <form
         className="flex-col signup-sec"
         onSubmit={(e) => {
-          e.preventDefault();
-          signUp({
-            data: inputValues,
-            userDataDispatch,
-            setLoginState,
-            showToast,
-            navigate,
-          });
+          if (!disabled) {
+            e.preventDefault();
+            signUp({
+              data: inputValues,
+              userDataDispatch,
+              setLoginState,
+              showToast,
+              navigate,
+            });
+          }
         }}
       >
-        <i className="primary fa-regular fa-user fa-5x"></i>
         <p className="body-l">Create my account on Artsy Shop!</p>
 
         <InputField
-          value={inputValues.firstName}
+          value={firstName}
           onChange={(e) =>
             setInputValues({ ...inputValues, firstName: e.target.value })
           }
           label={"First Name"}
         />
         <InputField
-          value={inputValues.lastName}
+          value={lastName}
           onChange={(e) =>
             setInputValues({ ...inputValues, lastName: e.target.value })
           }
           label={"Last Name"}
         />
         <InputField
-          value={inputValues.email}
+          value={email}
           onChange={(e) =>
             setInputValues({ ...inputValues, email: e.target.value })
           }
           label={"Email"}
         />
-        {!validEmail && <p className="error-msg">Enter a valid email.</p>}
+        {!validEmail && email !== "" && (
+          <p className="error-msg">Enter a valid email.</p>
+        )}
         <PasswordInput
-          value={inputValues.password}
+          value={password}
           onChange={(e) =>
             setInputValues({ ...inputValues, password: e.target.value })
           }
@@ -95,9 +99,17 @@ export const SignUp = () => {
           />
           <span className="checkbox-text">
             By registering, I accept the
-            <Link to="me" className="primary">
+            <p
+              onClick={() =>
+                showToast({
+                  title: "Coming Soon",
+                  type: "primary",
+                })
+              }
+              className="primary"
+            >
               General terms and conditions.
-            </Link>
+            </p>
           </span>
         </label>
         <ButtonPrimary

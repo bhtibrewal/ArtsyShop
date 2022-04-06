@@ -7,7 +7,7 @@ export const signIn = async ({
     productDispatch,
     setLoginState,
     showToast,
-    navigate
+    keepMeLoggedIn
 }) => {
     try {
         const res = await axios.post("/api/auth/login", data);
@@ -27,14 +27,15 @@ export const signIn = async ({
                 }
             })
             setLoginState(true);
-            localStorage.setItem("token", encodedToken);
             axios.defaults.headers.common["authorization"] = encodedToken;
-            localStorage.setItem('user', JSON.stringify({
-                firstName, lastName, email, createdAt, addresses
-            }))
             productDispatch({ type: "ADD_CART_WISHLIST", payload: { cart, wishlist } });
-            navigate(-1);
             showToast({ title: 'logged in successfully', type: 'success' });
+            if (keepMeLoggedIn) {
+                localStorage.setItem("token", encodedToken);
+                localStorage.setItem('user', JSON.stringify({
+                    firstName, lastName, email, createdAt, addresses
+                }))
+            }
         }
     } catch (e) {
         setSigninError(e.response.data.errors);

@@ -11,7 +11,7 @@ const ThemeProvider = ({ children }) => {
     localStorage.setItem("mode", darkMode);
 
     return () => {
-      localStorage.clear("mode");
+      localStorage.removeItem("mode");
     };
   }, [darkMode]);
 

@@ -2,13 +2,13 @@ import "../cart_page/cart_page.css";
 import "../user_profile/user_profile.css";
 import "./checkout.css";
 import { useNavigate } from "react-router-dom";
-import { useUserContext } from "../../context";
+import { useToast, useUserContext } from "../../context";
 import { TotalBill } from "../cart_page/component/TotalBill";
 import { AddressForm } from "./components/AddressForm";
 import { AddressesList } from "./components/AddressesList";
 
 export const Checkout = () => {
-  const navigate = useNavigate();
+  const { showToast } = useToast();
   const {
     userData: { firstName, lastName, createdAt },
   } = useUserContext();
@@ -31,7 +31,14 @@ export const Checkout = () => {
           {/* list */}
           <AddressesList />
         </div>
-        <TotalBill onClick={() => navigate("/payment")} />
+        <TotalBill
+          onClick={() =>
+            showToast({
+              title: "Payment Integration coming soon",
+              type: "primary",
+            })
+          }
+        />
       </section>
     </main>
   );

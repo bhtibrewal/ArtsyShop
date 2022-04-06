@@ -8,7 +8,7 @@ export const LoggedInUser = () => {
   const { showToast } = useToast();
   return (
     <div className="user">
-      <div className="avatar-text avatar-s">{`${userData.firstName[0]}${userData.lastName[0]}`}</div>
+      <div className="avatar-text avatar-s">{`${userData.firstName[0].toUpperCase()}${userData.lastName[0].toUpperCase()}`}</div>
       <div className="user-dropdown flex-col">
         <Link to="/user-profile" className="flex-align-center">
           <span>My Account</span>
@@ -25,7 +25,7 @@ export const LoggedInUser = () => {
               setLoginState,
               userDataDispatch,
               productDispatch,
-              showToast
+              showToast,
             })
           }
         >
