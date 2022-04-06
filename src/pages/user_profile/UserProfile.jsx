@@ -1,8 +1,7 @@
 import { useToast, useUserContext } from "../../context";
 import { ButtonPrimary } from "../../components";
 import { useDocumentTitle } from "../../custom_hooks";
-import { AddressForm } from "../checkout/components/AddressForm";
-import { AddressesList } from "../checkout/components/AddressesList";
+import { AddressesList, AddressForm } from "../checkout/components";
 
 export const UserProfile = () => {
   const {

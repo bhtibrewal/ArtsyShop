@@ -1,11 +1,9 @@
 import "../cart_page/cart_page.css";
 import "../user_profile/user_profile.css";
 import "./checkout.css";
-import { useNavigate } from "react-router-dom";
 import { useToast, useUserContext } from "../../context";
 import { TotalBill } from "../cart_page/component/TotalBill";
-import { AddressForm } from "./components/AddressForm";
-import { AddressesList } from "./components/AddressesList";
+import { AddressesList, AddressForm } from "./components";
 
 export const Checkout = () => {
   const { showToast } = useToast();
