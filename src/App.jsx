@@ -35,12 +35,12 @@ export const WithNavbar = () => {
 };
 
 function App() {
-  const { loginState } = useUserContext();
+  const { isUserLoggedIn } = useUserContext();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
-    privateRouting({ loginState, pathname, navigate });
-  }, [pathname, loginState]);
+    privateRouting({ isUserLoggedIn, pathname, navigate });
+  }, [pathname, isUserLoggedIn]);
   const { darkMode } = useTheme();
 
   return (
@@ -63,7 +63,7 @@ function App() {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
-      <Toast position={"top-right"} />
+      <Toast position={"top-left"} />
     </div>
   );
 }

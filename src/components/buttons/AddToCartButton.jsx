@@ -5,7 +5,7 @@ import { inCart } from "../../utils/cart.utils";
 
 export const AddToCartButton = ({ className, product }) => {
   const navigate = useNavigate();
-  const { loginState } = useUserContext();
+  const { isUserLoggedIn } = useUserContext();
   const { showToast } = useToast();
   const {
     productState: { cart },
@@ -13,7 +13,7 @@ export const AddToCartButton = ({ className, product }) => {
   } = useProductContext();
   const isInCart = inCart(cart, product);
   const handleAddToCart = (product) => {
-    if (loginState)
+    if (isUserLoggedIn)
       if (!isInCart) addToCart({ product, productDispatch, showToast });
       else navigate("/cart");
     else navigate("/sign-in");

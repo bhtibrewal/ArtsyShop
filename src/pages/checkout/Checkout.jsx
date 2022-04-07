@@ -1,14 +1,12 @@
 import "../cart_page/cart_page.css";
 import "../user_profile/user_profile.css";
 import "./checkout.css";
-import { useNavigate } from "react-router-dom";
-import { useUserContext } from "../../context";
+import { useToast, useUserContext } from "../../context";
 import { TotalBill } from "../cart_page/component/TotalBill";
-import { AddressForm } from "./components/AddressForm";
-import { AddressesList } from "./components/AddressesList";
+import { AddressesList, AddressForm } from "./components";
 
 export const Checkout = () => {
-  const navigate = useNavigate();
+  const { showToast } = useToast();
   const {
     userData: { firstName, lastName, createdAt },
   } = useUserContext();
@@ -19,7 +17,7 @@ export const Checkout = () => {
         <div className="avatar-text avatar-m">{`${firstName[0]}${lastName[0]}`}</div>
         <h1>Hello {firstName}</h1>
         <p className="body-l">
-          Artsy collector since {createdAt.split("T")[0]}
+          Artsy collector since {createdAt?.split("T")[0]}
         </p>
       </section>
       <h1>Secure Checkout in just 2 steps</h1>
@@ -31,7 +29,14 @@ export const Checkout = () => {
           {/* list */}
           <AddressesList />
         </div>
-        <TotalBill onClick={() => navigate("/payment")} />
+        <TotalBill
+          onClick={() =>
+            showToast({
+              title: "Payment Integration coming soon",
+              type: "primary",
+            })
+          }
+        />
       </section>
     </main>
   );

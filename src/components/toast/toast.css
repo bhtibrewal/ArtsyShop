@@ -1,6 +1,6 @@
 .toast {
   padding: 1.6rem;
-  max-width: 100rem;
+  max-width: 25rem;
   display: flex;
   align-items: center;
   border-radius: 0.4rem;
@@ -9,13 +9,14 @@
 }
 .toast-container {
   position: absolute;
+  z-index: 999;
 }
 .toast-container.bottom-right {
   bottom: 5%;
   right: 5%;
 }
 .toast-container.top-right {
-  top: 5%;
+  top: 10%;
   right: 5%;
 }
 .toast-container.bottom-left {
@@ -23,7 +24,7 @@
   left: 5%;
 }
 .toast-container.top-left {
-  top: 5%;
+  top: 10%;
   left: 5%;
 }
 .toast-icon {

@@ -23,6 +23,7 @@ export const HomePage = () => {
       <CategoriesSection />
 
       {/* collection section  */}
+      {/* no functionality in this section for now */}
       <CollectionSection
         collection_bg_url2={collection_bg_url2}
         collection_bg_url={collection_bg_url}

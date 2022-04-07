@@ -1,6 +1,6 @@
 import "../auth.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useProductContext, useToast, useUserContext } from "../../../context";
 import { useDocumentTitle } from "../../../custom_hooks";
 import {
@@ -23,26 +23,33 @@ export const SignIn = () => {
     email: "adarshbalak@gmail.com",
     password: "adarshBalaki123",
   };
+  const [keepMeLoggedIn, setKeepMeLoggedIn] = useState(false);
 
   const { productDispatch } = useProductContext();
-  const { setLoginState, userDataDispatch } = useUserContext();
-  const {showToast} =useToast();
-  
+  const { setIsUserLoggedIn, userDataDispatch } = useUserContext();
+  const { showToast } = useToast();
+  useEffect(() => {
+    showToast({
+      title: "Click on Keep me Logged in before submitting to stay logged in",
+      type: "primary",
+    });
+    return () => {};
+  }, []);
+
   return (
     <main className="main center">
       <form
         className="flex-col signup-sec"
         onSubmit={(e) => {
           e.preventDefault();
-          console.log("this");
           signIn({
             setSigninError,
             data: inputValues,
             productDispatch,
             userDataDispatch,
-            setLoginState,
+            setIsUserLoggedIn,
             showToast,
-            navigate,
+            keepMeLoggedIn,
           });
         }}
       >
@@ -63,7 +70,11 @@ export const SignIn = () => {
           label={"Password"}
         />
         <label className="flex-align-center">
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            checked={keepMeLoggedIn}
+            onChange={() => setKeepMeLoggedIn((prev) => !prev)}
+          />
           <span className="checkbox-text"> Keep me logged in. </span>
         </label>
         <ButtonPrimary type="submit">
@@ -73,9 +84,17 @@ export const SignIn = () => {
         <OutlineButtonPrimary onClick={() => setInputValues(guestLogin)}>
           Login as Guest
         </OutlineButtonPrimary>
-        <Link to="me" className="link-text-primary">
+        <p
+          onClick={() =>
+            showToast({
+              title: "Coming Soon",
+              type: "primary",
+            })
+          }
+          className="link-text-primary"
+        >
           Forgot your password?
-        </Link>
+        </p>
         <div>
           <p className="body-md">Still don't have an account ?</p>
           <div

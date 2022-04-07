@@ -1,20 +1,22 @@
-import { useUserContext } from "../../context";
+import { useToast, useUserContext } from "../../context";
 import { ButtonPrimary } from "../../components";
 import { useDocumentTitle } from "../../custom_hooks";
+import { AddressesList, AddressForm } from "../checkout/components";
 
 export const UserProfile = () => {
   const {
     userData: { firstName, lastName, createdAt },
   } = useUserContext();
+  const { showToast } = useToast();
   useDocumentTitle(`| ${firstName}`);
   return (
     <main className="main user-page">
       {/* <!-- header section --> */}
       <section className="sec user-header-sec flex-col">
-        <div className="avatar-text avatar-m">{`${firstName[0]}${lastName[0]}`}</div>
+        <div className="avatar-text avatar-m">{`${firstName[0]?.toUpperCase()}${lastName[0]?.toUpperCase()}`}</div>
         <h1>Hello {firstName}</h1>
         <p className="body-l">
-          Artsy collector since {createdAt.split("T")[0]}
+          Artsy collector since {createdAt?.split("T")[0]}
         </p>
       </section>
       <h1>My Account</h1>
@@ -22,26 +24,12 @@ export const UserProfile = () => {
       {/* <!-- grid  --> */}
       <section className="user-grid">
         {/* <!-- contact details from --> */}
-        <form className="form sec contact-dets">
-          <div className="flex-col inputs">
-            <h2>User Contact Details</h2>
-            <label className="artsy-input">
-              <input type="text" />
-              <span className="input-label">First Name</span>
-            </label>
-            <label className="artsy-input">
-              <input type="text" />
-              <span className="input-label">Email</span>
-            </label>
-            <label className="artsy-input">
-              <input type="text" />
-              <span className="input-label">Phone Number</span>
-            </label>
-            <button type="submit" className="btn btn-primary">
-              Update
-            </button>
-          </div>
-        </form>
+        <div className="address-management sec">
+          {/* form */}
+          <AddressForm />
+          {/* list */}
+          <AddressesList />
+        </div>
 
         {/* <!-- payment details from --> */}
         <div className="sec flex-col payment-dets">
@@ -49,7 +37,16 @@ export const UserProfile = () => {
           <p className="body-l">My Card</p>
           <i className="fa-solid fa-credit-card primary-text fa-8x"></i>
           <p>Add a card for future use.</p>
-          <ButtonPrimary>add a card</ButtonPrimary>
+          <ButtonPrimary
+            onClick={() =>
+              showToast({
+                title: "Payment Integration coming soon",
+                type: "primary",
+              })
+            }
+          >
+            add a card
+          </ButtonPrimary>
         </div>
       </section>
     </main>

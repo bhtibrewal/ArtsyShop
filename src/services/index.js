@@ -10,6 +10,7 @@ export { removeFromWishlist } from "./wishlist/removeFromWishlist";
 /* cart */
 export { addToCart } from "./cart/addToCart";
 export { removeFromCart } from "./cart/removeFromCart";
+export {updateCartQuantity} from './cart/updateCartQuantity';
 
 /* data */
 export { fetchCategories } from "./fetch_data/fetchCategories";
