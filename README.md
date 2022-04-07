@@ -19,7 +19,7 @@ Build with React
 - Address Management
 - Private Routing
 - Toasts for success/ error
-- Keep user logged in
+- Keep user logged in (only if you select the checkbox before you will remain logged in for a refresh)
 - Apply Coupons
 - Responsive Sidebar
 - Dark-Light theme
