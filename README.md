@@ -6,6 +6,7 @@ Live Preview: [Artsy Shop](https://artsyshop.netlify.app)
 An e-commerce selling exquisite and unique paintings.
 Build with React
 
+![recording](https://netlify-cocoon.netlify.app/.netlify/functions/fetch?code=307&path=eyJzaXRlX2lkIjoiNDBkYTk2MDAtNGEzMy00YWIxLWE5MDAtMjllMGI3NTliNWQwIiwiZGVwbG95X2lkIjoiNjI0ZWM2ZTA5NjZmMjQwMDA5NmMyZWZlIiwiaWQiOiI0MDJlY2Y3ZS1iMTk4LTQwMTktOWE2OS0xODZlOWEyNDk4YTgifQ==)
 
 ### Features:
 - Authentication
