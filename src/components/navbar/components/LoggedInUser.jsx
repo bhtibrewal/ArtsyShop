@@ -3,7 +3,7 @@ import { useProductContext, useToast, useUserContext } from "../../../context";
 import { logOut } from "../../../services";
 
 export const LoggedInUser = () => {
-  const { setLoginState, userData, userDataDispatch } = useUserContext();
+  const { setIsUserLoggedIn, userData, userDataDispatch } = useUserContext();
   const { productDispatch } = useProductContext();
   const { showToast } = useToast();
   return (
@@ -22,7 +22,7 @@ export const LoggedInUser = () => {
           className="flex-align-center"
           onClick={() =>
             logOut({
-              setLoginState,
+              setIsUserLoggedIn,
               userDataDispatch,
               productDispatch,
               showToast,

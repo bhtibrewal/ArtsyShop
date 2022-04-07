@@ -3,13 +3,15 @@ import { useProductContext, useTheme, useUserContext } from "../../../context";
 import { LoggedInUser } from "./LoggedInUser";
 
 export const RightNav = () => {
-  const { loginState } = useUserContext();
+  const { isUserLoggedIn } = useUserContext();
   const navigate = useNavigate();
-  const { productState:{ wishList, cart } } = useProductContext();
-  const {darkMode, setDarkMode} = useTheme();
+  const {
+    productState: { wishList, cart },
+  } = useProductContext();
+  const { darkMode, setDarkMode } = useTheme();
   return (
     <div className="right-side">
-      {loginState ? (
+      {isUserLoggedIn ? (
         <LoggedInUser />
       ) : (
         <div onClick={() => navigate("/sign-in")} className="user">
@@ -19,7 +21,7 @@ export const RightNav = () => {
       <div
         className="wishlist"
         onClick={() =>
-          loginState ? navigate("/wishlist") : navigate("/sign-in")
+          isUserLoggedIn ? navigate("/wishlist") : navigate("/sign-in")
         }
       >
         <i className="fa-regular fa-heart fa-xl"></i>
@@ -28,13 +30,17 @@ export const RightNav = () => {
 
       <div
         className="cart"
-        onClick={() => (loginState ? navigate("/cart") : navigate("/sign-in"))}
+        onClick={() =>
+          isUserLoggedIn ? navigate("/cart") : navigate("/sign-in")
+        }
       >
         <i className="fa-solid fa-bag-shopping fa-xl"></i>
         <span className="items">{cart.length}</span>
       </div>
-      <div onClick= {()=>setDarkMode(prev=>!prev)}>
-        <i className={`fa-solid ${darkMode? "fa-cloud-moon": "fa-cloud-sun"}`}/>
+      <div onClick={() => setDarkMode((prev) => !prev)}>
+        <i
+          className={`fa-solid ${darkMode ? "fa-cloud-moon" : "fa-cloud-sun"}`}
+        />
       </div>
     </div>
   );

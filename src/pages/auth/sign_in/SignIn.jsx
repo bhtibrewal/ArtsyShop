@@ -26,7 +26,7 @@ export const SignIn = () => {
   const [keepMeLoggedIn, setKeepMeLoggedIn] = useState(false);
 
   const { productDispatch } = useProductContext();
-  const { setLoginState, userDataDispatch } = useUserContext();
+  const { setIsUserLoggedIn, userDataDispatch } = useUserContext();
   const { showToast } = useToast();
   useEffect(() => {
     showToast({
@@ -47,7 +47,7 @@ export const SignIn = () => {
             data: inputValues,
             productDispatch,
             userDataDispatch,
-            setLoginState,
+            setIsUserLoggedIn,
             showToast,
             keepMeLoggedIn,
           });

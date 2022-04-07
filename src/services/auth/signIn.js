@@ -5,7 +5,7 @@ export const signIn = async ({
     data,
     userDataDispatch,
     productDispatch,
-    setLoginState,
+    setIsUserLoggedIn,
     showToast,
     keepMeLoggedIn
 }) => {
@@ -26,7 +26,7 @@ export const signIn = async ({
                     firstName, lastName, email, createdAt, cart, wishlist, addresses
                 }
             })
-            setLoginState(true);
+            setIsUserLoggedIn(true);
             axios.defaults.headers.common["authorization"] = encodedToken;
             productDispatch({ type: "ADD_CART_WISHLIST", payload: { cart, wishlist } });
             showToast({ title: 'logged in successfully', type: 'success' });

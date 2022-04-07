@@ -6,7 +6,7 @@ import { signUp } from "../../../services";
 
 export const SignUp = () => {
   const navigate = useNavigate();
-  const { setLoginState, userDataDispatch } = useUserContext();
+  const { setIsUserLoggedIn, userDataDispatch } = useUserContext();
   const { showToast } = useToast();
   const [inputValues, setInputValues] = useState({
     firstName: "",
@@ -26,12 +26,7 @@ export const SignUp = () => {
   const validEmail = emailPattern.test(email);
 
   const canSubmit = () => {
-    return (
-      firstName !== "" &&
-      lastName !== "" &&
-      validEmail &&
-      validPassword
-    );
+    return firstName !== "" && lastName !== "" && validEmail && validPassword;
   };
   /* if agree to terms and can submit then set disabled false */
   const isDisabled = () => !(agreeToTerms && canSubmit());
@@ -47,7 +42,7 @@ export const SignUp = () => {
             signUp({
               data: inputValues,
               userDataDispatch,
-              setLoginState,
+              setIsUserLoggedIn,
               showToast,
               navigate,
             });

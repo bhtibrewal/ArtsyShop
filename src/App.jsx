@@ -35,12 +35,12 @@ export const WithNavbar = () => {
 };
 
 function App() {
-  const { loginState } = useUserContext();
+  const { isUserLoggedIn } = useUserContext();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
-    privateRouting({ loginState, pathname, navigate });
-  }, [pathname, loginState]);
+    privateRouting({ isUserLoggedIn, pathname, navigate });
+  }, [pathname, isUserLoggedIn]);
   const { darkMode } = useTheme();
 
   return (

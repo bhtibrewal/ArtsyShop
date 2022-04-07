@@ -1,5 +1,5 @@
-export const logOut = ({ setLoginState, userDataDispatch, productDispatch, showToast }) => {
-    setLoginState(false);
+export const logOut = ({ setIsUserLoggedIn, userDataDispatch, productDispatch, showToast }) => {
+    setIsUserLoggedIn(false);
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     productDispatch({ type: "RESET_CART_WISHLIST" });

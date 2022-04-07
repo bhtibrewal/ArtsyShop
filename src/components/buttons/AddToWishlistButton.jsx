@@ -7,14 +7,14 @@ export const AddToWishlistButton = ({ product }) => {
   const { _id } = product;
   const navigate = useNavigate();
   const { showToast } = useToast();
-  const { loginState } = useUserContext();
+  const { isUserLoggedIn } = useUserContext();
   const {
     productState: { wishList },
     productDispatch,
   } = useProductContext();
   const isAddedToWishlist = inWhisList(wishList, product);
   const handleAddToWishlist = () => {
-    if (loginState)
+    if (isUserLoggedIn)
       if (isAddedToWishlist)
         removeFromWishlist({ _id, productDispatch, showToast });
       else addToWishlist({ product, productDispatch, showToast });
