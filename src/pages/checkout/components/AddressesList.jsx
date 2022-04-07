@@ -30,7 +30,7 @@ export const AddressesList = () => {
                       if (element !== "_id")
                         return (
                           <p key={element}>
-                            <strong className="capitalize">{element.split('_').join(' ')}</strong>:{" "}
+                            <strong className="capitalize">{element?.split('_').join(' ')}</strong>:{" "}
                             {address[element]}
                           </p>
                         );

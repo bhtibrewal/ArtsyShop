@@ -17,7 +17,7 @@ export const Checkout = () => {
         <div className="avatar-text avatar-m">{`${firstName[0]}${lastName[0]}`}</div>
         <h1>Hello {firstName}</h1>
         <p className="body-l">
-          Artsy collector since {createdAt.split("T")[0]}
+          Artsy collector since {createdAt?.split("T")[0]}
         </p>
       </section>
       <h1>Secure Checkout in just 2 steps</h1>

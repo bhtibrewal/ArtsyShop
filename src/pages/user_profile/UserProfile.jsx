@@ -13,10 +13,10 @@ export const UserProfile = () => {
     <main className="main user-page">
       {/* <!-- header section --> */}
       <section className="sec user-header-sec flex-col">
-        <div className="avatar-text avatar-m">{`${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}`}</div>
+        <div className="avatar-text avatar-m">{`${firstName[0]?.toUpperCase()}${lastName[0]?.toUpperCase()}`}</div>
         <h1>Hello {firstName}</h1>
         <p className="body-l">
-          Artsy collector since {createdAt.split("T")[0]}
+          Artsy collector since {createdAt?.split("T")[0]}
         </p>
       </section>
       <h1>My Account</h1>

@@ -47,7 +47,7 @@ export const AddressForm = () => {
                 }
               />
               <span className="input-label capitalize">
-                {element.split("_").join(" ")}
+                {element?.split("_").join(" ")}
               </span>
             </label>
           );
