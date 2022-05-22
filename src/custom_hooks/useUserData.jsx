@@ -37,6 +37,5 @@ export const useUserData = () => {
     userDataReducer,
     initialUserData
   );
-  console.log(userData);
   return { isUserLoggedIn, setIsUserLoggedIn, userData, userDataDispatch };
 };

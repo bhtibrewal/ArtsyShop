@@ -4,12 +4,14 @@ import "./checkout.css";
 import { useToast, useUserContext } from "../../context";
 import { TotalBill } from "../cart_page/component/TotalBill";
 import { AddressesList, AddressForm } from "./components";
+import { useState } from "react";
 
 export const Checkout = () => {
   const { showToast } = useToast();
   const {
     userData: { firstName, lastName, createdAt },
   } = useUserContext();
+  const [showAddressForm, setShowAddressForm] = useState(false);
 
   return (
     <main className="main user-page">
@@ -24,8 +26,15 @@ export const Checkout = () => {
 
       <section className="user-grid">
         <div className="address-management sec">
+          <p className="body-l">Shipping and Billing Address</p>
           {/* form */}
-          <AddressForm />
+          {!showAddressForm ? (
+            <p onClick={() => setShowAddressForm((prev) => !prev)}>
+              <i className="fa-solid fa-plus"></i> Add New Address
+            </p>
+          ) : (
+            <AddressForm setShowAddressForm={setShowAddressForm} />
+          )}
           {/* list */}
           <AddressesList />
         </div>
