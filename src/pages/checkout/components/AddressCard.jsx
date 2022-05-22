@@ -29,8 +29,8 @@ export const AddressCard = ({ address }) => {
           >
             <i className="fa-solid fa-trash"></i>
           </button>
-          <input id="adress-select" type="radio" name="address" />
-          <label htmlFor="adress-select" className="address-card-content">
+        
+          <div className="address-card-content">
             {Object.keys(address).map((element) => {
               if (element !== "_id")
                 return (
@@ -45,7 +45,7 @@ export const AddressCard = ({ address }) => {
             <div onClick={() => setAdressEditable(true)}>
               <i className="fa-regular fa-pen-to-square"></i>
             </div>
-          </label>
+          </div>
         </>
       )}
     </div>

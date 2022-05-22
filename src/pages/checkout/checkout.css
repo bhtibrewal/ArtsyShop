@@ -12,6 +12,7 @@
 }
 .card-delete-btn {
   color: var(--primary-text);
+  align-self: center;
 }
 .address-list {
   flex-direction: column;
