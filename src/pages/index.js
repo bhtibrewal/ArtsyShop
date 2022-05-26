@@ -6,6 +6,7 @@ export { SignIn } from "./auth/sign_in/SignIn";
 export { SignUp } from "./auth/sign_up/SignUp";
 export { ProductDetails } from "./product_details_page/ProductDetails";
 export { Checkout } from "./checkout/Checkout";
+export {OrderPage} from './order_page/OrderPage';
 export { UserProfile } from "./user_profile/UserProfile";
 export { Page404 } from './page_404/Page404';
 

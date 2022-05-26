@@ -8,7 +8,7 @@ export const useUserData = () => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(initialisUserLoggedIn);
   const localUserData = JSON.parse(localStorage.getItem("user"));
   const initialUserData = localUserData
-    ? { ...localUserData, addresses: [] }
+    ? { ...localUserData }
     : {
         firstName: "",
         lastName: "",
@@ -37,5 +37,6 @@ export const useUserData = () => {
     userDataReducer,
     initialUserData
   );
+  console.log(userData);
   return { isUserLoggedIn, setIsUserLoggedIn, userData, userDataDispatch };
 };

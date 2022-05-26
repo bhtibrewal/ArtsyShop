@@ -12,6 +12,7 @@ import {
   CartPage,
   Checkout,
   HomePage,
+  OrderPage,
   Page404,
   ProductDetails,
   ProductPage,
@@ -20,10 +21,9 @@ import {
   UserProfile,
   WishlistPage,
 } from "./pages";
-import MockAPI from "./backend/Mockman";
-import { ProductFilterProvider, useTheme, useUserContext } from "./context";
+import { useTheme, useUserContext } from "./context";
 import { privateRouting } from "./utils/privateRouting";
-import { Footer, Toast } from "./components";
+import { Toast } from "./components";
 
 export const WithNavbar = () => {
   return (
@@ -56,7 +56,7 @@ function App() {
           <Route path="/wishlist" element={<WishlistPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/mockman" element={<MockAPI />} />
+          <Route path="/order-details" element={<OrderPage/>}/>
         </Route>
 
         <Route path="/sign-up" element={<SignUp />} />

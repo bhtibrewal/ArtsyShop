@@ -10,6 +10,9 @@
   justify-content: space-between;
   background-color: var(--light-text);
 }
+.selected-address{
+  border: thin solid var(--secondary-color);
+}
 .card-delete-btn {
   color: var(--primary-text);
   align-self: center;

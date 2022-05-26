@@ -13,6 +13,7 @@ export const Checkout = () => {
   } = useUserContext();
   const [showAddressForm, setShowAddressForm] = useState(false);
 
+  
   return (
     <main className="main user-page">
       <section className="sec user-header-sec flex-col">
@@ -38,13 +39,8 @@ export const Checkout = () => {
           {/* list */}
           <AddressesList />
         </div>
-        <TotalBill
-          onClick={() =>
-            showToast({
-              title: "Payment Integration coming soon",
-              type: "primary",
-            })
-          }
+        <TotalBill 
+          
         />
       </section>
     </main>

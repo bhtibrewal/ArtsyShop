@@ -52,7 +52,7 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       users.forEach((item) =>
-        server.create("user", { ...item, cart: [], wishlist: [], addresses: [] })
+        server.create("user", { ...item, cart: [], wishlist: [],  })
       );
 
       categories.forEach((item) => server.create("category", { ...item }));
@@ -80,6 +80,7 @@ export function makeServer({ environment = "development" } = {}) {
         "/user/cart/:productId",
         removeItemFromCartHandler.bind(this)
       );
+      // this.delete("/user/cart", resetCart.bind(this));
 
       // wishlist routes (private)
       this.get("/user/wishlist", getWishlistItemsHandler.bind(this));
