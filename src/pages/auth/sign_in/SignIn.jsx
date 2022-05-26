@@ -20,8 +20,8 @@ export const SignIn = () => {
     password: "",
   });
   const guestLogin = {
-    email: "adarshbalak@gmail.com",
-    password: "adarshBalaki123",
+    email: "guestUser@gmail.com",
+    password: "guestUser123",
   };
   const [keepMeLoggedIn, setKeepMeLoggedIn] = useState(false);
 

@@ -15,7 +15,7 @@ export const CollectionItem = ({ bg_img, children }) => {
     >
       <div className="collection-image">
         <img
-          alt="collection image "
+          alt="collection"
           className="collection-image"
           src={bg_img}
         />

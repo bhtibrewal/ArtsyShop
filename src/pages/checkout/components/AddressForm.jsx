@@ -2,15 +2,20 @@ import { useState } from "react";
 import { ButtonPrimary } from "../../../components";
 import { useToast, useUserContext } from "../../../context";
 import { addNewAddress } from "../../../services";
+import { updateAddress } from "../../../services/address/updateAddress";
 
-export const AddressForm = () => {
-  const {
-    userData: { addresses },
-    userDataDispatch,
-  } = useUserContext();
+export const AddressForm = ({
+  setShowAddressForm,
+  addressId,
+  addressToEdit,
+  setAdressEditable,
+}) => {
+  const { userDataDispatch } = useUserContext();
   const { showToast } = useToast();
   const addressEntries = { street: "", city: "", country: "", zip_code: "" };
-  const [inputValues, setInputValues] = useState({ ...addressEntries });
+  const [inputValues, setInputValues] = useState(
+    addressToEdit ? { ...addressToEdit } : { ...addressEntries }
+  );
 
   const submitAddressFormHandler = (e) => {
     e.preventDefault();
@@ -19,38 +24,48 @@ export const AddressForm = () => {
         title: `Fields cannot be empty`,
         type: "error",
       });
-    else {
+    else if (addressId) {
+      updateAddress({
+        addressId,
+        address: inputValues,
+        userDataDispatch,
+        showToast,
+      });
+      setAdressEditable(false);
+    } else {
       addNewAddress({
         address: inputValues,
         userDataDispatch,
         showToast,
       });
+      setShowAddressForm(false);
       setInputValues({ ...addressEntries });
     }
   };
 
   return (
     <form className="form " onSubmit={submitAddressFormHandler}>
-      <h2>Shipping and Billing Address</h2>
+      
       <div className="flex-col inputs">
         {Object.keys(inputValues).map((element) => {
-          return (
-            <label key={element} className="artsy-input">
-              <input
-                type="text"
-                value={inputValues[element]}
-                onChange={(e) =>
-                  setInputValues((prev) => ({
-                    ...prev,
-                    [element]: e.target.value,
-                  }))
-                }
-              />
-              <span className="input-label capitalize">
-                {element?.split("_").join(" ")}
-              </span>
-            </label>
-          );
+          if (element !== "_id")
+            return (
+              <label key={element} className="artsy-input">
+                <input
+                  type="text"
+                  value={inputValues[element]}
+                  onChange={(e) =>
+                    setInputValues((prev) => ({
+                      ...prev,
+                      [element]: e.target.value,
+                    }))
+                  }
+                />
+                <span className="input-label capitalize">
+                  {element?.split("_").join(" ")}
+                </span>
+              </label>
+            );
         })}
       </div>
       <ButtonPrimary>

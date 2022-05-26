@@ -11,7 +11,7 @@ const ProductFilterProvider = ({ children }) => {
     showFastDelivery: false,
     showOutOfStock: true,
     ratingAbove: 1,
-    priceRange: 1000000,
+    priceRange: 1000,
     searchKeyword:'',
   };
   

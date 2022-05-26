@@ -1,0 +1,11 @@
+.order-details{
+    background: var(--light-bg);
+    padding: 2rem;
+}
+.order{
+    margin: 2rem 1rem;
+}
+.order-item{
+    padding: 1rem;
+    border: thin solid var(--primary-text);
+}

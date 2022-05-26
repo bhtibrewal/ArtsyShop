@@ -9,7 +9,9 @@ const ProductContextProvider = ({ children }) => {
     categoriesList: [],
     wishList: [],
     cart: [],
-    couponDiscount: 0
+    couponDiscount: 0,
+    selectedAddress:{},
+    order: []
   };
   const [productState, productDispatch] = useReducer(
     productStateReducer,

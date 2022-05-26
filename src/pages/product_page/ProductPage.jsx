@@ -73,9 +73,9 @@ export const ProductPage = () => {
           <div className='price-range'>
             <input
               type="range"
-              max="1000000"
+              max="1000"
               min="0"
-              step="100000"
+              step="100"
               value={priceRange}
               onChange={(e) =>
                 filterStateDispatch({
