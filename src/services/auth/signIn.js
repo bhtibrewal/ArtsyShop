@@ -34,9 +34,10 @@ export const signIn = async ({
             localStorage.setItem('user', JSON.stringify({
                 firstName, lastName, email, createdAt, addresses
             }))
-
         }
+        return res.data;
     } catch (e) {
-        setSigninError(e.response.data.errors);
+        setSigninError(e.response?.data.errors);
+        return e;
     }
 }
