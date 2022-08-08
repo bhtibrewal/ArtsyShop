@@ -51,13 +51,3 @@ export const categories = [
   },
 ];
 
-  // const category_list = [
-  //   "Abstraction",
-  //   "Nature",
-  //   "Landscape",
-  //   "urban",
-  //   "Street",
-  //   "Medival",
-  //   "Pop Culture",
-  //   "Portrait",
-  // ];
